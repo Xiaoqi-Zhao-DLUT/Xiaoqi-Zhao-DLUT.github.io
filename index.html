@@ -271,6 +271,7 @@ My research interests include RGB/RGB-D salient object detection, video object s
         <h2 id="experience">News</h2>
         <div class="paper">
             <ul>
+              	<li> 1 paper accepted in CVPR 2022.  </li>
                 <li> 1 paper accepted in AAAI 2022 (~15%[1349/9020]).  </li>
                 <li> 1 paper accepted in ACMMM 2021 (oral ~9%[179/1942]).  </li>
                 <li> 1 paper accepted in MICCAI 2021.  </li>
@@ -283,10 +284,29 @@ My research interests include RGB/RGB-D salient object detection, video object s
 </div>
     
 
-
 <div style="clear: both;">
     <div class="section">
         <h2 id="confpapers">Publications</h2>
+ 
+   <div class="paper"><img class="paper" src="./resources/paper_icon/CVPR2022-ZoomNet.png"
+                                title="Zoom In and Out: A Mixed-scale Triplet Network for Camouflaged Object Detection">
+            <div><strong>Zoom In and Out: A Mixed-scale Triplet Network for Camouflaged Object Detection</strong><br>
+               Youwei Pang, <strong>Xiaoqi Zhao</strong>, Tian-zhu Xiang, Lihe Zhang, Huchuan Lu<br>
+                in CVPR 2022<br>
+                <a href="https://arxiv.org/pdf/2203.02688.pdf">[Paper]</a>
+                <a href="https://github.com/lartpang/ZoomNet">[Code]</a><img
+                        src="https://img.shields.io/github/stars/lartpang/ZoomNet"/>
+                        <br>
+                <alert> *  A mixed-scale  triplet network.<br>
+                  * The scale integration unit (SIU) and the hierarchical mixed-scale unit (HMU).<br>
+                  * A uncertainty-aware loss (UAL).<br>
+                  * Good performance on both COD and SOD datasets.
+                </alert>
+            </div>
+            <div class="spanner"></div>
+        </div>
+
+
  
    <div class="paper"><img class="paper" src="./resources/paper_icon/2021-SSL.png"
                                 title="Self-Supervised Pretraining for RGB-D Salient Object Detection">
@@ -294,10 +314,16 @@ My research interests include RGB/RGB-D salient object detection, video object s
                 <strong>Xiaoqi Zhao</strong>, Youwei Pang, Lihe Zhang, Huchuan Lu, Xiang Ruan<br>
                 in AAAI 2022<br>
                 <a href="https://arxiv.org/pdf/2101.12482.pdf">[Paper]</a>
+              <a href="https://mp.weixin.qq.com/s?__biz=MzI5MDUyMDIxNA==&mid=2247591348&idx=2&sn=34a95dbbd14b7adfd508f12899ac27a2&chksm=ec1d884ddb6a015b71612bf16227bed8c69db4074585f712c1dc7dceb7859641088441ff9753&mpshare=1&scene=1&srcid=0112O4ivFbyChzTTH4vKU91t&sharer_sharetime=1646716025907&sharer_shareid=0ffc6ac03af605267e92344350efdb83&exportkey=AxNWDL6LKSsLK6MxSNkSF88%3D&acctmode=0&pass_ticket=TXKuWY6yeluRhUKTt0pk10ycuy%2BMsyJV6%2BXdxFjTtusuYyJMVPywg38icEXhKktM&wx_header=0#rd">[Slide&极市平台推送]</a>
                 <a href="https://github.com/Xiaoqi-Zhao-DLUT/SSLSOD">[Code]</a><img
                         src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/SSLSOD"/>
                         <br>
-                <alert> In this work, we propose a novel self-supervised learning (SSL) scheme to accomplish effective pre-training for RGB-D  SOD  without requiring  human  annotation. As the first method of SSL in RGB-D SOD, it can be taken as a new baseline for future research.
+                <alert> 
+                  * The first one self-supervised pretraining method for RGB-D SOD. <br>
+                  * Pretext tasks: a cross-modal auto-encoder and a depth-contour estimation decoder.  <br>
+                  *  The consistency-difference aggregation structure that is suitable for both cross-level and cross-modal feature integration.<br>
+                  * Pretraining datasets: 6,392 pairs of RGB-Depth images (without manual  annotations)  vs. ImageNet (1,280,000 with image-level labels). <br>
+                  * Good performance on RGB-D SOD datasets.
                 </alert>
             </div>
             <div class="spanner"></div>
@@ -315,7 +341,14 @@ My research interests include RGB/RGB-D salient object detection, video object s
                 <a href="https://github.com/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS">[Code]</a><img
                         src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS"/>
                 <br>
-                <alert> In this paper, we propose a novel multi-source fusion network to effectively utilize the complementary features from the RGB, depth, static saliency and optical flow for zero-shot video object segmentation.  And, to get rid of the inevitable interference caused by low-quality optical flow, we design a novel predictor selection network, which automatically chooses the results from static saliency predictor and moving object predictor. 
+                <alert> 
+                  * The first one utilizes multi-source information to achieve static/moving objet segmentation.<br>
+                  * The first one aims to evaluate the quality of optical flow for segmentation tasks.<br>
+                  * Multiple sources (rgb + depth + optical flow + static saliency) for ZVOS.<br>
+                  * Interoceptive spatial attention module (ISAM).<br>
+                  * Feature purification module (FPM).<br>
+                  * Automatic predictor selection network.<br>
+                                   
                 </alert>
             </div>
             <div class="spanner"></div>
@@ -330,7 +363,11 @@ My research interests include RGB/RGB-D salient object detection, video object s
                 <a href="https://github.com/Xiaoqi-Zhao-DLUT/MSNet">[Code]</a><img
                         src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/MSNet"/>
                 <br>
-                <alert> In this paper, we present a novel multi-scale subtraction network (MSNet) to automatically segment polyps from colonoscopy images. MSNet runs at the fastest speed of ∼70fps among the existing polyp segmentation methods.
+                <alert> 
+                  * Automatic  polyp segmentation.<br>
+                  * Fast speed (∼70fps).<br>
+                  * A multi-scale  subtraction  network.<br>
+                  * A training-free  loss  network.<br>
                 </alert>
             </div>
             <div class="spanner"></div>
@@ -348,7 +385,12 @@ My research interests include RGB/RGB-D salient object detection, video object s
                         src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency"/>
               
                 <br>
-                <alert> The gate unit is simple yet effective, therefore, a gated FPN network can be used as a new baseline for dense prediction tasks.
+                <alert> 
+                  * Simple & Effective.<br>
+                  * A new baseline -- GateNet.<br>
+                  * A new convolution -- Fold conv.<br>
+                  * A new style -- Progressive + Prallel.<br>
+                  * Good performance on RGB, RGB-D SOD and video object segmentaton datasets.
                 </alert>
             </div>
             <div class="spanner"></div>
@@ -364,7 +406,12 @@ My research interests include RGB/RGB-D salient object detection, video object s
                         src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/DANet-RGBD-Saliency"/>
        
                 <br>
-                <alert> We build a single-stream network with the novel depth-enhanced dual attention for real-time (speed: 32FPS, model size: 106.7 MB with the VGG-16 backbone ) and robust rgb-d salient object detection. The more efficient way of using depth information to guide early fusion and ehance feature discrimination in decoder, which are different from existing two-stream methods  concentrate on the cross-modal fusion between the RGB stream and the depth stream.
+                <alert> 
+                  * The first one single stream network for RGB-D SOD.<br>
+                  * Light (55.5% lighter than the second lightest model) & Fastest speed (32 FPS).<br>
+                  * Depth-enhanced dual attention mechanism.<br>
+                  * Pyramidally  attended  feature  extraction  module.<br>
+                  * Good performance on RGB-D SOD datasets.<br>
                 </alert>            </div>
             <div class="spanner"></div>
         </div>
@@ -378,7 +425,12 @@ My research interests include RGB/RGB-D salient object detection, video object s
                 [<a href="https://github.com/lartpang/MINet">Code</a>]<img src="https://img.shields.io/github/stars/lartpang/MINet"/>
    
                 <br>
-                <alert>In  this  paper,  we  investigate  the  multi-scale  issue  to propose an effective and efficient network MINet with the transformation-interaction-fusion strategy, for salient object detection.
+                <alert>
+                  * Multi-scale.<br>
+                  * Aggregate Interaction Module.<br>
+                  * Self-Interaction Module.<br>
+                  * Consistency-enhanced loss. <br>
+                  * Good performance on RGB SOD datasets.<br>
                 </alert>
             </div>
             <div class="spanner"></div>
@@ -394,10 +446,12 @@ My research interests include RGB/RGB-D salient object detection, video object s
                 [<a href="https://github.com/lartpang/HDFNet">Code</a>]<img src="https://img.shields.io/github/stars/lartpang/HDFNet"/>
          
                 <br>
-                <alert>The proposed model (HDFNet)  generates  adaptive  filters  with different receptive field sizes through the dynamic dilated pyramid module. It can make full use of semantic cues from multi-modal mixed features to achieve multi-scale cross-modal guidance, thereby enhancing the representation capabilities of the decoder.
-                 HDFNet is an important baseline of the
-                [<a href="https://arxiv.org/pdf/2105.00690.pdf">winning solution</a>] in NTIRE 2021 (Depth Guided Image Relighting Challenge)
-                hosted in CVPR 2021 workshop (winner: AICSNTU-MBNet team (Asustek Computer Inc & National Taiwan University)).
+                <alert>
+                  * The first dynamic conv-based network for RGB-D SOD.<br>
+                  * Hybrid enhanced loss.<br>
+                  * Good performance on RGB-D SOD datasets.<br>
+                  * The proposed model (HDFNet) is an important baseline of the
+                [<a href="https://arxiv.org/pdf/2105.00690.pdf">winning solution</a>] in NTIRE 2021 (Depth Guided Image Relighting Challenge) hosted in CVPR 2021 workshop (winner: AICSNTU-MBNet team (Asustek Computer Inc & National Taiwan University)).<br>
                 </alert>
             </div>
             <div class="spanner"></div>
@@ -419,9 +473,10 @@ My research interests include RGB/RGB-D salient object detection, video object s
             <br>
 
             <strong>Conference Reviewer</strong><br>
-            ICCV: 2021
-            AAAI: 2022
-            CVPR: 2022
+            ICCV: 2021 <br>
+            AAAI: 2022 <br>
+            CVPR: 2022 <br>
+          	ECCV: 2022 <br>
             <br>
         </div>
     </div>
