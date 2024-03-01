@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="">
+  <meta name="keywords" content="X-ray-PBD">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Towards Automatic Power Battery Detection:\\
+    New Challenge, Benchmark Dataset and Baseline</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="../static/css/bulma.min.css">
+  <link rel="stylesheet" href="../static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="../static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="../static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="../static/js/fontawesome.all.min.js"></script>
+  <script src="../static/js/bulma-carousel.min.js"></script>
+  <script src="../static/js/bulma-slider.min.js"></script>
+  <script src="../static/js/index.js"></script>
+</head>
+<body>
+
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Towards Automatic Power Battery Detection: New Challenge, Benchmark Dataset and Baseline</h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://xiaoqi-zhao-dlut.github.io/">Xiaoqi Zhao</a><sup>1,2*</sup>,</span>
+            <span class="author-block">
+              <a href="https://lartpang.github.io/">Youwei Pang</a><sup>1,2*</sup>,</span>
+            <span class="author-block">
+              <a >Zhenyu Chen</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a >Qian Yu</a><sup>1</sup>,
+            </span>
+            <br>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=zh-CN&user=XGPdQbIAAAAJ">Lihe Zhang</a><sup>1*</sup>,
+            </span>
+            <span class="author-block">
+              <a >Hanqi Liu</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a >Jiaming Zuo</a><sup>2*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=zh-CN&user=D3nE0agAAAAJ">Huchuan Lu</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">  
+            <span class="author-block">
+              <a href="https://futureschool.dlut.edu.cn/IIAU.htm"><sup>1</sup>IIAU-Lab, Dalian University of Technology</a>,
+            </span>
+            <br>
+            <span class="author-block">
+              <a href="http://www.gy3000.company/"><sup>2</sup>AI Lab, X3000 Inspection Co., Ltd</a>,
+            </span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2312.02528.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/pdf/2312.02528.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span> -->
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/Xiaoqi-Zhao-DLUT/X-ray-PBD"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Dataset&Code</span>
+                  </a>
+              </span>
+              <p>
+              <span style="font-family: Georgia; font-size: 1.5rem; color: #2531e3">If you are interested in Ai4Industury, feel free to contact with us via Email (zxq@mail.dlut.edu.cn, lartpang@mail.dlut.edu.cn),</span>
+            </p>
+            </div>
+
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="setting teaser">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Application Value</h2>
+        <div class="content has-text-justified">
+    <div class="hero-body">
+      <img src="./src/pbd_role.png" alt="empty">
+      <p>
+        Assembly process of power battery for new energy vehicles. The power battery has gone through the process from the cell to the system before it is finally installed on the vehicle unit. 
+        To ensure the safety of the power battery, it is necessary to perform power battery detection (PBD) on each battery cell to complete its functional evaluation.  
+      </p>
+    </div>
+  </div>
+      </div>
+      </div>
+  </div>
+
+</section>
+
+
+<section class="setting teaser">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Task Definition</h2>
+        <div class="content has-text-justified">
+    <div class="hero-body">
+      <img src="./src/pbd_taskpng.png" alt="empty">
+      <p>
+       Power Battery Detection (PBD) aims to judge whether the battery cell is OK or NG based on the number and overhang. 
+       Therefore, object counting and localization are necessary processing for PBD, which can provide accurate coordinate information for all anode and cathode endpoints. 
+      </p>
+    </div>
+  </div>
+      </div>
+      </div>
+  </div>
+
+</section>
+
+
+
+<!--<section class="hero is-light is-small">-->
+<!--  <div class="hero-body">-->
+<!--    <div class="container">-->
+<!--      <div id="results-carousel" class="carousel results-carousel">-->
+<!--        <div class="item item-steve">-->
+<!--          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="../static/videos/steve.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-chair-tp">-->
+<!--          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="../static/videos/chair-tp.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-shiba">-->
+<!--          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="../static/videos/shiba.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-fullbody">-->
+<!--          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="../static/videos/fullbody.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-blueshirt">-->
+<!--          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="../static/videos/blueshirt.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-mask">-->
+<!--          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="../static/videos/mask.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-coffee">-->
+<!--          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="../static/videos/coffee.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-toby">-->
+<!--          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="../static/videos/toby2.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We conduct a comprehensive study on a new task named power battery detection (PBD), which aims to localize the dense cathode and anode plates endpoints from X-ray images to evaluate the quality of power batteries. 
+            Existing manufacturers usually rely on human eye observation to complete PBD, which makes it difficult to balance the accuracy and efficiency of detection. 
+            To address this issue and drive more attention into this meaningful task, we first elaborately collect a dataset, called 
+            X-ray PBD, which has 1,500 diverse X-ray images selected from thousands of power batteries of 5 manufacturers, with 7 different visual interference. 
+            Then, we propose a novel segmentation-based solution for PBD, termed multi-dimensional collaborative network (MDCNet). With the help of line  and counting predictors, the representation of the point segmentation branch can be improved at both semantic and detail aspects.
+            Besides, we design an effective distance-adaptive mask generation strategy, which can alleviate the visual challenge caused by the inconsistent distribution density of plates to provide MDCNet with stable supervision.
+            Without any bells and whistles, our segmentation-based MDCNet consistently outperforms various other corner detection, crowd counting and general/tiny object detection-based solutions, making it a strong baseline that can help facilitate future research in PBD. Finally, we share some potential difficulties and works for future researches. The source code and datasets will be publicly available at \href{https://github.com/Xiaoqi-Zhao-DLUT/X-ray-PBD}{X-ray PBD}.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <section class="setting teaser">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Dataset</h2>
+            <div class="content has-text-justified">
+        <div class="hero-body">
+          <img src="./src/datasets_characteristic -1.png" alt="empty">
+          <p>
+            Statistics of the X-ray PBD dataset. (a) Taxonomic of interference and shots. (b) Overhang distributions. (c) Number distributions. (d) Co-occurrence  distribution of attributes. (e) Multi-dependencies among these attributes.
+          </p>
+        </div>
+      </div>
+          </div>
+          </div>
+      </div>
+    
+    </section>
+
+    <section class="setting teaser">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+        <div class="hero-body">
+          <img src="./src/battery_class.png" alt="empty">
+          <p>
+            Examples of various attributes from our X-ray PBD dataset (best viewed zoomed in).
+          </p>
+        </div>
+      </div>
+          </div>
+          </div>
+      </div>
+    </section>
+
+      <section class="setting teaser">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <div class="content has-text-justified">
+          <div class="hero-body">
+            <img src="./src/attribute_description.png" alt="empty">
+            <p>
+              Attribute descriptions.
+            </p>
+          </div>
+        </div>
+            </div>
+            </div>
+        </div>
+    
+    </section>
+
+
+
+
+    <section class="setting teaser">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Research Value&Challenges</h2>
+            <h2 class="title is-5">(1) Open vision modeling problem. </h2>
+            <h2 class="title is-5">(2) Minimal object instance localization (1 pixel/X,000,000+ pixel).</h2>
+            <h2 class="title is-5">(3) Weak feature perception.</h2>
+            <div class="content has-text-justified">
+      </div>
+          </div>
+          </div>
+      </div>
+    </section>
+ 
+    
+    
+
+    <section class="setting teaser">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Method: MDCNet</h2>
+            <div class="content has-text-justified">
+        <div class="hero-body">
+          <img src="./src/network.png" alt="empty">
+          <p>
+            Overview of our MDCNet. It contains a shared encoder to extract different level features for the prompt and current images, respectively. Multi-scale module is only embedded in the high-level features. Prompt filter module are used to combine the prompt and current features to generate a series of filtered features. Point predictor include five decoder layers to produce point segmentation maps. Counting and line predictors are guided by the point prediction and fusing high-level and low-level features, respectively.</p>
+        </div>
+      </div>
+          </div>
+          </div>
+      </div>
+    
+    </section>
+
+
+    <section class="setting teaser">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Comparison with Potential Solutions </h2>
+        <div class="content has-text-justified">
+    <div class="hero-body">
+        <img src="./src/performance.png" alt="empty">
+        <p>
+          Quantitative comparison of different methods. ``—'' represents that the results are not available because these methods can not provide coordinate information or their prediction accuracy of the number of plates is zero.
+        </p>
+    </div>
+  </div>
+      </div>
+      </div>
+  </div>
+
+</section>
+
+<section class="setting teaser">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+    <div class="hero-body">
+      <img src="./src/three-level.png" alt="empty">
+      <p>
+        Qualitative results on the regular, difficult and tough examples with different shots and attributes. Best viewed zoomed in.
+      </p>
+    </div>
+  </div>
+      </div>
+      </div>
+  </div>
+
+</section>
+
+<section class="setting teaser">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+    <div class="hero-body">
+      <img src="./src/comparision.png" alt="empty">
+      <p>
+        Visual comparison with other general/tiny object detection-based, counting-based, corner detection-based solutions. We directly visualize the predicted results (Ours: Segmentation map, General/Tiny object detection methods: Bounding box, Counting methods: Density map, Corner detection methods: Corner map) without any post-processing operations.
+      </p>
+    </div>
+  </div>
+      </div>
+      </div>
+  </div>
+
+</section>
+
+<section class="setting teaser">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Coming Soon </h2>
+        <div class="content has-text-justified">
+    <div class="hero-body">
+        <img src="./src/future_work_enhance.png" alt="empty">
+        <p>
+          Ai4Industury-Image Blind Enhancement.
+        </p>
+    </div>
+  </div>
+      </div>
+      </div>
+  </div>
+
+</section>
+
+<section class="setting teaser">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+    <div class="hero-body">
+        <img src="./src/3D_re.png" alt="empty">
+        <p>
+          Ai4Industury-CT Reconstruction.
+        </p>
+    </div>
+  </div>
+      </div>
+      </div>
+  </div>
+
+</section>
+
+<section class="setting teaser">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+    <div class="hero-body">
+        <img src="./src/Unifiied_model.png" alt="empty">
+        <p>
+          Ai4Industury-Multimodal Unified Model.
+        </p>
+    </div>
+  </div>
+      </div>
+      </div>
+  </div>
+
+</section>
+
+<section class="setting teaser">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+    <div class="hero-body">
+        <img src="./src/Ai4Industry_GPT.png" alt="empty">
+        <p>
+          Ai4Industury-GPT.
+        </p>
+    </div>
+  </div>
+      </div>
+      </div>
+  </div>
+
+</section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+  @inproceedings{X-ray-PBD,
+  title={Towards Automatic Power Battery Detection: New Challenge, Benchmark Dataset and Baseline},
+  author={Zhao, Xiaoqi and Pang, Youwei and Chen, Zhenyu and Yu, Qian and Zhang, Lihe and Liu, Hanqi and Zuo, Jiaming and Lu, Huchua},
+  booktitle={CVPR},
+  year={2024}
+}</code></pre>
+  </div>
+</section>
+
+}
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Thanks for the project template by  <a href="https://github.com/nerfies/nerfies.github.io"> Nerfies Project</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
