@@ -6,634 +6,2762 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link rel="stylesheet" href="jemdoc.css" type="text/css">
 <title>Xiaoqi Zhao &#39;s Homepage</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <!-- Google Analytics -->
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
 ga('create', 'UA-159069803-1', 'auto');
 ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->
-<!--
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-87320911-1', 'auto');
-  ga('send', 'pageview');
+<style>
+/* 导航栏样式 */
+.navbar {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+}
+.navbar-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+.navbar-nav li {
+  margin: 0;
+}
+.navbar-nav a {
+  display: block;
+  padding: 14px 20px;
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+.navbar-nav a:hover, .navbar-nav a.active {
+  background-color: #e9ecef;
+  color: #007bff;
+}
 
-</script>
--->
+/* 自定义researchbox */
+.myresearchbox {
+  background-color: #e6f0ff; /* 淡蓝色背景 */
+  border: 1px solid black;   /* 黑色边框 */
+  border-radius: 8px;        /* 圆角 */
+  padding: 12px;             /* 内边距 */
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* icon-links */
+.icon-links a {
+  text-decoration: none;
+  color: #000;
+  margin-right: 12px;
+  font-size: 16px;
+}
+.icon-links i {
+  margin-right: 5px;
+}
+
+/* 内容区域样式 */
+.content-section {
+  display: none;
+}
+.content-section.active {
+  display: block;
+}
+
+/* 高亮文本 */
+alert {
+  color: #d63384;
+  font-weight: bold;
+}
+</style>
+
+
 </head>
+
+
+
 <body>
+
+<!-- 顶部导航 -->
+<nav class="navbar">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link active" onclick="showSection('about')">About</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" onclick="showSection('publications')">Publications</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" onclick="showSection('honors')">Honors and Services</a>
+    </li>
+	<li class="nav-item">
+		<a class="nav-link" onclick="showSection('projects')">Project/Toolkit/Owesome</a>
+	  </li>
+    <!-- <li class="nav-item">
+      <a class="nav-link" href="/others/">Others</a>
+    </li> -->
+  </ul>
+</nav>
+
+<!-- 页面内容开始 -->
 <div id="layout-content" style="margin-top:25px">
-<table>
-	<tbody>
-		<tr>
-			<td width="670">
-				<div id="toptitle">
-					<h1>Xiaoqi Zhao <font face="Arial">    赵骁骐 </font></h1></div>
 
-		
-<!-- 				<h3> <a href="https://iiaulab.github.io/">Dalian University of Technology - IIAU LAB</a><br> </h3> -->
-<!-- 				<h3> <a href="http://www.gy3000.company/">X3000 INSPECTION - AI LAB</a><br></h3> -->
-<!-- 				<span><strong>Address</strong>: No.2 Linggong Road, Ganjingzi District, Dalian City, Liaoning, China</span><br> -->
-				<span><strong>Email</strong>: zhaoxq.cv[at]gmail.com </span> <br>
-				<br>
-				[<a href="https://github.com/Xiaoqi-Zhao-DLUT">GitHub</a>]
-				[<a href="https://scholar.google.com/citations?user=0EKcLI4AAAAJ&hl=zh-CN">Google Scholar</a>]
-			</td>
-			<td>
-				<img src="./resources/images/ZXQ-CQ.jpg" border="0" width="220"><br>
-			</td>
-		</tr><tr>
-	</tr></tbody>
-</table>
+  <table>
+    <tbody>
+      <tr>
+        <!-- 左侧：头像 -->
+        <td style="vertical-align:top; padding-right:50px;">
+          <img src="./resources/images/zxq_4k.png" alt="Xiaoqi  Zhao" border="0" width="150"><br>
+        </td>
 
-<h2>Biography </h2>
-<p>
+        <!-- 右侧：姓名、邮箱、图标 -->
+        <td width="670" style="vertical-align:top;">
+          <div id="toptitle">
+            <h1>Xiaoqi (Jackie) Zhao <font face="Arial"> 赵骁骐 </font></h1>
+          </div>
 
-		<li>
-		Postdoctoral Researcher at Yale University
-		 </li>
-		 <li>
-		Founding Partner & Chief AI Scientist of <a href="http://www.gy3000.company/">X3000 INSPECTION</a>（Series A+ Round）
-		 </li>
-		 <li>
-		Dalian University of Technology (DLUT), Dalian, China （2019-2024 PhD degree, my advisors are  <a href="http://faculty.dlut.edu.cn/lhzhang/zh_CN/index.htm">Prof. Lihe Zhang</a> and  <a href="http://faculty.dlut.edu.cn/Huchuan_Lu/zh_CN/index.htm">Prof. Huchuan Lu (IEEE Fellow)</a> from <a href="https://iiaulab.github.io/">IIAU-LAB.</a> I work very closely with my best friend <a href="https://lartpang.github.io/">Youwei Pang.</a>）
-		 </li>
-	<li>
-		Dalian University of Technology (DLUT), Dalian, China （2015-2019 B.E. degree）
-		 </li>
-	
-	
+          <div style="font-size:1.1em; margin-top:4px; margin-bottom:8px;">
+            Radiology &amp; Biomedical Imaging, Yale University
+          </div>
 
-</p>
+          <span><strong>Email</strong>: xiaoqi.zhao[at]yale.edu </span>
+          <br><br>
 
+          <!-- 图标在文字下方 -->
+          <a href="https://github.com/Xiaoqi-Zhao-DLUT" target="_blank"
+          style="text-decoration:none; margin-right:30px; color:#000; text-align:center; display:inline-block;">
+            <i class="fab fa-github" style="font-size:40px;"></i><br>
+            <span style="margin-top:8px; display:inline-block;">GitHub</span>
+          </a>
 
-<div style="clear: both;">
-    <div class="section">
+          <a href="https://scholar.google.com/citations?user=0EKcLI4AAAAJ&hl=zh-CN" target="_blank"
+          style="text-decoration:none; color:#000; text-align:center; display:inline-block;">
+            <i class="fa-solid fa-graduation-cap" style="font-size:40px;"></i><br>
+            <span style="margin-top:8px; display:inline-block;">Google Scholar</span>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- About 部分 -->
+  <div id="about-section" class="content-section active">
+    <h2>Biography </h2>
+    <p>
+      I am a Postdoctoral Researcher at Yale University working with <a href="https://campuspress.yale.edu/xliu/people/">Prof. Xiaofeng Liu</a> and <a href="https://medicine.yale.edu/profile/georges-elfakhri/">Prof. Georges El Fakhri</a>  (AIMBE and IEEE Fellow). Previously, I received my Ph.D. degree in Signal and Information Processing from the Dalian University of Technology (DLUT) in 2024, advised by <a href="https://scholar.google.com/citations?user=XGPdQbIAAAAJ&hl=zh-CN">Prof. Lihe Zhang</a>  and  <a href="https://scholar.google.com/citations?hl=en&user=D3nE0agAAAAJ">Prof. Prof. Huchuan Lu (IEEE Fellow)</a>. I also obtained my B.E. degree in Electronic Information Engineering from DLUT in 2019.
+      Beyond academic research, I am deeply passionate about AI + X entrepreneurship. I am a Founding Partner of <a href="http://www.gy3000.company/en/about-us">X3000 INSPECTION (Startup, Series A+)</a>. From 2021 to 2024, I served as its Chief AI Scientist, leading the development of X3000Former, X3000NeXt and other foundational models for power battery generation and inspection, which have been deployed to serve top power battery companies.
+    </p>
+
+    <div style="clear: both;">
+      <div class="section">
         <h2 id="confpapers">Research Fields</h2>
         <div class="paper">
-            <ul>
-                <li>
-                 <strong> Unified Context-dependent Concept Segmentation (Unified Vision Model)</strong> <br>
-               Salient + Shadow + Transparent + Inharmonious + Defocus Blur + Medical Lesion  ... 
-                   </li>
-                   
-         <!--        <li>
-                 <strong> Natural Scene Image&Video:</strong>  General Object Segmentation (Salient Object Detection, Camouflaged Object Detection, Change Detection); Specific Object Segmentation (Defocus Blur Detection, Shadow Detection, Glass and Transparent Detection, Mirror Detection);  Video Object Segmentation; Crowd Counting 
-                   </li> -->
-                                     <li>
-                 <!--    <strong> X-ray based Complex Industrial Detection</strong>  
-					Lithium Battery (Winding and lamination); FPCA; Auto Parts   -->
-                <strong> Industrial X-ray/CT Machine Vision (Ai4Industry)</strong><br>  
-                                       Lithium Battery; FPCA; Auto Parts              </li>
-		    <li>
-                  <strong>Medical Lesion Segmentation & Device Imaging Quality Enhancement (Ai4Health)</strong><br> 
-                   Colon Polyp; COVID-19; Breast; Skin; Glaucoma
-                 </li>
-                 <li><strong> Self-driven Learning Mode</strong><br> 
-                   Self-supervised/Few-shot/In-context/Prompt/Open-Vocabulary Learning
-                </li>
-                    <li>
-                <strong> Multi-modal/source/view Fusion</strong><br> 
-                    RGB + X (Depth; Thermal; Optical Flow; Text; Event; Video; View)
-                       </li> 
-            </ul>
-            <div class="spanner"></div>
+          <ul>
+            <div class="myresearchbox">
+      My research aims to develop a general-purpose visual intelligence engine that supports multi-source inputs, multi-task processing, multi-modal fusion, and cross-domain generalization. This engine is designed to balance expert-level performance in specific scenarios with unified modeling across diverse visual tasks, laying the foundation for semantic understanding and generalizable perception in future visual AGI systems. In recent years, my work has spanned both theoretical advancements and practical deployments, focusing on four core areas: Unified Visual Perception Systems, Industrial X-ray/CT Machine Vision (Ai4Industry), Multi-modal Collaborative Medical Image Analysis (Ai4Health), and Self-driven Learning Mode.
+        
+            </div>
+      <li>
+      <strong>Unified Visual Perception System</strong>
+      <ul style="list-style-type: circle; margin-top:4px;">
+        <li>Context-Dependent Multi-Concept Understanding Models</li>
+        </ul>
+        <ul style="list-style-type: circle; margin-top:4px;">
+        <li>Unified Multi-modal/Image-Video/Multi-view Models</li>
+        </ul>
+        <div style="margin-left:18px; margin-top:4px;">
+        <strong style="color:#1a73e8;">Representative works:</strong> 
+		<a href="https://arxiv.org/pdf/2405.01002">Spider (ICML'24)</a>, 
+		<a href="https://arxiv.org/pdf/2303.10396">GateNet (IJCV'24 & ECCV'20)</a>, 
+		<a href="https://arxiv.org/abs/2509.16170">UniMRSeg (NeurIPS'25)</a>, 
+		<a href="https://arxiv.org/abs/2509.25934">UniMMAD (arXiv'25)</a>, 
+		<a href="https://arxiv.org/pdf/2407.11503?">UniFSS (PR'25)</a>, 
+		<a href="https://arxiv.org/pdf/2412.01240">SAM-EVA (arXiv'25)</a>, 
+		<a href="https://arxiv.org/pdf/2307.12349">ComPtr (PAMI'25)</a>, 
+		<a href="https://openaccess.thecvf.com/content/CVPR2025W/DG-EBF/papers/Wei_Mixture-of-Shape-Experts_MoSE_End-to-End_Shape_Dictionary_Framework_to_Prompt_SAM_for_CVPRW_2025_paper.pdf">MoSE (CVPR'25)</a>, 
+		<a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Chang_Unified_Medical_Lesion_Segmentation_via_Self-referring_Indicator_CVPR_2025_paper.pdf">SR-ICL (CVPR'25)</a>,  
+		<a href="https://arxiv.org/pdf/2303.10383">MS-ASP (IJCV'24 & MM'21)</a>, 
+		<a href="https://arxiv.org/pdf/2310.20208">ZoomNeXt (PAMI'24)</a>,  
+		<a href="https://arxiv.org/pdf/2404.07445">MVANet (CVPR'24)</a>, 
+		<a href="https://arxiv.org/pdf/2203.04895">MMFT (TIP'23)</a>
         </div>
-    </div>
-</div>
+      </li>
 
-<div style="clear: both;">
-    <div class="section">
-        <h2 id="confpapers">Honor</h2>
-        <div class="paper">
-             <ul> 
-		<alert>  
-                  <li>
-                  Profiled by People’s Daily《人民日报》as an  <a href="https://mp.weixin.qq.com/s/dBHdfQmwjeYRn-ls726Myw"> Outstanding PhD Student Representative</a><strong> (Top 100 nationwide; the sole
-representative from DLUT)</strong>
-                     </li> 
-                  </alert> 
-		     
- 		      <alert>  
-                  <li>
-                    2022 Huawei Camera Academic Star <strong>(Top 8 globally; 170,000+ viewers watched the live talk)</strong>
-                     </li> 
-                  </alert> 
-		<alert>   
-		<li>
-                   CVPR 2022 Outstanding Reviewer <strong>(~2%[156/6247])</strong>
-                </li>
-                 </alert> 
-             <alert>  <li>
-                  <a href="https://www.vspwdataset.com/Workshop%202023.html">  Third place of PVUW2023 Video Semantic Segmentation Track (CVPR 2023 Challenge) </a>  
-           </li>
-                 </alert> 
-              <alert>  <li>
-                     Gold Award of <a href="https://cy.ncss.cn/information/2c93f4c682872dbb01849802948e17dd">The 8th China International College Students' 'Internet+' Innovation and Entrepreneurship Competition</a>, <strong>(Company/Project: 工源三仟; ~0.05‰[161/3,400,000+])</strong>
-                 </li>
-                 </alert> 
-         <alert>  <li>
-                  <a href="https://aistudio.baidu.com/aistudio/competition/detail/230/0/leaderboard"> MICCAI 2022 Challenge: Glaucoma Oct Analysis and Layer Segmentation (GOALS)</a>  (Team: IIAU-Segmentors; Glaucoma Detection:<strong> 1/100</strong>; OCT Layer Segmentation:<strong> 3/100</strong>; GOALS:<strong> 2/100</strong>; $1,300 bonus)
-           </li>
-                 </alert> 
-		<li>
-                    Third place of 2018 OPPO Top AI Competition (Portrait Segmentation), <strong>50,000 RMB bonus (3/456)</strong> 
-                </li>
-                <li>
-                    Seventh place of 2020 Hualu Cup's first big data competition (Intelligent Diagnosis of Cancer Risk), <strong>(7/114)</strong>
-                </li>
-		  <li>Second Prize of Doctoral Academic Forum (2024), Supported by Dalian University of Technology School
-			  </li>
-	  <li>  2024 National Scholarship (Phd) </li>
-		   <li>  2023 AVIC-LuoYang Scholarship (Phd)
-	  </li>
-   <li>  2022 National Scholarship (Phd) </li>
-<!-- <li>   2020 Huawei Fellowship </li> -->
-  <li>  2019-2024 Outstanding graduate student of Dalian University of Technology </li>
-            </ul>
-            <div class="spanner"></div>
+      <li>
+      <strong> Industrial X-ray/CT/Surface Machine Vision (Ai4Industry)</strong>
+      <ul style="list-style-type: circle; margin-top:4px;">
+        <li>Power Battery Image Detection and Generation</li>
+        </ul>
+		<ul style="list-style-type: circle; margin-top:4px;">
+			<li>Unsupervised Anomaly Detection</li>
+			</ul>
+        <ul style="list-style-type: circle; margin-top:4px;">
+        <li> Industrial CT Reconstruction</li>
+        </ul>
+        <ul style="list-style-type: circle; margin-top:4px;">
+        <li> Industrial Blind Image Enhancement</li>
+        </ul>
+        <div style="margin-left:18px; margin-top:4px;">
+        <strong style="color:#1a73e8;">Representative works:</strong> 
+		<a href="https://arxiv.org/pdf/2312.02528">MDCNet (CVPR'24)</a>, 
+		<a href="https://arxiv.org/pdf/2508.07797">MDCNeXt (arXiv'25)</a>,  
+		<a href="https://arxiv.org/abs/2509.25934">UniMMAD (arXiv'25)</a>, 
+		<a href="https://arxiv.org/abs/2509.25934">DGDM (TCSVT'25)</a>
         </div>
-    </div>
-</div>
+      </li>
 
-<h2 id="experience">News</h2>
-<div style="height: 280px; overflow: auto;">
-    <div class="section">   
-        <div class="paper">
-            <ul>
-		     <li>[02/2025]Our ComPtr (General Bi-source Transformer Model) accepted in TPAMI 2025. Congratulations to <a href="https://lartpang.github.io/">Youwei</a> ! </li>
-		      <li>[02/2025]1 paper accepted in CVPR 2025. Congratulations to <a href="https://scholar.google.com/citations?user=yn5W75MAAAAJ&hl=zh-CN">Shijie</a> ! </li>
-		    <li>[01/2025] Our CAVER (IEEE TIP 2023) is the <alert><strong> ESI Highly Cited Paper (1%)</strong> </alert>.</li>
-		<li>[12/2024] I successfully defended my PhD dissertation! Call me Dr.Zhao!😎😎😎</li>
-		<li>[08/2024] <a href="https://mp.weixin.qq.com/s/t7zYXtV-M6cgGUTyvRkpaw">X3000 INSPECTION fininshed Series A and A+ financing rounds</a>. 🎉🎉🎉 Ai4EVSafety is all you need！    </li>
-<!-- 		<li>[07/2024] 1 paper accepted in ECCV 2024.  <alert><strong>New Task! Open-Vocabulary Camouflaged Object Segmentation</strong> </alert> .    </li> -->
-		    <li>[06/2024] 1 paper accepted in TPAMI 2024.   </li>
-          	<li>[05/2024] 1 paper accepted in ICML 2024.   </li>
-				<li>[03/2024] 1 paper accepted in IJCV 2024.   </li>
-		         <li>[02/2024] 2 papers accepted in CVPR 2024 <alert> <strong>(1 highlight ~3%[324/11532])</strong> </alert>. <strong> Ai4Industry in New Electrical Vehicle! </strong>   </li>
-            	<li> [01/2024] 1 paper accepted in IJCV 2024.  </li>
-                <li> [07/2023] 1 paper accepted in ICCV 2023.  </li>
-                <li> [01/2023] 1 paper accepted in IEEE TIP 2023.  </li>
-                <li> [12/2022] 1 paper accepted in IEEE TIP 2022.  </li>
-                <li> [03/2022] 1 paper accepted in CVPR 2022.  </li>
-                <li> [11/2021] 1 paper accepted in AAAI 2022  <alert><strong> (~15%[1349/9020])</strong> </alert> .  </li>
-                <li> [07/2021] 1 paper accepted in ACM MM 2021  <alert> <strong>(oral ~9%[179/1942])</strong> </alert> .  </li>
-                <li> [06/2021] 1 paper accepted in MICCAI 2021.  </li>
-                <li> [07/2020] 3 papers accepted in ECCV 2020  <alert> <strong>(1 oral ~2%[104/5025])</strong> </alert> .  </li>
-                <li> [03/2020] 1 paper accepted in CVPR 2020.  </li>
-            </ul>
-            <div class="spanner"></div>
+      <li>
+      <strong> Multi-modal Collaborative Medical Image Analysis (Ai4Health)</strong>
+      <ul style="list-style-type: circle; margin-top:4px;">
+        <li>Unified Modality-Relax Imaging and Segmentation</li>
+        </ul>
+        <ul style="list-style-type: circle; margin-top:4px;">
+        <li>  Medical Generalist</li>
+        </ul>
+        <div style="margin-left:18px; margin-top:4px;">
+        <strong style="color:#1a73e8;">Representative works:</strong>
+		<a href="https://arxiv.org/abs/2509.16170">UniMRSeg (NeurIPS'25)</a>
+		<a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Chang_Unified_Medical_Lesion_Segmentation_via_Self-referring_Indicator_CVPR_2025_paper.pdf">SR-ICL (CVPR'25)</a>,  
         </div>
+      </li>
+
+      <li>
+      <strong> Self-driven Learning Mode</strong>
+      <ul style="list-style-type: circle; margin-top:4px;">
+        <li> Self-supervised/Unsupervised/Few-shot/In-context/Prompt/Open-Vocabulary Learning</li>
+        </ul>
+        <div style="margin-left:18px; margin-top:4px;">
+        <strong style="color:#1a73e8;">Representative works:</strong> 
+		<a href="https://arxiv.org/pdf/2101.12482">SSLSOD (AAAI'22)</a>, 
+		<a href="https://arxiv.org/pdf/2405.01002">Spider (ICML'24)</a>, 
+		<a href="https://arxiv.org/abs/2509.16170">UniMRSeg (NeurIPS'25)</a>, 
+		<a href="https://arxiv.org/pdf/2311.11241">OVCoser (ECCV'24)</a>, 
+		<a href="https://arxiv.org/abs/2509.25934">UniMMAD (arXiv'25)</a>, 
+		<a href="https://arxiv.org/abs/2509.25934">DGDM (TCSVT'25)</a>, 
+		<a href="https://arxiv.org/pdf/2407.11503?">UniFSS (PR'25)</a>, 
+		<a href="https://arxiv.org/pdf/2412.01240">SAM-EVA (arXiv'25)</a>, 
+		<a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Chang_Unified_Medical_Lesion_Segmentation_via_Self-referring_Indicator_CVPR_2025_paper.pdf">SR-ICL (CVPR'25)</a>       
+        </div>
+      </li>
+            <!-- 其他列表同理 -->
+          </ul>
+        </div>
+      </div>
     </div>
-</div>
 
-<!-- <span style="color:red; white-space: nowrap;">(One Spotlight)</span>. -->
+    <!-- 下面 Honor, News, Publications 按你的原代码继续放 -->
 
-
-
-
-
-<h2> Selected Publications   [<a href="https://scholar.google.com/citations?user=0EKcLI4AAAAJ&hl=zh-CN">Google Scholar (3000 + citations)</a>]</h2>
-	<!-- <br>      <span style="color:red; white-space: nowrap;"><b>(* indicates equal contribution)</b></span> -->
-	<br> <b>TPAMI/IJCV/TIP: 7</b>
-	<br> <b>ICML/CVPR/ECCV/ICCV/AAAI/MM/MICCAI: 14 (2 oral, 1 highlight)</b>
-	<br> <b>Papers with 500+ Citations: 2</b>
-	<br> <b>Papers with 100+ Citations: 8</b>
-	<br> <b>Papers as First/co-First Author: 17</b>
-	<br>
-
-
-	<tr><tr><tr><tr>
-		<div style="margin-top: 10px"></div>
-			<!-- <h2>Selected Publications <a href="https://scholar.google.com/citations?hl=en&user=botczdcAAAAJ">(Google Scholar)</a> </h2> -->
-		<!--<p><a href="https://scholar.google.com/citations?hl=en&user=botczdcAAAAJ">My Google Scholar</a></p>-->
-			 
-		<!--<table id="tbPublications" width="100%">
-			<tbody>
-		<h3 style="color: red">Preprints</h3>
-				
-		   <tr>	
-				<td width="206">
-				<img src="img/TransZero-TPAMI.png" width="185px" height = "95" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td><a href="TransZero-pp/TransZero-pp.html" target="_blank">TransZero++: Cross Attribute-guided Transformer for Zero-Shot Learning.</a><br>
-				<p ><strong>Shiming Chen</strong>, Ziming Hong, Guo-Sen Xie, Jian Zhao, Xinge You, Shuicheng Yan, Ling Shao.</p>
-				<p class="post-date" style="margin-top: -10px" ><i>arXiv preprint arXiv: 2111.04254</i>, 2021. <strong>
-				[<a href="TransZero-pp/TransZero-pp.html">Project Page</a>][<a href="http://arxiv.org/abs/2112.08643">arXiv</a>]
-				[<a href="https://github.com/shiming-chen/TransZero_pp">Code</a>]</strong>
-				</p>		
-			 <p style="margin-top: -11px"><span style="color:Green">Submitted to <i>IEEE Transactions Pattern Analysis and Machine Intelligence (<strong> TPAMI </strong>)</i> (Minor Revision)</span></p>
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>
-			
-		 </tbody>
-		</table>-->	      
-		<table id="tbPublications" width="100%">
-		<tbody>
-		<!-- <span>(*:Co-First Author) </span> -->
-		<h3 style="color: red">Conference Papers </h3>	
-
-			
-
-
-
-	
-		<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/SAM-EVA2025.png" width="185px" height = "120px" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="https://arxiv.org/pdf/2412.01240" target="_blank"> Inspiring the Next Generation of Segment Anything Models: Comprehensively Evaluate SAM and SAM 2 with Diverse Prompts Towards Context-Dependent Concepts under Different Scenes</a>
-					<a href="https://arxiv.org/pdf/2412.01240">[Paper]</a>  
-					<a href="https://github.com/lartpang/SAMs-CDConcepts-Eval">[Code]</a><img
-								src="https://img.shields.io/github/stars/lartpang/SAMs-CDConcepts-Eval"/>
-				 <p ><strong>Xiaoqi Zhao*</strong>, Youwei Pang*, Shijie Chang*, Yuan Zhao*, Lihe Zhang, Huchuan Lu, Jinsong Ouyang, Georges El Fakhri, Xiaofeng Liu</p>
-			   <p style="margin-top: -11px"><i>arXiv, 2025. </i></p>
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>
-			
-      		<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/Spider-ICML2024.png" width="185px" height = "120px" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="https://arxiv.org/pdf/2405.01002.pdf" target="_blank"> Spider: A Unified Framework for Context-dependent Concept Segmentation</a>
-					<a href="https://arxiv.org/pdf/2405.01002.pdf">[Paper]</a>  
-					<a href="https://mp.weixin.qq.com/s/_qaKf6ctRm0A0VYWL63umQ">[Interpretation by CVHub (~7000 views)]</a>
-					<a href="https://github.com/Xiaoqi-Zhao-DLUT/Spider-UniCDSeg">[Code]</a><img
-								src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Spider-UniCDSeg"/>
-				 <p ><strong>Xiaoqi Zhao*</strong>, Youweii Pang*, Wei Ji*, Baicheng Sheng, Jiaming Zuo, Lihe Zhang, Huchuan Lu</p>
-			   <p style="margin-top: -11px"><i>International Conference on Machine Learning(<strong> ICML </strong>), 2024. </i></p>
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>	
-
-	
-          
-		<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/CVPR24-PBD-1.png" width="185px" height = "120px" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="https://arxiv.org/pdf/2312.02528v2.pdf" target="_blank"> Towards Automatic Power Battery Detection:
-					New Challenge, Benchmark Dataset and Baseline</a>
-					<a href="https://arxiv.org/pdf/2312.02528v2.pdf">[Paper]</a>  
-					<a href="https://mp.weixin.qq.com/s/ZGI3aGQqOFCzCVWETKe4VA">[Interpretation by 极市平台]</a>
-					<a href="https://mp.weixin.qq.com/s/7YIxzGnwimo7UOb-Nw62mw">[Interpretation by X3000 INSPECTION]</a>
-					<a href="https://github.com/Xiaoqi-Zhao-DLUT/X-ray-PBD">[Code]</a><img
-								src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/X-ray-PBD"/>
-				 <p ><strong>Xiaoqi Zhao*</strong>, Youwei Pang*, Zhenyu Chen, Qian Yu, Lihe Zhang, Hanqi Liu, Jiaming Zuo, Huchuan Lu</p>
-			   <p style="margin-top: -11px"><i>IEEE Conference on Computer Vision and Pattern Recognition (<strong> CVPR </strong>), 2024. </i></p>
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>	
-		
-			<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/CVPR24-MVNet.png" width="185px" height = "90px" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="" target="_blank"> Multi-view Aggregation Network for Dichotomous Image Segmentation</a>
-				<a href="https://arxiv.org/pdf/2404.07445.pdf">[Paper]</a>  
-					<a href="https://github.com/qianyu-dlut/MVANet">[Code]</a><img
-								src="https://img.shields.io/github/stars/qianyu-dlut/MVANet"/>
-				 <p >Qian Yu*, <strong>Xiaoqi Zhao*</strong>, Youwei Pang*, Lihe Zhang, Huchuan Lu</p>
-			   <p style="margin-top: -11px"><i>IEEE Conference on Computer Vision and Pattern Recognition (<strong> CVPR </strong>), 2024. 
-					<a  style="color:red;text-decoration:none;" ><strong>Highlight</strong</a></i></p>
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>	
-		
-
-			
-			<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/ICCV23-Isomer.png" width="185px" height = "90" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="https://arxiv.org/pdf/2308.06693v1.pdf" target="_blank"> Isomer: Isomerous Transformer for Zero-shot Video Object Segmentation</a>
-					<a href="https://arxiv.org/pdf/2308.06693v1.pdf">[Paper]</a>  
-					<a href="https://github.com/DLUT-yyc/Isomer">[Code]</a><img
-								src="https://img.shields.io/github/stars/DLUT-yyc/Isomer"/>
-				 <p >Yichen Yuan, Yifan Wang, Lijun Wang, <strong>Xiaoqi Zhao</strong>, Huchuan Lu, Yu Wang, Weibo Su, Lei Zhang</p>
-			   <p style="margin-top: -11px"><i>IEEE International Conference on Computer Vision (<strong> ICCV </strong>), 2023. </i></p>
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>	
-<!-- 			<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/CVPR2022-ZoomNet.png" width="185px" height = "90" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="https://arxiv.org/pdf/2203.02688.pdf" target="_blank"> Zoom In and Out: A Mixed-scale Triplet Network for Camouflaged Object Detection</a>
-					<a href="https://arxiv.org/pdf/2203.02688.pdf">[Paper]</a>  
-					<a href="https://github.com/lartpang/ZoomNet">[Code]</a><img
-								src="https://img.shields.io/github/stars/lartpang/ZoomNet"/>
-				 <p >  Youwei Pang*, <strong>Xiaoqi Zhao</strong>*, Tian-zhu Xiang, Lihe Zhang, Huchuan Lu</p>
-			   <p style="margin-top: -11px"><i>IEEE Conference on Computer Vision and Pattern Recognition (<strong> CVPR </strong>), 2022. </i></p>
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>	 -->
-		
-			<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/2021-SSL.png" width="185px" height = "90" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="https://arxiv.org/pdf/2101.12482.pdf" target="_blank"> Self-Supervised Pretraining for RGB-D Salient Object Detection</a>
-					<a href="https://arxiv.org/pdf/2101.12482.pdf">[Paper]</a>
-					<a href="https://mp.weixin.qq.com/s?__biz=MzI5MDUyMDIxNA==&mid=2247591348&idx=2&sn=34a95dbbd14b7adfd508f12899ac27a2&chksm=ec1d884ddb6a015b71612bf16227bed8c69db4074585f712c1dc7dceb7859641088441ff9753&mpshare=1&scene=1&srcid=0112O4ivFbyChzTTH4vKU91t&sharer_sharetime=1646716025907&sharer_shareid=0ffc6ac03af605267e92344350efdb83&exportkey=AxNWDL6LKSsLK6MxSNkSF88%3D&acctmode=0&pass_ticket=TXKuWY6yeluRhUKTt0pk10ycuy%2BMsyJV6%2BXdxFjTtusuYyJMVPywg38icEXhKktM&wx_header=0#rd">[Slide&极市平台推送]</a>
-					  <a href="https://github.com/Xiaoqi-Zhao-DLUT/SSLSOD">[Code]</a><img
-							  src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/SSLSOD"/>
-				 <p >   <strong>Xiaoqi Zhao</strong>, Youwei Pang, Lihe Zhang, Huchuan Lu, Xiang Ruan</p>
-			   <p style="margin-top: -11px"><i>Thirty-Sixth AAAI Conference on Artificial Intelligence (<strong> AAAI </strong>), 2022. </i></p>
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>	
-		
-			<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/ACMMM2021-Multisource.png" width="185px" height = "90" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="https://arxiv.org/pdf/2108.05076.pdf" target="_blank"> Multi-Source Fusion and Automatic Predictor Selection for Zero-Shot Video Object Segmentation</a>
-					<a href="https://arxiv.org/pdf/2108.05076.pdf">[Paper]</a>
-					<a href="https://mp.weixin.qq.com/s?__biz=MzI5MDUyMDIxNA==&mid=2247570266&idx=2&sn=547fbfdeaa02b0ff83dec3b24a58a632&chksm=ec1d3ea3db6ab7b5cfbe7ba2fffcd4460584f1e2743d8265562757e508030bf049d1c3140d3c&mpshare=1&scene=23&srcid=0902BUt8U9MY8k2IvY500f71&sharer_sharetime=1630565724193&sharer_shareid=5c55e87df338791d997e8905ad2ebfe0#rd">[Slide&极市平台推送]</a>
-					<a href="https://github.com/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS">[Code]</a><img
-							src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS"/>
-				 <p > <strong>Xiaoqi Zhao</strong>, Youwei Pang, Jiaxing Yang, Lihe Zhang, Huchuan Lu</p>
-			   <p style="margin-top: -11px"><i>ACM International Conference on Multimedia (<strong> ACM MM </strong>), 2021.
-				<a  style="color:red;text-decoration:none;" ><strong>Oral</strong</a></i></p>
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>	
-
-			<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/MICCAI2021-MSNet.png" width="185px" height = "90" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="https://arxiv.org/pdf/2108.05082.pdf" target="_blank"> Automatic Polyp Segmentation via Multi-scale Subtraction Network</a>
-					<a href="https://arxiv.org/pdf/2108.05082.pdf">[Paper]</a>
-					<a href="https://github.com/Xiaoqi-Zhao-DLUT/MSNet">[Code]</a><img
-							src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/MSNet"/>  
-				<p >  <strong>  <a  style="color:red;text-decoration:none;" >🔥Top 30 Most Cited MICCAI Papers in the Last 5 Years</a>  <a href="https://scholar.google.com/citations?hl=en&view_op=list_hcore&venue=QLpioUFGyGMJ.2024&vq=med_radiologymedicalimaging&cstart=20">[Link]</a>  </strong</p>
-				<p <strong>Xiaoqi Zhao</strong>, Lihe Zhang, Huchuan Lu</p>
-			   <p style="margin-top: -11px"><i>International Conference on Medical Image Computing and Computer Assisted Intervention (<strong> MICCAI </strong>), 2021.
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>	
-		
-			<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/ECCV2020-GateNet.png" width="185px" height = "90" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="https://arxiv.org/pdf/2007.08074.pdf" target="_blank"> Suppress and Balance: A Simple Gated Network for Salient Object Detection</a>
-					<a href="https://arxiv.org/pdf/2007.08074.pdf">[Paper]</a>
-					<a href=" https://github.com/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency/blob/master/2852.pdf">[Slide]</a>
-					<a href="https://github.com/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency">[Code]</a><img
-							src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency"/>
-<p >  <strong>  <a  style="color:red;text-decoration:none;" >🔥Top 50 Most Cited ECCV Papers (🏆Ranking Top 1 in Visual Saliency Field) in the Last 5 Years</a>  <a href="https://scholar.google.com/citations?hl=en&view_op=list_hcore&venue=cwIh2C-xo8kJ.2024&vq=eng_computervisionpatternrecognition&cstart=40">[Link]</a>  </strong</p>
-				<p <strong>Xiaoqi Zhao</strong>*, Youwei Pang*, Lihe Zhang, Huchuan Lu, Lei Zhang</p>
-			   <p style="margin-top: -11px"><i>European Conference on Computer Vision (<strong> ECCV </strong>), 2020.  <a  style="color:red;text-decoration:none;" ><strong>Oral</strong></a>
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>	
-			<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/ECCV2020-DANet.png" width="185px" height = "140" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="https://arxiv.org/pdf/2007.06811.pdf" target="_blank">A Single Stream Network for Robust and Real-time RGB-D Salient Object Detection</a>
-				    <a href="https://arxiv.org/pdf/2007.06811.pdf">[Paper]</a>
-                <a href="https://github.com/Xiaoqi-Zhao-DLUT/DANet-RGBD-Saliency">[Code]</a><img
-                        src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/DANet-RGBD-Saliency"/>
-				 <p >  <strong>Xiaoqi Zhao</strong>,  Lihe Zhang, Youwei Pang, Huchuan Lu, Lei Zhang</p>
-			   <p style="margin-top: -11px"><i>European Conference on Computer Vision (<strong> ECCV </strong>), 2020.
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>	
-
-			<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/CVPR2021-MINet.png" width="185px" height = "90" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="https://arxiv.org/pdf/2007.09062.pdf" target="_blank">Multi-scale Interactive Network for Salient Object Detection</a>
-					[<a href="https://arxiv.org/pdf/2007.09062.pdf">Paper</a>]
-					[<a href="https://github.com/lartpang/MINet">Code</a>]<img src="https://img.shields.io/github/stars/lartpang/MINet"/>
-				 <p >       Youwei Pang*, <strong>Xiaoqi Zhao</strong>*, Lihe Zhang, Huchuan Lu</p>
-			   <p style="margin-top: -11px"><i>IEEE Conference on Computer Vision and Pattern Recognition (<strong> CVPR </strong>), 2020.
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>	
-	
-			<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/ECCV2020-HDFNet.png" width="185px" height = "90" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="https://arxiv.org/pdf/2007.06227.pdf" target="_blank">Hierarchical Dynamic Filtering Network for RGB-D Salient Object Detection</a>
-					[<a href="https://arxiv.org/pdf/2007.06227.pdf">Paper</a>]
-					[<a href="https://github.com/lartpang/HDFNet/blob/master/LongPresentation.pdf">Slide</a>]
-					[<a href="https://github.com/lartpang/HDFNet">Code</a>]<img src="https://img.shields.io/github/stars/lartpang/HDFNet"/>
-				 <p >     Youwei Pang, Lihe Zhang, <strong>Xiaoqi Zhao</strong>,  Huchuan Lu</p>
-			   <p style="margin-top: -11px"><i>European Conference on Computer Vision (<strong> ECCV </strong>), 2020.
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>	
-	
-		</tbody>
-		</table>
-				
-		<table id="tbPublications" width="100%">
-		<tbody>	
-		<h3 style="color: red">Journal Papers</h3>
-		<tr>	
-			<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/IJCV-23-DBS.png" width="185px" height = "185" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="https://arxiv.org/pdf/2303.10396.pdf" target="_blank">Towards Diverse Binary Segmentation via A Simple yet General Gated Network</a>
-					<a href="https://arxiv.org/pdf/2303.10396.pdf">[Paper]</a> 
-					<a href="https://github.com/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency">[Code]</a><img
-							src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency"/>
-				 <p >    <strong>Xiaoqi Zhao*</strong>, Youwei Pang*, Lihe Zhang, Huchuan Lu, Lei Zhang <br>
-			   <p style="margin-top: -11px"><i>International Journal of Computer Vision (<strong> IJCV </strong>), 2024.
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>	
-
-		<tr>	
-			<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/IJCV-23-AMP.png" width="185px" height = "140" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="https://arxiv.org/pdf/2303.10383.pdf" target="_blank">Adaptive Multi-source Predictor for Zero-shot Video Object Segmentation</a>
-					<a href="https://arxiv.org/pdf/2303.10383.pdf">[Paper]</a> 
-					<a href="https://github.com/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS">[Code]</a><img
-							  src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS"/>
-				 <p >    <strong>Xiaoqi Zhao*</strong>, Shijie Chang*, Youwei Pang, Jiaxing Yang, Lihe Zhang, Huchuan Lu<br>
-			   <p style="margin-top: -11px"><i>International Journal of Computer Vision (<strong> IJCV </strong>), 2024.
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>	
-		
-			
-<!-- 		<tr>	
-			<tr>
-			
-				<td width="206">
-				<img src="./resources/paper_icon/TPAMI24-ZoomNeXt.png" width="185px" height = "140" style="box-shadow: 4px 4px 8px #888">
-				</td>		
-				<td> <a href="https://arxiv.org/pdf/2310.20208.pdf" target="_blank">ZoomNeXt: A Unified Collaborative Pyramid Network for Camouflaged Object Detection</a>
-					<a href="https://arxiv.org/pdf/2310.20208.pdf">[Paper]</a>    <br>
-					<a href="https://github.com/lartpang/ZoomNeXt">[Code]</a><img
-							  src="https://img.shields.io/github/stars/lartpang/ZoomNeXt"/>
-				 <p >     Youwei Pang*, <strong>Xiaoqi Zhao*</strong>, Tian-Zhu Xiang, Lihe Zhang, Huchuan Lu<br>
-			   <p style="margin-top: -11px"><i>IEEE Transactions on Pattern Analysis and Machine Intelligence (<strong> TPAMI </strong>), 2024.
-				</td>
-			</tr>
-			<tr></tr>
-			<tr></tr>	 -->
-		
-			<tr>	
-				<tr>
-				
-					<td width="206">
-					<img src="./resources/paper_icon/PAMI_Comptr.png" width="185px" height = "140" style="box-shadow: 4px 4px 8px #888">
-					</td>		
-					<td> <a href="https://arxiv.org/pdf/2307.12349.pdf" target="_blank">ComPtr: Towards Diverse Bi-source Dense Prediction Tasks via A Simple yet General Complementary Transformer</a>
-						<a href="https://arxiv.org/pdf/2307.12349.pdf">[Paper]</a>    <br>
-					 <p >   Youwei Pang*, <strong>Xiaoqi Zhao*</strong>, Lihe Zhang, Huchuan Lu<br>
-				   <p style="margin-top: -11px"><i>IEEE Transactions on Pattern Analysis and Machine Intelligence (<strong> TPAMI </strong>), 2025.
-					</td>
-				</tr>
-				<tr></tr>
-				<tr></tr>	
-
-				<tr>	
-					<tr>
+    <h2 id="experience">News</h2>
+    <div style="height: 280px; overflow: auto;">
+        <div class="section">   
+            <div class="paper">
+                <ul>
+					<li>[09/2024] Two papers accepted at NeurIPS 2025.</li>
+					<li>[08/2025] I was nominated as a Rising Star at WAIC Yunfan!</li>
+					<li>[02/2025] Our ComPtr (General Bi-source Transformer Model) was accepted by TPAMI 2025. Congratulations to <a href="https://lartpang.github.io/">Youwei</a>!</li>
+					<li>[02/2025] Two papers accepted at CVPR 2025. Congratulations to <a href="https://scholar.google.com/citations?user=yn5W75MAAAAJ&hl=zh-CN">Shijie</a> and <a href="https://scholar.google.com/citations?user=jLLrtFQAAAAJ&hl=zh-CN">Jia</a>!</li>
+					<li>[01/2025] Our CAVER (IEEE TIP 2023) is an <alert><strong>ESI Highly Cited Paper (Top 1%)</strong></alert>.</li>
+					<li>[12/2024] I successfully defended my PhD dissertation! Call me Dr. Zhao! 😎😎😎</li>
+					<li>[08/2024] <a href="https://mp.weixin.qq.com/s/t7zYXtV-M6cgGUTyvRkpaw">X3000 INSPECTION finished Series A and A+ financing rounds</a>. 🎉🎉🎉 Ai4EVSafety is all you need!</li>
+					<li>[07/2024] One paper accepted at ECCV 2024. <alert><strong>New Task! Open-Vocabulary Camouflaged Object Segmentation</strong></alert>.</li>
+					<li>[06/2024] One paper accepted at TPAMI 2024.</li>
+					<li>[05/2024] One paper accepted at ICML 2024.</li>
+					<li>[03/2024] One paper accepted at IJCV 2024.</li>
+					<li>[02/2024] Two papers accepted at CVPR 2024 <alert><strong>(1 highlight ~3% [324/11532])</strong></alert>. Congratulations to <a href="https://scholar.google.com/citations?user=_PgjfE4AAAAJ&hl=zh-TW">Qian</a>!</li>
+					<li>[01/2024] One paper accepted at IJCV 2024.</li>
+					<li>[07/2023] One paper accepted at ICCV 2023. Congratulations to <a href="https://scholar.google.com/citations?user=IKZh8-kAAAAJ&hl=en">Yichen</a>!</li>
+					<li>[01/2023] One paper accepted at IEEE TIP 2023.</li>
+					<li>[12/2022] One paper accepted at IEEE TIP 2022.</li>
+					<li>[03/2022] One paper accepted at CVPR 2022.</li>
+					<li>[11/2021] One paper accepted at AAAI 2022 <alert><strong>(~15% [1349/9020])</strong></alert>.</li>
+					<li>[07/2021] One paper accepted at ACM MM 2021 <alert><strong>(oral ~9% [179/1942])</strong></alert>.</li>
+					<li>[06/2021] One paper accepted at MICCAI 2021.</li>
+					<li>[07/2020] Three papers accepted at ECCV 2020 <alert><strong>(1 oral ~2% [104/5025])</strong></alert>.</li>
+					<li>[03/2020] One paper accepted at CVPR 2020.</li>
 					
-						<td width="206">
-						<img src="./resources/paper_icon/TIP2022-MMFT.jpg" width="185px" height = "140" style="box-shadow: 4px 4px 8px #888">
-						</td>		
-						<td> <a href="https://arxiv.org/pdf/2203.04895v2.pdf" target="_blank">Joint Learning of Salient Object Detection, Depth Estimation and Contour Extraction</a>
-							<a href="https://arxiv.org/pdf/2203.04895v2.pdf">[Paper]</a>
-							<a href="https://github.com/Xiaoqi-Zhao-DLUT/MMFT">[Code]</a><img
-									src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/MMFT"/>
-									<br>
-						 <p >  <strong>Xiaoqi Zhao</strong>, Youwei Pang, Lihe Zhang, Huchuan Lu<br>
-					   <p style="margin-top: -11px"><i>IEEE Transactions on Image Processing (<strong> TIP </strong>), 2022.
-						</td>
-					</tr>
-					<tr></tr>
-					<tr></tr>	
-
-					<tr>	
-						<tr>
-						
-							<td width="206">
-							<img src="./resources/paper_icon/TIP23-CAVER.png" width="185px" height = "140" style="box-shadow: 4px 4px 8px #888">
-							</td>		
-							<td> <a href="https://arxiv.org/pdf/2112.02363.pdf" target="_blank">CAVER: Cross-Modal View-Mixed Transformer for Bi-Modal Salient Object Detection</a>
-								<a href="https://arxiv.org/pdf/2112.02363.pdf">[Paper]</a>
-								<a href="https://github.com/lartpang/CAVER">[Code]</a><img
-										src="https://img.shields.io/github/stars/lartpang/CAVER"/>
-										<br>
-							 <p >    Youwei Pang, <strong>Xiaoqi Zhao</strong>, Lihe Zhang, Huchuan Lu<br>
-						   <p style="margin-top: -11px"><i>IEEE Transactions on Image Processing (<strong> TIP </strong>), 2023.
-  <p >  <strong>  <a  style="color:red;text-decoration:none;" >ESI Highly Cited Paper (1%)</a>  </strong</p>
- 
+                </ul>
+                <div class="spanner"></div>
+            </div>
+        </div>
+    </div>
+  </div>
 
 
 
 
-							</td>
-						</tr>
-						<tr></tr>
-						<tr></tr>
-				<tr>	
-						<tr>
-						
-							<td width="206">
-							<img src="./resources/paper_icon/TMI-23-M2SNet.png" width="185px" height = "140" style="box-shadow: 4px 4px 8px #888">
-							</td>		
-							<td> <a href="https://arxiv.org/pdf/2303.10894.pdf" target="_blank">M2SNet: Multi-scale in Multi-scale Subtraction Network for Medical Image Segmentation</a>
-								<a href="https://arxiv.org/pdf/2303.10894.pdf">[Paper]</a>  
-									<a href="https://mp.weixin.qq.com/s/Hh7ZimtcvpOiMYU3FxBA3A">[Interpretation by CVHub (~5000 views)]</a>
-								<a href="https://github.com/Xiaoqi-Zhao-DLUT/MSNet">[Code]</a><img
-								src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/MSNet"/>
-										<br>
-							 <p >     <strong>Xiaoqi Zhao</strong>, Hongpeng Jia, Youwei Pang, Long Lv, Feng Tian, Lihe Zhang, Weibing Sun, Huchuan Lu<br>
-						   <p style="margin-top: -11px"><i>🏆The second place (2/100) in the MICCAI 2022 Challenge: Glaucoma Oct Analysis and Layer Segmentation (GOALS).
-							</td>
-						</tr>
-						<tr></tr>
-						<tr></tr>		
+  <div id="projects-section" class="content-section">
+	<div style="clear: both;">
+		<div class="section">
+			<div style="max-width: 1000px; margin-top: 20px;">
+				<!-- Awesome-AI4X-NSCLR-Papers -->
+				<div style="background-color: white; border: 1px solid #d0d7de; border-radius: 6px; padding: 16px; margin-bottom: 16px;">
+					<div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
+						<div style="flex: 1;">
+							<a href="https://github.com/Xiaoqi-Zhao-DLUT/Awesome-AI4X-NSCLR-Papers" style="font-size: 16px; font-weight: 600; color: #0969da; text-decoration: none; margin-bottom: 4px; display: block;" target="_blank">Awesome-AI4X-NSCLR-Papers</a>
+							<p style="font-size: 14px; color: #656d76; line-height: 1.4; margin: 0;">A curated collection of AI+X papers published in Nature / Science / Cell / Lancet / Radiology and their flagship sub-journals.</p>
+						</div>
+					</div>
+					<div style="display: flex; align-items: center; gap: 16px; font-size: 12px; color: #656d76;">
+						<div style="display: flex; align-items: center; gap: 4px;">
+							<span style="width: 12px; height: 12px; border-radius: 50%; background-color: #3572A5;"></span>
+							<span>Python</span>
+						</div>
+						<div style="display: flex; align-items: center; gap: 4px;">
+							<img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Awesome-AI4X-NSCLR-Papers" alt="stars">
+						</div>
+					</div>
+				</div>
+				
+				<!-- Awesome-Open-Vision-Problem-Modeling -->
+				<div style="background-color: white; border: 1px solid #d0d7de; border-radius: 6px; padding: 16px; margin-bottom: 16px;">
+					<div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
+						<div style="flex: 1;">
+							<a href="https://github.com/Xiaoqi-Zhao-DLUT/Awesome-Open-Vision-Problem-Modeling" style="font-size: 16px; font-weight: 600; color: #0969da; text-decoration: none; margin-bottom: 4px; display: block;" target="_blank">Awesome-Open-Vision-Problem-Modeling</a>
+							<p style="font-size: 14px; color: #656d76; line-height: 1.4; margin: 0;">Awesome List for Diverse Open Vision Problems and Modeling Solutions.</p>
+						</div>
+					</div>
+					<div style="display: flex; align-items: center; gap: 16px; font-size: 12px; color: #656d76;">
+						<div style="display: flex; align-items: center; gap: 4px;">
+							<span style="width: 12px; height: 12px; border-radius: 50%; background-color: #3572A5;"></span>
+							<span>Python</span>
+						</div>
+						<div style="display: flex; align-items: center; gap: 4px;">
+							<img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Awesome-Open-Vision-Problem-Modeling" alt="stars">
+						</div>
+					</div>
+				</div>
+
+				<div style="background-color: white; border: 1px solid #d0d7de; border-radius: 6px; padding: 16px; margin-bottom: 16px;">
+					<div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
+						<div style="flex: 1;">
+							<a href="https://github.com/Xiaoqi-Zhao-DLUT/Awesome-Unified-Context-dependent-Concept-Segmentation" style="font-size: 16px; font-weight: 600; color: #0969da; text-decoration: none; margin-bottom: 4px; display: block;" target="_blank">Awesome-Unified-Context-dependent-Concept-Segmentation</a>
+							<p style="font-size: 14px; color: #656d76; line-height: 1.4; margin: 0;"> Awesome List for Unified Context-dependent Concept Segmentation.</p>
+						</div>
+					</div>
+					<div style="display: flex; align-items: center; gap: 16px; font-size: 12px; color: #656d76;">
+						<div style="display: flex; align-items: center; gap: 4px;">
+							<span style="width: 12px; height: 12px; border-radius: 50%; background-color: #3572A5;"></span>
+							<span>Python</span>
+						</div>
+						<div style="display: flex; align-items: center; gap: 4px;">
+							<img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Awesome-Unified-Context-dependent-Concept-Segmentation" alt="stars">
+						</div>
+					</div>
+				</div>
+
+
+				<div style="background-color: white; border: 1px solid #d0d7de; border-radius: 6px; padding: 16px; margin-bottom: 16px;">
+					<div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
+						<div style="flex: 1;">
+							<a href="https://github.com/lartpang/SAMs-CDConcepts-Eval" style="font-size: 16px; font-weight: 600; color: #0969da; text-decoration: none; margin-bottom: 4px; display: block;" target="_blank">SAMs-CDConcepts-Eval</a>
+							<p style="font-size: 14px; color: #656d76; line-height: 1.4; margin: 0;">  Comprehensively Evaluate SAM and SAM 2 with Diverse Prompts Towards Context-Dependent Concepts under Different Scenes.</p>
+						</div>
+					</div>
+					<div style="display: flex; align-items: center; gap: 16px; font-size: 12px; color: #656d76;">
+						<div style="display: flex; align-items: center; gap: 4px;">
+							<span style="width: 12px; height: 12px; border-radius: 50%; background-color: #3572A5;"></span>
+							<span>Python</span>
+						</div>
+						<div style="display: flex; align-items: center; gap: 4px;">
+							<img src="https://img.shields.io/github/stars/lartpang/SAMs-CDConcepts-Eval" alt="stars">
+						</div>
+					</div>
+				</div>
+
+				<div style="background-color: white; border: 1px solid #d0d7de; border-radius: 6px; padding: 16px; margin-bottom: 16px;">
+					<div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
+						<div style="flex: 1;">
+							<a href="https://github.com/Xiaoqi-Zhao-DLUT/PySegMetric_EvalToolkit" style="font-size: 16px; font-weight: 600; color: #0969da; text-decoration: none; margin-bottom: 4px; display: block;" target="_blank">PySegMetrics</a>
+							<p style="font-size: 14px; color: #656d76; line-height: 1.4; margin: 0;">  A Python-based Simple yet Efficient Evaluation Toolbox for Segmentation-like tasks.</p>
+						</div>
+					</div>
+					<div style="display: flex; align-items: center; gap: 16px; font-size: 12px; color: #656d76;">
+						<div style="display: flex; align-items: center; gap: 4px;">
+							<span style="width: 12px; height: 12px; border-radius: 50%; background-color: #3572A5;"></span>
+							<span>Python</span>
+						</div>
+						<div style="display: flex; align-items: center; gap: 4px;">
+							<img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/PySegMetric_EvalToolkit" alt="stars">
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+				
+		</div>
+
+			
+		</div>
+	  </div>
+	  
+	</div>
+
+
+	<div id="honors-section" class="content-section">
+		<div style="clear: both;">
+			<div class="section">
+				<h2 id="confpapers">Honor</h2>
+				<div class="paper">
+					 <ul> 
+						<li>
+							2025  <a href="https://www.thegaiaa.org/en/awards_mrzx"> WAIC Yunfan Award, Rising Star Nomination</a> (10 winners worldwide)
+							   </li> 
+			
+						<li>
+							2025   Profiled by People’s Daily《人民日报》as an  <a href="https://mp.weixin.qq.com/s/dBHdfQmwjeYRn-ls726Myw"> Outstanding PhD Student Representative </a> (100 PhD students nationwide; 1 PhD student from DLUT)
+							   </li> 
+							   <li>
+								2020-2024   <a href="https://www.aminer.org/ai2000/search_rank?id=5614ca9445ce1e59634f5e37&searchValue=%E8%B5%B5%E9%AA%81%E9%AA%90&yearLeft=2020&yearRight=2024">  AI 2000 Most Influential Scholars by Aminer in Computer Vision </a>
+								   </li> 
+					   <li>
+						   2022 & 2024 Doctoral National Scholarship
+								   </li> 
+					<li>
+						2023 3rd Place in 	<a href="https://www.vspwdataset.com/Workshop%202023.html">  Video Semantic Segmentation Track  of the CVPR PVUW challenge </a>  
+							   </li>
+					<li>
+						2023 Gold Award of <a href="https://cy.ncss.cn/information/2c93f4c682872dbb01849802948e17dd">The 8th China International College Students' 'Internet+' Innovation and Entrepreneurship Competition</a> (Company/Project: 工源三仟; ~0.05‰[161/3,400,000+])
+							</li>
+					<li>
+						2022 CVPR 2022 <a href="https://cvpr2022.thecvf.com/outstanding-reviewers">Outstanding Reviewer</a> (~2%[156/6247])
+							 </li>
+	
+						  <li>
+							2022 Huawei Camera, Academic Rising Star Award (8 winners worldwide;  170,000+ viewers watched the live talk; 30,000 RMB bonus)
+							 </li> 	
+			<li>
+						2022  MICCAI Challenge: Glaucoma Oct Analysis and Layer Segmentation (GOALS)  (Team: IIAU-Segmentors; Glaucoma Detection:1/100; OCT Layer Segmentation: 3/100; GOALS: 2/100; $1,300 bonus)
+					 </li>
+			<li>  2019-2024 Outstanding graduate student of Dalian University of Technology </li>
+			<li>
+				2018	3rd place of OPPO Top AI Competition (Portrait Segmentation) (3/456; 50,000 RMB bonus) 
+				</li>
+					</ul>
+					<div class="spanner"></div>
+				</div>
+	
+				
+	<h2><font> Academic Service </font></h2>
+	<ul>
+	
+		<li>
+			<b>Program Committee or Reviewer</b></br>
+			Conference on Computer Vision and Pattern Recognition (CVPR), 2022-2025 <strong>(Outstanding Reviewer ~2%[156/6247])</strong><br>
+			International Conference on Computer Vision (ICCV), 2021-2025 <br>
+			European Conference on Computer Vision (ECCV), 2022-2024 <br>
+			AAAI Conference on Artificial Intelligence (AAAI), 2022-2026 <br>
+			Neural Information Processing Systems (NeurIPS), 2023-2025 <br>
+			International Conference on Learning Representations (ICLR), 2024-2026 <br>
+			International Conference on Machine Learning (ICML), 2024-2025 <br>
+		</li>
+	
+		<li>
+			<b>Regular Journal Reviewer</b></br>
+		IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI) <br>
+		International Journal of Computer Vision (IJCV) <br>
+		IEEE Transactions on Image Processing (TIP) <br>
+		IEEE Transactions on Medical Imaging (TMI) <br>
+		</li>
+	
+	</ul>
+			</div>
+		  </div>
+		  
+		</div>
+
+  <!-- Publications 部分 -->
+  <div id="publications-section" class="content-section">
+    <h2> Publications   [<a href="https://scholar.google.com/citations?user=0EKcLI4AAAAJ&hl=zh-CN">Google Scholar (3,800 + citations)</a>]</h2>
+    <!-- <br>      <span style="color:red; white-space: nowrap;"><b>(* indicates equal contribution)</b></span> -->
+    <br> <b>TPAMI/IJCV/TIP: 7</b>
+    <br> <b>NeurIPS/ICML/CVPR/ECCV/ICCV/AAAI/MM/MICCAI: 17 (2 oral, 1 highlight)</b>
+    <br> <b>Papers with 500+ Citations: 2</b>
+    <br> <b>Papers with 100+ Citations: 9</b>
+    <br> <b>Papers as First/co-First/Last Author: 19</b>
+    <br>
+	<tr>
+		<td colspan="2" style="padding:0;">
+		  <hr style="border:0; border-top:1px solid #ccc; margin:15px 0;">
+		</td>
+	  </tr>
+    <!-- <tr><tr><tr><tr> -->
+      <div style="margin-top: 20px"></div>    
+	  
+      <table id="tbPublications" width="100%">
+
+      <tbody>
+
+	  <tr>
+		<td width="100" style="text-align:center; padding-right:20px;">
+		  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+		  <div style="
+			background-color: pink;
+			width: 185px;
+			height: 28px;
+			line-height: 28px;
+			border-radius: 8px;
+			margin: 0 auto 5px auto;
+			font-weight: bold;">
+			arXiv 2025
+		  </div>
+		  <img src="./resources/paper_icon/SAM-EVA2025.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+		</td>    
+	  
+		<td>
+			
+			<div style="line-height:1.5; margin-bottom:6px;">
+		  <a href="https://arxiv.org/pdf/2412.01240" target="_blank">
+			Inspiring the Next Generation of Segment Anything Models: Comprehensively Evaluate SAM and SAM 2 with Diverse Prompts Towards Context-Dependent Concepts under Different Scenes
+		  </a>
+		</div>
+
+		  <div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			<strong>Xiaoqi Zhao</strong>, Youwei Pang, Shijie Chang, Yuan Zhao, Lihe Zhang, Chenyang Yu,  
+			Hanqi Liu, Jiaming Zuo, Jinsong Ouyang, Weisi Lin, Georges El Fakhri, Huchuan Lu, Xiaofeng Liu
+		  </div>
+
+		  <div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			<i>arXiv, 2025.</i>
+		  </div>
+
+	  
+		  <!-- 底部按钮区域 -->
+		  <div style="margin-top:10px;">
+			<div style="margin-top:10px;">
+				<!-- Code + stars -->
+				<a href="https://github.com/lartpang/SAMs-CDConcepts-Eval" target="_blank" style="
+				  display:inline-flex;
+				  align-items:center;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+				  margin-right:8px;">
+				  <span style="margin-right:6px;">Code</span>
+				  <img src="https://img.shields.io/github/stars/lartpang/SAMs-CDConcepts-Eval" 
+					   style="height:16px;">
+				</a>
+			  
+				<!-- arXiv -->
+				<a href="https://arxiv.org/pdf/2412.01240" target="_blank" style="
+				  display:inline-block;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+				  arXiv
+				</a>
+			  </div>
+			  
+		  </div>
+		</td>
+	  </tr>
+	  <tr></tr>
+	  <tr></tr>
+	
+	  
+	  <tr>
+		<td width="100" style="text-align:center; padding-right:20px;">
+		  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+		  <div style="
+			background-color: pink;
+			width: 185px;
+			height: 28px;
+			line-height: 28px;
+			border-radius: 8px;
+			margin: 0 auto 5px auto;
+			font-weight: bold;">
+			arXiv 2025
+		  </div>
+		  <img src="./resources/paper_icon/PBD_arXiv25.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+		</td>    
+	  
+		<td>
+			<div style="line-height:1.5; margin-bottom:6px;">
+				<a href="https://arxiv.org/pdf/2508.07797" target="_blank">
+					Power Battery Detection
+				</a>
+			  </div>
+	  
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+					<strong>Xiaoqi Zhao</strong>, Peiqian Cao, Chenyang Yu, Zonglei Feng, Lihe Zhang, Hanqi Liu, Jiaming Zuo, Youwei Pang, Jinsong Ouyang, Weisi Lin, Georges El Fakhri, Huchuan Lu, Xiaofeng Liu
+				</div>
+	  
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				  <i>arXiv, 2025.</i>
+				</div>
+
+		  <!-- 底部按钮区域 -->
+		  <div style="margin-top:10px;">
+			<div style="margin-top:10px;">
+				<!-- Code + stars -->
+				<a href="https://github.com/Xiaoqi-Zhao-DLUT/X-ray-PBD" target="_blank" style="
+				  display:inline-flex;
+				  align-items:center;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+				  margin-right:8px;">
+				  <span style="margin-right:6px;">Code</span>
+				  <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/X-ray-PBD" 
+					   style="height:16px;">
+				</a>
+			  
+			  
+				<!-- arXiv -->
+				<a href="https://arxiv.org/pdf/2508.07797" target="_blank" style="
+				  display:inline-block;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+				  arXiv
+				</a>
+			  </div>
+			  
+		  </div>
+		</td>
+	  </tr>
+	  <tr></tr>
+	  <tr></tr>
+     
+	  <tr>
+		<td width="100" style="text-align:center; padding-right:20px;">
+		  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+		  <div style="
+			background-color: pink;
+			width: 185px;
+			height: 28px;
+			line-height: 28px;
+			border-radius: 8px;
+			margin: 0 auto 5px auto;
+			font-weight: bold;">
+			arXiv 2025
+		  </div>
+		  <img src="./resources/paper_icon/UniMMAD.png" width="185px" height="170px" style="box-shadow: 4px 4px 8px #888">
+		</td>    
+	  
+		<td>
+			<div style="line-height:1.5; margin-bottom:6px;">
+				<a href="https://arxiv.org/abs/2509.25934" target="_blank">
+					UniMMAD: Unified Multi-Modal and Multi-Class Anomaly Detection via MoE-Driven Feature Decompression
+				</a>
+			  </div>
+	  
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+					Yuan Zhao, Youwei Pang, Lihe Zhang, Hanqi Liu, Jiaming Zuo, Huchuan Lu, <strong>Xiaoqi Zhao</strong>
+				</div>
+	  
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				  <i>arXiv, 2025.</i>
+				</div>
+
+		  <!-- 底部按钮区域 -->
+		  <div style="margin-top:10px;">
+			<div style="margin-top:10px;">
+				<!-- Code + stars -->
+				<a href="https://github.com/yuanzhao-CVLAB/UniMMAD" target="_blank" style="
+				  display:inline-flex;
+				  align-items:center;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+				  margin-right:8px;">
+				  <span style="margin-right:6px;">Code</span>
+				  <img src="https://img.shields.io/github/stars/yuanzhao-CVLAB/UniMMAD" 
+					   style="height:16px;">
+				</a>
+			  
+			  
+				<!-- arXiv -->
+				<a href="https://arxiv.org/abs/2509.25934" target="_blank" style="
+				  display:inline-block;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+				  arXiv
+				</a>
+			  </div>
+			  
+		  </div>
+		</td>
+	  </tr>
+	  <tr></tr>
+	  <tr></tr>
+
+	  <tr>
+		<td width="100" style="text-align:center; padding-right:20px;">
+		  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+		  <div style="
+			background-color: pink;
+			width: 185px;
+			height: 28px;
+			line-height: 28px;
+			border-radius: 8px;
+			margin: 0 auto 5px auto;
+			font-weight: bold;">
+			NeurIPS 2025
+		  </div>
+		  <img src="./resources/paper_icon/UniMRSeg.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+		</td>    
+	  
+		<td>
+			<div style="line-height:1.5; margin-bottom:6px;">
+				<a href="https://arxiv.org/abs/2509.16170" target="_blank">
+					UniMRSeg: Unified Modality-Relax Segmentation via Hierarchical Self-Supervised Compensation
+				</a>
+			  </div>
+	  
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+					<strong> Xiaoqi Zhao</strong>, Youwei Pang, Chenyang Yu, Lihe Zhang, Huchuan Lu, Shijian Lu, Georges El Fakhri, Xiaofeng Liu
+				</div>
+	  
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				  <i>Neural Information Processing Systems (NeurIPS), 2025.</i>
+				</div>
+
+		  <!-- 底部按钮区域 -->
+		  <div style="margin-top:10px;">
+			<div style="margin-top:10px;">
+				<!-- Code + stars -->
+				<a href="https://github.com/Xiaoqi-Zhao-DLUT/UniMRSeg" target="_blank" style="
+				  display:inline-flex;
+				  align-items:center;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+				  margin-right:8px;">
+				  <span style="margin-right:6px;">Code</span>
+				  <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/UniMRSeg" 
+					   style="height:16px;">
+				</a>
+			  
+			  
+				<!-- arXiv -->
+				<a href="https://arxiv.org/abs/2509.16170" target="_blank" style="
+				  display:inline-block;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+				  arXiv
+				</a>
+			  </div>
+			  
+		  </div>
+		</td>
+	  </tr>
+	  <tr></tr>
+	  <tr></tr>
+
+	  <tr>
+		<td width="100" style="text-align:center; padding-right:20px;">
+		  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+		  <div style="
+			background-color: pink;
+			width: 185px;
+			height: 28px;
+			line-height: 28px;
+			border-radius: 8px;
+			margin: 0 auto 5px auto;
+			font-weight: bold;">
+			NeurIPS 2025
+		  </div>
+		  <img src="./resources/paper_icon/IRSTD.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+		</td>    
+	  
+		<td>
+			<div style="line-height:1.5; margin-bottom:6px;">
+				<a href="https://arxiv.org/pdf/2509.16888" target="_blank">
+					Rethinking Evaluation of Infrared Small Target Detection
+				</a>
+			  </div>
+	  
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+					Youwei Pang, <strong>Xiaoqi Zhao</strong>, Lihe Zhang, Huchuan Lu, Georges El Fakhri, Xiaofeng Liu, Shijian Lu
+				</div>
+	  
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				  <i>Neural Information Processing Systems (NeurIPS), 2025.</i>
+				</div>
+
+		  <!-- 底部按钮区域 -->
+		  <div style="margin-top:10px;">
+			<div style="margin-top:10px;">
+				<!-- Code + stars -->
+				<a href="https://github.com/lartpang/PyIRSTDMetrics" target="_blank" style="
+				  display:inline-flex;
+				  align-items:center;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+				  margin-right:8px;">
+				  <span style="margin-right:6px;">Code</span>
+				  <img src="https://img.shields.io/github/stars/lartpang/PyIRSTDMetrics" 
+					   style="height:16px;">
+				</a>
+			  
+			  
+				<!-- arXiv -->
+				<a href="https://arxiv.org/abs/2509.16888" target="_blank" style="
+				  display:inline-block;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+				  arXiv
+				</a>
+			  </div>
+			  
+		  </div>
+		</td>
+	  </tr>
+	  <tr></tr>
+	  <tr></tr>
+
+	  <tr>
+		<td width="100" style="text-align:center; padding-right:20px;">
+		  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+		  <div style="
+			background-color: pink;
+			width: 185px;
+			height: 28px;
+			line-height: 28px;
+			border-radius: 8px;
+			margin: 0 auto 5px auto;
+			font-weight: bold;">
+			TPAMI 2025
+		  </div>
+		  <img src="./resources/paper_icon/PAMI_Comptr.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+		</td>    
+	  
+		<td>
+			<div style="line-height:1.5; margin-bottom:6px;">
+				<a href="https://arxiv.org/pdf/2307.12349" target="_blank">
+					ComPtr: Toward Diverse Bi-Source Dense Prediction Tasks via a Simple Yet General Complementary Transformer
+				</a>
+			  </div>
+	  
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+					Youwei Pang, <strong>Xiaoqi Zhao</strong>, Lihe Zhang, Huchuan Lu 
+				</div>
+	  
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				  <i>IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025.</i>
+				</div>
+
+		  <!-- 底部按钮区域 -->
+		  <div style="margin-top:10px;">
+			<div style="margin-top:10px;">
+				<!-- Code + stars -->
+				<a href="https://github.com/lartpang/ComPtr" target="_blank" style="
+				  display:inline-flex;
+				  align-items:center;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+				  margin-right:8px;">
+				  <span style="margin-right:6px;">Code</span>
+				  <img src="https://img.shields.io/github/stars/lartpang/ComPtr" 
+					   style="height:16px;">
+				</a>
+			  
+			  
+				<!-- arXiv -->
+				<a href="https://arxiv.org/pdf/2307.12349" target="_blank" style="
+				  display:inline-block;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+				  arXiv
+				</a>
+			  </div>
+			  
+		  </div>
+		</td>
+	  </tr>
+	  <tr></tr>
+	  <tr></tr>
+	  
+	  
+	
+
+	  <tr>
+		<td width="100" style="text-align:center; padding-right:20px;">
+		  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+		  <div style="
+			background-color: pink;
+			width: 185px;
+			height: 28px;
+			line-height: 28px;
+			border-radius: 8px;
+			margin: 0 auto 5px auto;
+			font-weight: bold;">
+			CVPR 2025
+		  </div>
+		  <img src="./resources/paper_icon/SR-ICL.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+		</td>    
+	  
+		<td>
+			<div style="line-height:1.5; margin-bottom:6px;">
+				<a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Chang_Unified_Medical_Lesion_Segmentation_via_Self-referring_Indicator_CVPR_2025_paper.pdf" target="_blank">
+					Unified Medical Lesion Segmentation via Self-referring Indicator
+					</a>
+			  </div>
+	  
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+					Shijie Chang, <strong>Xiaoqi Zhao</strong>, Lihe Zhang, Tiancheng Wang
+				</div>
+	  
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				  <i>IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2025.</i>
+				</div>
+
+		  <!-- 底部按钮区域 -->
+		  <div style="margin-top:10px;">
+			<div style="margin-top:10px;">
+				<!-- Code + stars -->
+				<a href="https://github.com/DUT-CSJ/SR-ICL" target="_blank" style="
+				  display:inline-flex;
+				  align-items:center;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+				  margin-right:8px;">
+				  <span style="margin-right:6px;">Code</span>
+				  <!-- <img src="https://img.shields.io/github/stars/lartpang/ComPtr" 
+					   style="height:16px;"> -->
+				</a>
+			  
+			  
+				<!-- arXiv -->
+				<a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Chang_Unified_Medical_Lesion_Segmentation_via_Self-referring_Indicator_CVPR_2025_paper.pdf" target="_blank" style="
+				  display:inline-block;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+				  arXiv
+				</a>
+			  </div>
+			  
+		  </div>
+		</td>
+	  </tr>
+	  <tr></tr>
+	  <tr></tr>
+	  
+	  <tr>
+		<td width="100" style="text-align:center; padding-right:20px;">
+		  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+		  <div style="
+			background-color: pink;
+			width: 185px;
+			height: 28px;
+			line-height: 28px;
+			border-radius: 8px;
+			margin: 0 auto 5px auto;
+			font-weight: bold;">
+			CVPR 2025
+		  </div>
+		  <img src="./resources/paper_icon/MoSE.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+		</td>    
+	  
+		<td>
+			<div style="line-height:1.5; margin-bottom:6px;">
+				<a href="https://openaccess.thecvf.com/content/CVPR2025W/DG-EBF/papers/Wei_Mixture-of-Shape-Experts_MoSE_End-to-End_Shape_Dictionary_Framework_to_Prompt_SAM_for_CVPRW_2025_paper.pdf" target="_blank">
+					Mixture-of-Shape-Experts (MoSE): End-to-End Shape Dictionary Framework to Prompt SAM for Generalizable Medical Segmentation
+					</a>
+			  </div>
+	  
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+					Jia Wei, <strong>Xiaoqi Zhao</strong>, Jonghye Woo, Jinsong Ouyang, Georges El Fakhri, Qingyu Chen, Xiaofeng Liu
+				</div>
+	  
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				  <i>IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2025.</i>
+				</div>
+
+		  <!-- 底部按钮区域 -->
+		  <div style="margin-top:10px;">
+			<div style="margin-top:10px;">
+				<!-- Code + stars -->
+				<a href="" target="_blank" style="
+				  display:inline-flex;
+				  align-items:center;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+				  margin-right:8px;">
+				  <span style="margin-right:6px;">Code</span>
+				  <!-- <img src="https://img.shields.io/github/stars/lartpang/ComPtr" 
+					   style="height:16px;"> -->
+				</a>
+			  
+			  
+				<!-- arXiv -->
+				<a href="https://openaccess.thecvf.com/content/CVPR2025W/DG-EBF/papers/Wei_Mixture-of-Shape-Experts_MoSE_End-to-End_Shape_Dictionary_Framework_to_Prompt_SAM_for_CVPRW_2025_paper.pdf" target="_blank" style="
+				  display:inline-block;
+				  padding:6px 12px;
+				  background-color:#ffffff;
+				  border:1px solid #ddd;
+				  border-radius:8px;
+				  text-decoration:none;
+				  font-size:14px;
+				  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+				  arXiv
+				</a>
+			  </div>
+			  
+		  </div>
+		</td>
+	  </tr>
+	  <tr></tr>
+	  <tr></tr>
+  
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		PR 2025
+	  </div>
+	  <img src="./resources/paper_icon/UniFSS.png" width="185px" height="80px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2407.11503?" target="_blank">
+				Beyond Mask: Rethinking Guidance Types in Few-shot Segmentation
+			</a>
+		  </div>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				Shijie Chang, Youwei Pang, <strong>Xiaoqi Zhao</strong>, Huchuan Lu, Lihe Zhang
+			</div>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>Pattern Recognition (PR), 2025.</i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/DUT-CSJ/PR-UniFSS" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <!-- <img src="https://img.shields.io/github/stars/lartpang/ComPtr" 
+				   style="height:16px;"> -->
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2407.11503?" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+  <tr>
+	<td colspan="2" style="padding:0;">
+	  <hr style="border:0; border-top:1px solid #ccc; margin:15px 0;">
+	</td>
+  </tr>
+  
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		ICML 2024
+	  </div>
+	  <img src="./resources/paper_icon/Spider-ICML2024.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2405.01002" target="_blank">
+				Spider: A Unified Framework for Context-dependent Concept Segmentation
+			</a>
+		  </div>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				<strong>Xiaoqi Zhao</strong>, Youweii Pang, Wei Ji, Baicheng Sheng, Jiaming Zuo, Lihe Zhang, Huchuan Lu
+			</div>
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				<a href="https://mp.weixin.qq.com/s/_qaKf6ctRm0A0VYWL63umQ">[Interpretation by CVHub (8,000 + views)]</a>
+			</div>
 		
-		</tbody>
-		</table>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>International Conference on Machine Learning (ICML), 2024.</i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/Xiaoqi-Zhao-DLUT/Spider-UniCDSeg" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Spider-UniCDSeg" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2405.01002" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		CVPR 2024
+	  </div>
+	  <img src="./resources/paper_icon/CVPR24-PBD-1.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2312.02528" target="_blank">
+				Towards Automatic Power Battery Detection: New Challenge, Benchmark Dataset and Baseline
+			</a>
+		  </div>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				<strong>Xiaoqi Zhao</strong>, Youwei Pang, Zhenyu Chen, Qian Yu, Lihe Zhang, Hanqi Liu, Jiaming Zuo, Huchuan Lu
+			</div>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				<a href="https://mp.weixin.qq.com/s/ZGI3aGQqOFCzCVWETKe4VA">[Interpretation by 极市平台]</a>
+				<a href="https://mp.weixin.qq.com/s/7YIxzGnwimo7UOb-Nw62mw">[Interpretation by X3000 INSPECTION]</a>
+			</div>
+	
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024.</i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/Xiaoqi-Zhao-DLUT/X-ray-PBD" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/X-ray-PBD" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2312.02528" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		CVPR 2024 <a  style="color:red;text-decoration:none;" ><strong>Highlight</strong></a>
+	  </div>
+	  <img src="./resources/paper_icon/CVPR24-MVNet.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2404.07445" target="_blank">
+				Multi-view Aggregation Network for Dichotomous Image Segmentation
+			</a>
+		  </div>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				Qian Yu, <strong>Xiaoqi Zhao</strong>, Youwei Pang, Lihe Zhang, Huchuan Lu
+				</div>
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024. <a  style="color:red;text-decoration:none;" ><strong>Highlight</strong></a></i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://img.shields.io/github/stars/qianyu-dlut/MVANet" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/qianyu-dlut/MVANet" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2404.07445" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		ECCV 2024
+	  </div>
+	  <img src="./resources/paper_icon/ECCV2024-OVCOS.png" width="185px" height="80px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2311.11241" target="_blank">
+				Open-Vocabulary Camouflaged Object Segmentation
+			</a>
+		  </div>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				Youwei Pang, <strong>Xiaoqi Zhao</strong>, Jiaming Zuo, Lihe Zhang, Huchuan Lu
+				</div>
+			
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				<a href="https://mp.weixin.qq.com/s/JdhHr5-X1578STcTaDcg3Q">[Interpretation by CVHub (7,000 + views)]</a>	
+			</div>
+			
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>European Conference on Computer Vision (ECCV), 2024.</i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/lartpang/OVCamo" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/lartpang/OVCamo" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2311.11241" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		IJCV 2024
+	  </div>
+	  <img src="./resources/paper_icon/IJCV-23-DBS.png" width="185px" height="180px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2303.10396" target="_blank">
+				Towards Diverse Binary Segmentation via A Simple yet General Gated Network
+			</a>
+		  </div>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				<strong>Xiaoqi Zhao</strong>, Youwei Pang, Lihe Zhang, Huchuan Lu, Lei Zhang
+				</div>
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>International Journal of Computer Vision (IJCV), 2024.</i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2303.10396" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		IJCV 2024
+	  </div>
+	  <img src="./resources/paper_icon/IJCV-23-AMP.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2303.10383" target="_blank">
+				Adaptive Multi-source Predictor for Zero-shot Video Object Segmentation
+			</a>
+		  </div>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				<strong>Xiaoqi Zhao</strong>, Shijie Chang, Youwei Pang, Jiaxing Yang, Lihe Zhang, Huchuan Lu
+				</div>
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>International Journal of Computer Vision (IJCV), 2024.</i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2303.10383" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+
+  
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		TPAMI 2024
+	  </div>
+	  <img src="./resources/paper_icon/TPAMI24-ZoomNeXt.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2310.20208" target="_blank">
+				ZoomNeXt: A Unified Collaborative Pyramid Network for Camouflaged Object Detection
+			</a>
+		  </div>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				Youwei Pang, <strong>Xiaoqi Zhao</strong>, Tian-Zhu Xiang, Lihe Zhang, Huchuan Lu
+				</div>
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2024.</i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/lartpang/ZoomNeXt" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/lartpang/ZoomNeXt" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2310.20208" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+  <tr>
+	<td colspan="2" style="padding:0;">
+	  <hr style="border:0; border-top:1px solid #ccc; margin:15px 0;">
+	</td>
+  </tr>
+
+
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		MICCAI Challenge
+	  </div>
+	  <img src="./resources/paper_icon/TMI-23-M2SNet.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2303.10894" target="_blank">
+				M2SNet: Multi-scale in Multi-scale Subtraction Network for Medical Image Segmentation
+			</a>
+		  </div>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				<strong>Xiaoqi Zhao</strong>, Hongpeng Jia, Youwei Pang, Long Lv, Feng Tian, Lihe Zhang, Weibing Sun, Huchuan Lu
+				</div>
+
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+					<a href="https://mp.weixin.qq.com/s/qwfsNXEqNj9StsB1eYaOZA">[Interpretation by 极市平台 (6,000 + views)]</a>
+					<a href="https://mp.weixin.qq.com/s/Hh7ZimtcvpOiMYU3FxBA3A">[Interpretation by CVHub (4,000 + views)]</a>
+				</div>
+	
+				
+
+			
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>🏆The second place (2/100) in the MICCAI 2022 Challenge: Glaucoma Oct Analysis and Layer Segmentation (GOALS).</i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/Xiaoqi-Zhao-DLUT/MSNet" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/MSNet" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2303.10894" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+	
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		CVPR Challenge
+	  </div>
+	  <img src="./resources/paper_icon/PVUW2023.jpg" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/abs/2306.02291" target="_blank">
+				3rd Place Solution for PVUW2023 VSS Track: A Large Model for Semantic Segmentation on VSPW
+			</a>
+		  </div>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				Shijie Chang, Zeqi Hao, Ben Kang, <strong>Xiaoqi Zhao</strong>, Jiawen Zhu, Zhenyu Chen, Lihe Zhang, Lu Zhang, Huchuan Lu
+			</div>
+
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>🏆The third place in  video semantic segmentation track of the CVPR 2023 PVUW challenge.</i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/DUT-CSJ/PVUW2023-VSS-3rd" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <!-- <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/MSNet" 
+				   style="height:16px;"> -->
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/abs/2306.02291" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		TIP 2023
+	  </div>
+	  <img src="./resources/paper_icon/TIP23-CAVER.png" width="185px" height="80px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2112.02363" target="_blank">
+				CAVER: Cross-Modal View-Mixed Transformer for Bi-Modal Salient Object Detection
+			</a>
+		  </div>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				Youwei Pang, <strong>Xiaoqi Zhao</strong>, Lihe Zhang, Huchuan Lu		
+			</div>
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			<a  style="color:red;text-decoration:none;" >ESI Highly Cited Paper (1%)</a> 
+		</div>
+
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>IEEE Transactions on Image Processing (TIP), 2023.</i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/lartpang/CAVER" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/lartpang/CAVER" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2112.02363" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+        
+    
 
 
 
+ 
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		ICCV 2023
+	  </div>
+	  <img src="./resources/paper_icon/ICCV23-Isomer.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2308.06693" target="_blank">
+				Isomer: Isomerous Transformer for Zero-shot Video Object Segmentation
+			</a>
+		  </div>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				Yichen Yuan, Yifan Wang, Lijun Wang, <strong>Xiaoqi Zhao</strong>, Huchuan Lu, Yu Wang, Weibo Su, Lei Zhang			
+			</div>
 
 
-<h2><font> Academic Service </font></h2>
-<ul>
-    <li>
-		<b>Journal Reviewer:</b></br>
-	TPAMI, IJCV, TIP, TMI ...
-    </li>
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>IEEE International Conference on Computer Vision (ICCV), 2023.</i>
+			</div>
 
-    <li>
-        <b>Conference Reviewer:</b></br>
-		CVPR: 2025, 2024, 2023, 2022 <strong>(Outstanding Reviewer ~2%[156/6247])</strong><br>
-		ICCV: 2025, 2023, 2021 <br>
-		ECCV: 2024, 2022 <br>
-		AAAI: 2025, 2024, 2023, 2022 <br>
-		NeurIPS: 2024, 2023 <br>
-		ICLR: 2025, 2024 <br>
-		ICML: 2025, 2024 <br>
-    </li>
-</ul>
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/DLUT-yyc/Isomer" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/DLUT-yyc/Isomer" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2308.06693" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+        
+  <tr>
+	<td colspan="2" style="padding:0;">
+	  <hr style="border:0; border-top:1px solid #ccc; margin:15px 0;">
+	</td>
+  </tr>
+  
+
+ 
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		TIP 2022
+	  </div>
+	  <img src="./resources/paper_icon/TIP2022-MMFT.jpg" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2203.04895" target="_blank">
+				Joint Learning of Salient Object Detection, Depth Estimation and Contour Extraction
+			</a>
+		  </div>
+  
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				<strong>Xiaoqi Zhao</strong>, Youwei Pang, Lihe Zhang, Huchuan Lu
+				</div>
+
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>IEEE Transactions on Image Processing (TIP), 2022.</i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/Xiaoqi-Zhao-DLUT/MMFT" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/MMFT" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2203.04895" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		AAAI 2022
+	  </div>
+	  <img src="./resources/paper_icon/2021-SSL.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2101.12482" target="_blank">
+				Self-Supervised Pretraining for RGB-D Salient Object Detection
+			</a>
+		  </div>
+  
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				<strong>Xiaoqi Zhao</strong>, Youwei Pang, Lihe Zhang, Huchuan Lu, Xiang Ruan
+				</div>
+
+				
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+					<a href="  https://mp.weixin.qq.com/s/cvCkM6noKFAf8D9sFmtONA">[Interpretation by 极市平台 (3,000 + views)]</a>
+				  
+				  </div>
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>Thirty-Sixth AAAI Conference on Artificial Intelligence (AAAI), 2022.</i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/Xiaoqi-Zhao-DLUT/SSLSOD" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/SSLSOD" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2101.12482" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		CVPR 2022
+	  </div>
+	  <img src="./resources/paper_icon/CVPR2022-ZoomNet.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2203.02688" target="_blank">
+				Zoom In and Out: A Mixed-scale Triplet Network for Camouflaged Object Detection
+			</a>
+		  </div>
+  
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				Youwei Pang, <strong>Xiaoqi Zhao</strong>, Tian-zhu Xiang, Lihe Zhang, Huchuan Lu
+				</div>
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2022.</i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/lartpang/ZoomNet" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/lartpang/ZoomNet" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2203.02688" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+          
+  <tr>
+	<td colspan="2" style="padding:0;">
+	  <hr style="border:0; border-top:1px solid #ccc; margin:15px 0;">
+	</td>
+  </tr>
+  
+
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		MM 2021 <a  style="color:red;text-decoration:none;" ><strong>Oral</strong></a>
+	  </div>
+	  <img src="./resources/paper_icon/ACMMM2021-Multisource.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2108.05076" target="_blank">
+				Multi-Source Fusion and Automatic Predictor Selection for Zero-Shot Video Object Segmentation
+			</a>
+		  </div>
+  
+		 
+		  
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				<strong>Xiaoqi Zhao</strong>, Youwei Pang, Jiaxing Yang, Lihe Zhang, Huchuan Lu
+				</div>
+
+						
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+					<a href="  https://mp.weixin.qq.com/s/lV1KktoF5ggoz58L_sguaA">[Interpretation by 极市平台 (2,000 + views)]</a>
+				  
+				  </div>
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>ACM International Conference on Multimedia (MM), 2021. <a  style="color:red;text-decoration:none;" ><strong>Oral</strong></a></i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2108.05076" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		MICCAI 2021
+	  </div>
+	  <img src="./resources/paper_icon/MICCAI2021-MSNet.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2108.05082" target="_blank">
+				Automatic Polyp Segmentation via Multi-scale Subtraction Network
+			</a>
+		  </div>
+  
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				<strong>Xiaoqi Zhao</strong>, Lihe Zhang, Huchuan Lu
+				</div>
+						
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			 <a  style="color:red;text-decoration:none;" >🔥Top 1% Most Cited MICCAI 2021 Papers & 🏆Ranking Top 1 in Colonoscopy Diagnosis Field </a>  <a href="https://scholar.google.com/citations?hl=en&view_op=list_hcore&venue=QLpioUFGyGMJ.2024&vq=med_radiologymedicalimaging&cstart=20">[Link]</a>
+				  
+					</div>
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI), 2021.</i>
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/Xiaoqi-Zhao-DLUT/MSNet" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/MSNet" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2108.05082" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+
+          
+  <tr>
+	<td colspan="2" style="padding:0;">
+	  <hr style="border:0; border-top:1px solid #ccc; margin:15px 0;">
+	</td>
+  </tr>
+  
+
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		ECCV 2020 <a  style="color:red;text-decoration:none;" ><strong>Oral</strong></a>
+	  </div>
+	  <img src="./resources/paper_icon/ECCV2020-GateNet.png" width="185px" height="80px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2007.08074" target="_blank">
+				Suppress and Balance: A Simple Gated Network for Salient Object Detection
+			</a>
+		  </div>
+  
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				<strong>Xiaoqi Zhao</strong>, Youwei Pang, Lihe Zhang, Huchuan Lu, Lei Zhang
+				</div>
+						
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			 <a  style="color:red;text-decoration:none;" >🔥Top 3% Most Cited ECCV 2020 Papers & 🏆Ranking Top 1 in Visual Saliency Field </a>  <a href="https://scholar.google.com/citations?hl=en&view_op=list_hcore&venue=cwIh2C-xo8kJ.2024&vq=eng_computervisionpatternrecognition&cstart=40">[Link]</a>
+				  
+					</div>
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>European Conference on Computer Vision (ECCV), 2020. <a  style="color:red;text-decoration:none;" ><strong>Oral</strong></a></i> 
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2007.08074" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
 
 
 
-<p><center><font>
-        <br>&copy; Xiaoqi Zhao | Last updated: Mar. 2025 | </font></center>
-</p>
+  
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		ECCV 2020 
+	  </div>
+	  <img src="./resources/paper_icon/ECCV2020-DANet.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2007.06811" target="_blank">
+				A Single Stream Network for Robust and Real-time RGB-D Salient Object Detection
+			</a>
+		  </div>
+  
 
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				<strong>Xiaoqi Zhao</strong>, Youwei Pang, Lihe Zhang, Huchuan Lu, Lei Zhang
+				</div>
+						
+				<!-- <div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			 <a  style="color:red;text-decoration:none;" >🔥Top 3% Most Cited ECCV 2020 Papers & 🏆Ranking Top 1 in Visual Saliency Field </a>  <a href="https://scholar.google.com/citations?hl=en&view_op=list_hcore&venue=QLpioUFGyGMJ.2024&vq=med_radiologymedicalimaging&cstart=20">[Link]</a>
+				  
+					</div> -->
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>European Conference on Computer Vision (ECCV), 2020.</i> 
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/Xiaoqi-Zhao-DLUT/DANet-RGBD-Saliency" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/DANet-RGBD-Saliency" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2007.06811" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+
+    
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		ECCV 2020 
+	  </div>
+	  <img src="./resources/paper_icon/ECCV2020-HDFNet.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2007.06227" target="_blank">
+				Hierarchical Dynamic Filtering Network for RGB-D Salient Object Detection
+			</a>
+		  </div>
+  
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				Youwei Pang, Lihe Zhang, <strong>Xiaoqi Zhao</strong>,  Huchuan Lu
+				</div>
+						
+				<!-- <div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			 <a  style="color:red;text-decoration:none;" >🔥Top 3% Most Cited ECCV 2020 Papers & 🏆Ranking Top 1 in Visual Saliency Field </a>  <a href="https://scholar.google.com/citations?hl=en&view_op=list_hcore&venue=QLpioUFGyGMJ.2024&vq=med_radiologymedicalimaging&cstart=20">[Link]</a>
+				  
+					</div> -->
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>European Conference on Computer Vision (ECCV), 2020.</i> 
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/lartpang/HDFNet" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/lartpang/HDFNet" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2007.06227" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+      
+  <tr>
+	<td width="100" style="text-align:center; padding-right:20px;">
+	  <!-- 粉色圆角矩形框，显示论文发表地点 -->
+	  <div style="
+		background-color: pink;
+		width: 185px;
+		height: 28px;
+		line-height: 28px;
+		border-radius: 8px;
+		margin: 0 auto 5px auto;
+		font-weight: bold;">
+		CVPR 2020 
+	  </div>
+	  <img src="./resources/paper_icon/CVPR2021-MINet.png" width="185px" height="120px" style="box-shadow: 4px 4px 8px #888">
+	</td>    
+  
+	<td>
+		<div style="line-height:1.5; margin-bottom:6px;">
+			<a href="https://arxiv.org/pdf/2007.09062" target="_blank">
+				Multi-scale Interactive Network for Salient Object Detection
+			</a>
+		  </div>
+  
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+				Youwei Pang, <strong>Xiaoqi Zhao</strong>, Lihe Zhang, Huchuan Lu
+				</div>
+						
+				<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			 <a  style="color:red;text-decoration:none;" >🔥Top 4% Most Cited CVPR 2020 Papers & 🏆Ranking Top 1 in Visual Saliency Field </a>  <a href="https://scholar.google.com/citations?hl=en&view_op=list_hcore&venue=FXe-a9w0eycJ.2025&vq=en&cstart=140">[Link]</a>
+				  
+					</div>
+
+			<div style="font-size:14px; line-height:1.5; margin-bottom:6px;">
+			  <i>IEEE Conference on Computer Vision and Pattern Recognition  (CVPR), 2020.</i> 
+			</div>
+
+	  <!-- 底部按钮区域 -->
+	  <div style="margin-top:10px;">
+		<div style="margin-top:10px;">
+			<!-- Code + stars -->
+			<a href="https://github.com/lartpang/MINet" target="_blank" style="
+			  display:inline-flex;
+			  align-items:center;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+			  margin-right:8px;">
+			  <span style="margin-right:6px;">Code</span>
+			  <img src="https://img.shields.io/github/stars/lartpang/MINet" 
+				   style="height:16px;">
+			</a>
+		  
+		  
+			<!-- arXiv -->
+			<a href="https://arxiv.org/pdf/2007.09062" target="_blank" style="
+			  display:inline-block;
+			  padding:6px 12px;
+			  background-color:#ffffff;
+			  border:1px solid #ddd;
+			  border-radius:8px;
+			  text-decoration:none;
+			  font-size:14px;
+			  box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+			  arXiv
+			</a>
+		  </div>
+		  
+	  </div>
+	</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+
+      </tbody>
+      </table>
+  </div>
 </div>
-</body></html>
-<!-- <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5267tz04tuz&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script> -->
+
+<script>
+// 切换显示不同部分的函数
+function showSection(sectionId) {
+  // 隐藏所有内容部分
+  document.querySelectorAll('.content-section').forEach(section => {
+    section.classList.remove('active');
+  });
+  
+  // 显示选中的内容部分
+  document.getElementById(sectionId + '-section').classList.add('active');
+  
+  // 更新导航栏激活状态
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.remove('active');
+  });
+  event.target.classList.add('active');
+  
+  // 滚动到页面顶部
+  window.scrollTo(0, 0);
+}
+
+// 页面加载时默认显示About部分
+window.onload = function() {
+  showSection('about');
+};
+</script>
+
+</body>
+</html>
