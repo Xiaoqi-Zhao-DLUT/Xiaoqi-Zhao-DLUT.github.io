@@ -321,6 +321,27 @@ nav {
 }
 .hero-link-btn.secondary:hover { color: var(--text-primary); border-color: rgba(255,255,255,0.15); }
 
+/* Mobile portrait — shown only on small screens inside hero-left */
+.hero-portrait-mobile {
+  display: none;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--gold-line);
+  box-shadow: 0 0 24px rgba(201,168,76,0.2);
+  margin-bottom: 24px;
+  flex-shrink: 0;
+  opacity: 0;
+  animation: fadeIn 0.8s 0.15s forwards;
+}
+.hero-portrait-mobile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
 .hero-right {
   position: relative;
   z-index: 2;
@@ -992,6 +1013,7 @@ footer {
 
   #hero { grid-template-columns: 1fr; }
   .hero-right { display: none; }
+  .hero-portrait-mobile { display: block; }
   .hero-left { padding: 100px 32px 60px; }
 
   .bio-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -1157,6 +1179,11 @@ footer {
     <div class="hero-grid"></div>
 
     <div class="hero-left">
+      <!-- Portrait shown only on mobile (≤900px) -->
+      <div class="hero-portrait-mobile">
+        <img src="./resources/images/zxq_4k.png" alt="Xiaoqi Zhao"
+             onerror="this.style.display='none'">
+      </div>
       <div class="hero-eyebrow">AI4X Principal Investigator · NTU Singapore</div>
       <h1 class="hero-name">Xiaoqi <em>Jackie</em><br>Zhao</h1>
       <div class="hero-name-cn">赵 骁 骐</div>
@@ -1450,7 +1477,7 @@ Beyond academic research, I am deeply passionate about AI + X entrepreneurship. 
     <div class="member-card"><div class="member-portrait"><a href="https://akaxlh.github.io/" target="_blank"><img src="./resources/images/xlh.jpg" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Lianghao Xia</div><div class="member-role">Professor at HIT (Shenzhen)</div></div></div>
     <div class="member-card"><div class="member-portrait"><a href="https://teacher.nwpu.edu.cn/fanbin.html" target="_blank"><img src="./resources/images/fanbin.png" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Bin Fan</div><div class="member-role">Professor at NWPU</div></div></div>
     <div class="member-card"><div class="member-portrait"><a href="https://iai.xmu.edu.cn/info/2981/5895.htm" target="_blank"><img src="./resources/images/hj.jpg" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Jie Hu</div><div class="member-role">Associate Professor at MAC@XMU · Research Fellow at NUS</div></div></div>
-    <div class="member-card"><div class="member-portrait"><a href="https://scholar.google.com/citations?user=G4uCKHcAAAAJ&hl=en" target="_blank"><img src="./resources/images/jw.png" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Wei Ji</div><div class="member-role">Research Fellow at Yale</div></div></div>
+    <div class="member-card"><div class="member-portrait"><a href="https://scholar.google.com/citations?user=G4uCKHcAAAAJ&hl=en" target="_blank"><img src="./resources/images/jw.jpg" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Wei Ji</div><div class="member-role">Research Fellow at Yale</div></div></div>
     <div class="member-card"><div class="member-portrait"><a href="https://masterbin-iiau.github.io/" target="_blank"><img src="./resources/images/yb.jpg" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Bin Yan</div><div class="member-role">Research Scientist at ByteDance</div></div></div>
     <div class="member-card"><div class="member-portrait"><a href="https://pengtaojiang.github.io/" target="_blank"><img src="./resources/images/jpt.jpg" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Peng-Tao Jiang</div><div class="member-role">Lead Researcher at vivo</div></div></div>
   </div>
