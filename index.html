@@ -22,14 +22,14 @@
   --gold-line: rgba(201,168,76,0.3);
   --text-primary: #e8e4dc;
   --text-secondary: #9ba5b5;
-  --text-dim:  #9ba5b5;
+  --text-dim: #9ba5b5;
   --accent-blue: #4a90d9;
   --accent-teal: #2dd4bf;
   --border: rgba(255,255,255,0.06);
+  --nav-h: 60px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
 
 body {
@@ -41,7 +41,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ── NOISE TEXTURE OVERLAY ── */
 body::before {
   content: '';
   position: fixed;
@@ -61,9 +60,10 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 68px;
-  background: rgba(8,11,18,0.85);
+  height: var(--nav-h);
+  background: rgba(8,11,18,0.92);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
 }
 
@@ -74,6 +74,7 @@ nav {
   letter-spacing: 0.12em;
   color: var(--gold-light);
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .nav-links {
@@ -95,6 +96,74 @@ nav {
 .nav-links a:hover,
 .nav-links a.active { color: var(--gold-light); }
 
+/* Hamburger */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  border: none;
+  background: none;
+  z-index: 1100;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--gold-light);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile drawer */
+.nav-drawer {
+  display: none;
+  position: fixed;
+  top: var(--nav-h);
+  left: 0; right: 0;
+  background: rgba(8,11,18,0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  z-index: 999;
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s;
+}
+.nav-drawer.open {
+  max-height: 400px;
+  padding: 16px 0 24px;
+}
+.nav-drawer ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.nav-drawer ul li a {
+  display: block;
+  padding: 14px 28px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s, background 0.2s;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-drawer ul li:last-child a { border-bottom: none; }
+.nav-drawer ul li a:active,
+.nav-drawer ul li a.active { color: var(--gold-light); background: var(--gold-dim); }
+
 /* ── HERO ── */
 #hero {
   min-height: 100vh;
@@ -113,7 +182,6 @@ nav {
     linear-gradient(160deg, var(--obsidian) 0%, var(--deep-navy) 100%);
 }
 
-/* Geometric grid lines */
 .hero-grid {
   position: absolute;
   inset: 0;
@@ -152,11 +220,12 @@ nav {
   width: 32px;
   height: 1px;
   background: var(--gold);
+  flex-shrink: 0;
 }
 
 .hero-name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 5vw, 5.5rem);
+  font-size: clamp(2.6rem, 5vw, 5.5rem);
   font-weight: 300;
   line-height: 1.05;
   color: var(--text-primary);
@@ -210,11 +279,13 @@ nav {
   background: var(--accent-teal);
   box-shadow: 0 0 10px var(--accent-teal);
   animation: pulse 2s infinite;
+  flex-shrink: 0;
 }
 
 .hero-links {
   display: flex;
-  gap: 16px;
+  gap: 12px;
+  flex-wrap: wrap;
   opacity: 0;
   animation: fadeSlideUp 0.8s 0.75s forwards;
 }
@@ -235,8 +306,10 @@ nav {
   background: var(--gold-dim);
   transition: all 0.3s;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
 }
-.hero-link-btn:hover {
+.hero-link-btn:hover, .hero-link-btn:active {
   background: rgba(201,168,76,0.25);
   border-color: var(--gold);
   box-shadow: 0 0 20px rgba(201,168,76,0.15);
@@ -246,10 +319,7 @@ nav {
   border-color: var(--border);
   background: transparent;
 }
-.hero-link-btn.secondary:hover {
-  color: var(--text-primary);
-  border-color: rgba(255,255,255,0.15);
-}
+.hero-link-btn.secondary:hover { color: var(--text-primary); border-color: rgba(255,255,255,0.15); }
 
 .hero-right {
   position: relative;
@@ -333,57 +403,21 @@ nav {
   font-weight: 500;
 }
 
-.corner-deco {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  z-index: 4;
-}
+.corner-deco { position: absolute; width: 24px; height: 24px; z-index: 4; }
 .corner-deco.tl { top: -8px; left: -8px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
 .corner-deco.br { bottom: -8px; right: -8px; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
-
-/* Stats bar */
-.stats-bar {
-  position: absolute;
-  bottom: 0; left: 0; right: 50%;
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  display: flex;
-  padding: 24px 80px;
-  gap: 60px;
-  z-index: 3;
-}
-
-.stat-item { text-align: left; }
-.stat-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem;
-  font-weight: 300;
-  color: var(--gold-light);
-  line-height: 1;
-}
-.stat-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-top: 4px;
-}
 
 /* ── SECTIONS ── */
 .section {
   display: none;
   padding: 100px 120px;
-  min-height: calc(100vh - 68px);
+  min-height: calc(100vh - var(--nav-h));
   position: relative;
 }
 .section.active { display: block; }
 .section-alt { background: var(--deep-navy); }
 
-.section-header {
-  margin-bottom: 64px;
-}
+.section-header { margin-bottom: 64px; }
 
 .section-label {
   font-family: 'DM Mono', monospace;
@@ -406,7 +440,7 @@ nav {
 
 .section-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
   font-weight: 300;
   line-height: 1.1;
   color: var(--text-primary);
@@ -420,17 +454,11 @@ nav {
   align-items: start;
 }
 
-.bio-text {
-  font-size: 1.02rem;
-  color: var(--text-secondary);
-  line-height: 1.9;
-}
+.bio-text { font-size: 1.02rem; color: var(--text-secondary); line-height: 1.9; }
 .bio-text p { margin-bottom: 20px; }
 .bio-text a { color: var(--gold-light); text-decoration: none; border-bottom: 1px solid var(--gold-dim); transition: border-color 0.3s; }
 .bio-text a:hover { border-color: var(--gold); }
 .bio-text strong { color: var(--text-primary); font-weight: 500; }
-
-.bio-sidebar {}
 
 .info-card {
   background: var(--surface);
@@ -467,13 +495,7 @@ nav {
   color: var(--text-secondary);
 }
 .info-item:last-child { margin-bottom: 0; }
-.info-item i {
-  color: var(--gold);
-  width: 14px;
-  margin-top: 3px;
-  font-size: 0.8rem;
-  flex-shrink: 0;
-}
+.info-item i { color: var(--gold); width: 14px; margin-top: 3px; font-size: 0.8rem; flex-shrink: 0; }
 
 /* NEWS */
 .news-list { max-height: 600px; overflow-y: auto; padding-right: 8px; }
@@ -484,7 +506,7 @@ nav {
 .news-item {
   display: grid;
   grid-template-columns: 90px 1fr;
-  gap: 20px;
+  gap: 16px;
   padding: 18px 0;
   border-bottom: 1px solid var(--border);
   align-items: start;
@@ -499,11 +521,7 @@ nav {
   padding-top: 3px;
 }
 
-.news-body {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
+.news-body { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
 .news-body a { color: var(--gold-light); text-decoration: none; }
 .news-body strong { color: var(--text-primary); }
 
@@ -540,11 +558,7 @@ nav {
   background: linear-gradient(to bottom, var(--gold), var(--accent-blue));
 }
 
-.research-intro p {
-  font-size: 0.98rem;
-  color: var(--text-secondary);
-  line-height: 1.9;
-}
+.research-intro p { font-size: 0.98rem; color: var(--text-secondary); line-height: 1.9; }
 .research-intro strong { color: var(--gold-light); }
 
 .research-pillars {
@@ -564,10 +578,7 @@ nav {
   transition: border-color 0.3s, transform 0.3s;
   cursor: default;
 }
-.pillar-card:hover {
-  border-color: var(--gold-line);
-  transform: translateY(-3px);
-}
+.pillar-card:hover { border-color: var(--gold-line); transform: translateY(-3px); }
 .pillar-card::after {
   content: '';
   position: absolute;
@@ -595,19 +606,9 @@ nav {
   margin-bottom: 12px;
 }
 
-.pillar-sub {
-  font-size: 0.82rem;
-  color: var(--text-dim);
-  line-height: 1.5;
-  margin-bottom: 20px;
-}
+.pillar-sub { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 20px; }
 
-.pillar-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 16px;
-}
+.pillar-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
 .pillar-tag {
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
@@ -619,12 +620,7 @@ nav {
   border-radius: 2px;
 }
 
-.pillar-works {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--gold);
-  letter-spacing: 0.08em;
-}
+.pillar-works { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gold); letter-spacing: 0.08em; }
 .pillar-works a { color: var(--gold-light); text-decoration: none; }
 
 /* ── PUBLICATIONS ── */
@@ -667,25 +663,23 @@ nav {
   color: var(--text-dim);
 }
 
-.pub-filters {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 36px;
-  flex-wrap: wrap;
-}
+.pub-filters { display: flex; gap: 8px; margin-bottom: 36px; flex-wrap: wrap; }
 
 .pub-filter-btn {
   font-family: 'DM Mono', monospace;
   font-size: 0.62rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 8px 16px;
+  padding: 10px 18px;
   border: 1px solid var(--border);
   border-radius: 2px;
   background: transparent;
   color: var(--text-dim);
   cursor: pointer;
   transition: all 0.25s;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 40px;
+  touch-action: manipulation;
 }
 .pub-filter-btn:hover { color: var(--text-secondary); border-color: rgba(255,255,255,0.12); }
 .pub-filter-btn.active { background: var(--gold-dim); border-color: var(--gold-line); color: var(--gold); }
@@ -714,12 +708,7 @@ nav {
   overflow: hidden;
   position: relative;
 }
-.pub-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
+.pub-image img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
 
 .pub-venue-badge {
   position: absolute;
@@ -749,12 +738,7 @@ nav {
 .pub-title a { color: inherit; text-decoration: none; transition: color 0.3s; }
 .pub-title a:hover { color: var(--gold-light); }
 
-.pub-authors {
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  line-height: 1.5;
-  margin-bottom: 10px;
-}
+.pub-authors { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 10px; }
 .pub-authors strong { color: var(--gold-light); }
 
 .pub-venue {
@@ -765,24 +749,7 @@ nav {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-.venue-highlight {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.58rem;
-  padding: 2px 8px;
-  border-radius: 2px;
-  background: rgba(255,80,80,0.12);
-  color: #ff7070;
-  border: 1px solid rgba(255,80,80,0.2);
-}
-.esi-badge {
-  font-size: 0.58rem;
-  padding: 2px 8px;
-  border-radius: 2px;
-  background: rgba(201,168,76,0.12);
-  color: var(--gold);
-  border: 1px solid var(--gold-line);
-  font-family: 'DM Mono', monospace;
+  flex-wrap: wrap;
 }
 
 .pub-actions { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -791,7 +758,7 @@ nav {
   font-size: 0.6rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 5px 12px;
+  padding: 6px 12px;
   border: 1px solid var(--border);
   border-radius: 2px;
   color: var(--text-dim);
@@ -799,8 +766,13 @@ nav {
   transition: all 0.25s;
   background: transparent;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
-.pub-btn:hover { color: var(--gold-light); border-color: var(--gold-line); }
+.pub-btn:hover, .pub-btn:active { color: var(--gold-light); border-color: var(--gold-line); }
 
 /* ── TEAM ── */
 .team-grid {
@@ -810,7 +782,7 @@ nav {
   margin-bottom: 60px;
 }
 
-.join-cta{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:8px 18px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:6px;color:#fff;font-size:13px;font-weight:600;}
+.join-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; padding: 10px 18px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: #fff; font-size: 13px; font-weight: 600; text-decoration: none; }
 
 .member-card {
   background: var(--surface);
@@ -831,31 +803,13 @@ nav {
   justify-content: center;
   position: relative;
 }
-.member-portrait a {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
+.member-portrait a { display: block; width: 100%; height: 100%; }
 .member-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.member-portrait-placeholder {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.5rem;
-  color: var(--gold-line);
-}
+.member-portrait-placeholder { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--gold-line); }
 
-.member-info { padding: 16px; }
-.member-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.05rem;
-  font-weight: 400;
-  color: var(--text-primary);
-  margin-bottom: 4px;
-}
-.member-role {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  line-height: 1.4;
-}
+.member-info { padding: 14px 16px; }
+.member-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 400; color: var(--text-primary); margin-bottom: 4px; }
+.member-role { font-size: 0.75rem; color: var(--text-dim); line-height: 1.4; }
 
 .team-section-title {
   font-family: 'DM Mono', monospace;
@@ -868,12 +822,7 @@ nav {
   align-items: center;
   gap: 16px;
 }
-.team-section-title::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--gold-line);
-}
+.team-section-title::after { content: ''; flex: 1; height: 1px; background: var(--gold-line); }
 
 .team-box {
   background: var(--surface);
@@ -912,38 +861,15 @@ nav {
 }
 .honor-item:hover { border-color: var(--gold-line); }
 
-.honor-year {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.7rem;
-  color: var(--gold);
-  letter-spacing: 0.05em;
-  text-align: center;
-}
-
-.honor-text {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
+.honor-year { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.05em; text-align: center; }
+.honor-text { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
 .honor-text a { color: var(--gold-light); text-decoration: none; }
 .honor-text strong { color: var(--text-primary); }
 
 .service-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 32px; }
 
-.service-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 28px;
-}
-.service-card-title {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 20px;
-}
+.service-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 28px; }
+.service-card-title { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
 .service-entry {
   font-size: 0.85rem;
   color: var(--text-secondary);
@@ -955,7 +881,7 @@ nav {
   line-height: 1.5;
 }
 .service-entry:last-child { border-bottom: none; }
-.service-entry i { color: var(--gold-dim); margin-top: 3px; font-size: 0.75rem; }
+.service-entry i { color: var(--gold-dim); margin-top: 3px; font-size: 0.75rem; flex-shrink: 0; }
 .service-highlight { color: var(--gold-light); font-size: 0.78rem; }
 
 /* ── PROJECTS ── */
@@ -970,10 +896,7 @@ nav {
   position: relative;
   overflow: hidden;
 }
-.project-card:hover {
-  border-color: var(--gold-line);
-  transform: translateY(-3px);
-}
+.project-card:hover { border-color: var(--gold-line); transform: translateY(-3px); }
 .project-card::before {
   content: '';
   position: absolute;
@@ -985,34 +908,12 @@ nav {
 }
 .project-card:hover::before { opacity: 1; }
 
-.project-icon {
-  font-size: 1.4rem;
-  margin-bottom: 16px;
-  color: var(--gold);
-}
-
-.project-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem;
-  font-weight: 400;
-  color: var(--text-primary);
-  margin-bottom: 10px;
-}
+.project-icon { font-size: 1.4rem; margin-bottom: 16px; color: var(--gold); }
+.project-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; color: var(--text-primary); margin-bottom: 10px; }
 .project-name a { color: inherit; text-decoration: none; }
 .project-name a:hover { color: var(--gold-light); }
-
-.project-desc {
-  font-size: 0.83rem;
-  color: var(--text-dim);
-  line-height: 1.6;
-  margin-bottom: 16px;
-}
-
-.project-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+.project-desc { font-size: 0.83rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 16px; }
+.project-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 
 .project-lang {
   font-family: 'DM Mono', monospace;
@@ -1023,12 +924,7 @@ nav {
   align-items: center;
   gap: 6px;
 }
-.project-lang::before {
-  content: '';
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--accent-blue);
-}
+.project-lang::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-blue); }
 
 /* ── FOOTER ── */
 footer {
@@ -1040,18 +936,8 @@ footer {
   justify-content: space-between;
 }
 
-.footer-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  color: var(--text-dim);
-}
-
-.footer-copy {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.6rem;
-  color: var(--text-dim);
-  letter-spacing: 0.1em;
-}
+.footer-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--text-dim); }
+.footer-copy { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.1em; }
 
 /* ── ANIMATIONS ── */
 @keyframes fadeSlideUp {
@@ -1074,36 +960,162 @@ footer {
 }
 .reveal.visible { opacity: 1; transform: none; }
 
-/* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--obsidian); }
 ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--gold-line); }
 
-/* responsive */
+/* ═══════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ═══════════════════════════════════════════════ */
+
+/* Large tablet / small desktop */
 @media (max-width: 1200px) {
   nav { padding: 0 32px; }
   .section { padding: 80px 60px; }
   .hero-left { padding: 120px 60px 80px; }
   .hero-right { padding: 120px 40px; }
-  .stats-bar { padding: 24px 60px; }
   footer { padding: 40px 60px; }
   .pub-stats { grid-template-columns: repeat(2, 1fr); }
   .research-pillars { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
+/* Tablet */
 @media (max-width: 900px) {
+  :root { --nav-h: 56px; }
+
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-drawer { display: block; }
+
   #hero { grid-template-columns: 1fr; }
   .hero-right { display: none; }
-  .stats-bar { left: 0; right: 0; }
-  .bio-grid { grid-template-columns: 1fr; }
-  .pub-entry { grid-template-columns: 1fr; }
-  .pub-image { height: 160px; }
-  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-left { padding: 100px 32px 60px; }
+
+  .bio-grid { grid-template-columns: 1fr; gap: 40px; }
+
+  .section { padding: 60px 32px; }
+
+  .pub-entry { grid-template-columns: 160px 1fr; }
+  .pub-image { min-height: 140px !important; }
+
+  .team-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .service-cols { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr; }
-  .section { padding: 60px 24px; }
+  .research-pillars { grid-template-columns: 1fr; }
+
+  footer { padding: 32px 32px; flex-direction: column; gap: 12px; text-align: center; }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  :root { --nav-h: 52px; }
+
+  nav { padding: 0 16px; }
+  .nav-logo { font-size: 1rem; }
+
+  /* Hero mobile */
+  #hero { min-height: auto; padding-bottom: 40px; }
+  .hero-left { padding: 80px 20px 40px; }
+  .hero-eyebrow { font-size: 0.6rem; letter-spacing: 0.15em; margin-bottom: 20px; }
+  .hero-eyebrow::before { width: 20px; }
+  .hero-name { font-size: clamp(2.2rem, 9vw, 3rem); }
+  .hero-name-cn { font-size: 1.1rem; margin-bottom: 20px; }
+  .hero-role { font-size: 0.9rem; }
+  .hero-affil { font-size: 0.68rem; margin-bottom: 32px; }
+  .hero-links { gap: 8px; }
+  .hero-link-btn { padding: 9px 14px; font-size: 0.62rem; }
+
+  /* Sections */
+  .section { padding: 48px 16px; }
+
+  .section-header { margin-bottom: 40px; }
+  .section-label { font-size: 0.58rem; letter-spacing: 0.2em; }
+  .section-title { font-size: clamp(1.7rem, 6vw, 2.4rem); }
+
+  /* Bio */
+  .bio-text { font-size: 0.92rem; }
+  .info-card { padding: 20px 18px; }
+  .info-item { font-size: 0.82rem; }
+
+  /* News */
+  .news-list { max-height: none; padding-right: 0; }
+  .news-item { grid-template-columns: 70px 1fr; gap: 10px; padding: 14px 0; }
+  .news-date { font-size: 0.6rem; }
+  .news-body { font-size: 0.82rem; }
+  .news-tag { font-size: 0.5rem; padding: 2px 6px; margin-right: 4px; }
+
+  /* Research */
+  .research-intro { padding: 24px 20px; }
+  .research-intro p { font-size: 0.88rem; }
+  .pillar-card { padding: 24px 20px; }
+  .pillar-title { font-size: 1.2rem; }
+  .pillar-number { font-size: 2.5rem; }
+
+  /* Publications */
+  .pub-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .pub-stat { padding: 16px 12px; }
+  .pub-stat-num { font-size: 1.8rem; }
+  .pub-stat-label { font-size: 0.6rem; }
+
+  /* Pub cards: stack vertically on mobile */
+  .pub-entry { grid-template-columns: 1fr; }
+  .pub-image {
+    height: 140px !important;
+    min-height: 100px !important;
+    max-height: 140px;
+  }
+  .pub-image img { height: 140px !important; object-fit: contain; }
+  .pub-content { padding: 16px 18px; }
+  .pub-title { font-size: 1rem; }
+  .pub-authors { font-size: 0.8rem; }
+  .pub-venue { font-size: 0.65rem; }
+  .pub-btn { font-size: 0.57rem; padding: 5px 10px; }
+
+  /* Team */
+  .team-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .member-name { font-size: 0.95rem; }
+  .member-role { font-size: 0.7rem; }
+  .member-info { padding: 12px; }
+  .team-box { padding: 20px; font-size: 0.85rem; }
+
+  /* Honors */
+  .honor-item { grid-template-columns: 52px 1fr; gap: 14px; padding: 16px 16px; }
+  .honor-year { font-size: 0.65rem; }
+  .honor-text { font-size: 0.84rem; }
+
+  .service-card { padding: 20px; }
+  .service-entry { font-size: 0.82rem; }
+
+  /* Projects */
+  .project-card { padding: 20px 20px; }
+  .project-name { font-size: 1rem; }
+  .project-desc { font-size: 0.8rem; }
+
+  footer { padding: 24px 16px; }
+  .footer-name { font-size: 0.9rem; }
+  .footer-copy { font-size: 0.58rem; }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+  .hero-name { font-size: 2rem; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .pub-stats { grid-template-columns: 1fr 1fr; }
+  .hero-link-btn { padding: 8px 10px; font-size: 0.58rem; }
+  .hero-links { gap: 6px; }
+}
+
+/* Touch-friendly tap targets */
+@media (hover: none) {
+  .pub-filter-btn { min-height: 44px; }
+  .hero-link-btn { min-height: 44px; }
+  .pub-btn { min-height: 36px; }
+  .member-card:hover { transform: none; }
+  .pillar-card:hover { transform: none; }
+  .project-card:hover { transform: none; }
 }
 </style>
 </head>
@@ -1112,17 +1124,32 @@ footer {
 <!-- NAV -->
 <nav>
   <div class="nav-logo">Xiaoqi Zhao</div>
-  <ul class="nav-links">
-    <li><a onclick="showSection('about')" class="active">About</a></li>
-    <li><a onclick="showSection('research')">Research</a></li>
-    <li><a onclick="showSection('team')">AI4X Team</a></li>
-    <li><a onclick="showSection('publications')">Publications</a></li>
-    <li><a onclick="showSection('honors')">Honors</a></li>
-    <li><a onclick="showSection('projects')">Projects</a></li>
+  <ul class="nav-links" id="desktop-nav">
+    <li><a onclick="showSection('about', event)" class="active">About</a></li>
+    <li><a onclick="showSection('research', event)">Research</a></li>
+    <li><a onclick="showSection('team', event)">AI4X Team</a></li>
+    <li><a onclick="showSection('publications', event)">Publications</a></li>
+    <li><a onclick="showSection('honors', event)">Honors</a></li>
+    <li><a onclick="showSection('projects', event)">Projects</a></li>
   </ul>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleDrawer()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- HERO (About) -->
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="nav-drawer">
+  <ul>
+    <li><a onclick="showSection('about', event); closeDrawer();" class="active" id="drawer-about">About</a></li>
+    <li><a onclick="showSection('research', event); closeDrawer();" id="drawer-research">Research</a></li>
+    <li><a onclick="showSection('team', event); closeDrawer();" id="drawer-team">AI4X Team</a></li>
+    <li><a onclick="showSection('publications', event); closeDrawer();" id="drawer-publications">Publications</a></li>
+    <li><a onclick="showSection('honors', event); closeDrawer();" id="drawer-honors">Honors</a></li>
+    <li><a onclick="showSection('projects', event); closeDrawer();" id="drawer-projects">Projects</a></li>
+  </ul>
+</div>
+
+<!-- HERO / ABOUT -->
 <div id="about-section" class="section active" style="padding:0; min-height:100vh; display:flex; flex-direction:column;">
 
   <div id="hero" style="flex:1;">
@@ -1135,7 +1162,6 @@ footer {
       <div class="hero-name-cn">赵 骁 骐</div>
       <p class="hero-role">
         NTU AI4X Principal Investigator / Postdoctoral Fellow<br>
-        <!-- Postdoctoral Researcher · Yale University · Radiology &amp; Biomedical Imaging -->
       </p>
       <div class="hero-affil">NRF Postdoctoral Award · NTU AI-for-X Fellowship</div>
       <div class="hero-links">
@@ -1143,12 +1169,12 @@ footer {
           <i class="fab fa-github"></i> GitHub
         </a>
         <a href="https://scholar.google.com/citations?user=0EKcLI4AAAAJ" target="_blank" class="hero-link-btn">
-          <i class="fas fa-graduation-cap"></i> Google Scholar
+          <i class="fas fa-graduation-cap"></i> Scholar
         </a>
         <a href="https://xiaoqi-zhao-dlut.github.io/resources/cv_03_2026_zxq.pdf" target="_blank" class="hero-link-btn">
-          <i class="fas fa-graduation-cap"></i> CV
+          <i class="fas fa-file-alt"></i> CV
         </a>
-        <span class="hero-link-btn secondary">
+        <span class="hero-link-btn secondary" style="word-break:break-all;">
           <i class="fas fa-envelope"></i> xiaoqi.zhao[at]ntu.edu.sg
         </span>
       </div>
@@ -1170,27 +1196,8 @@ footer {
     </div>
   </div>
 
-  <!-- <div class="stats-bar">
-    <div class="stat-item">
-      <div class="stat-num">4,000+</div>
-      <div class="stat-label">Citations</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">26+</div>
-      <div class="stat-label">Publications</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">19</div>
-      <div class="stat-label">Top Venues</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">3</div>
-      <div class="stat-label">500+ Cited Papers</div>
-    </div>
-  </div> -->
-
   <!-- Biography -->
-  <div style="padding: 80px 120px; background: var(--deep-navy);">
+  <div style="padding: 80px 120px; background: var(--deep-navy);" id="bio-wrapper">
     <div class="section-header reveal">
       <div class="section-label">Biography</div>
       <h2 class="section-title">Background &amp; Journey</h2>
@@ -1202,16 +1209,17 @@ footer {
           I am an <strong>AI4X Principal Investigator / Postdoctoral Fellow</strong> at Nanyang Technological University (NTU) in Singapore, supported by both the <strong>NRF Postdoctoral Award</strong> and the <strong>NTU AI-for-X Postdoctoral Fellowship</strong>, a globally competitive top-tier Singapore government fellowship providing up to four years of support toward an Assistant Professor transition.
         </p>
         <p>
-I was a Postdoctoral Researcher at Yale University working with <a href="https://campuspress.yale.edu/xliu/people/">Prof. Xiaofeng Liu</a> and <a href="https://medicine.yale.edu/profile/georges-elfakhri/">Prof. Georges El Fakhri</a> (AIMBE and IEEE Fellow). Previously, I received my Ph.D. degree in Signal and Information Processing from the Dalian University of Technology (DUT, 'Project 985' in China) in 2024, where I conducted my research at the <a href="https://iiaulab.github.io/">IIAU-LAB</a> under the supervision of <a href="https://scholar.google.com/citations?user=XGPdQbIAAAAJ&hl=zh-CN">Prof. Lihe Zhang</a> and <a href="https://scholar.google.com/citations?hl=en&user=D3nE0agAAAAJ">Prof. Huchuan Lu (IEEE Fellow)</a>. I also obtained my B.E. degree in Electronic Information Engineering from DUT in 2019.   </p>
+I was a Postdoctoral Researcher at Yale University working with <a href="https://campuspress.yale.edu/xliu/people/">Prof. Xiaofeng Liu</a> and <a href="https://medicine.yale.edu/profile/georges-elfakhri/">Prof. Georges El Fakhri</a> (AIMBE and IEEE Fellow). Previously, I received my Ph.D. degree in Signal and Information Processing from the Dalian University of Technology (DUT, 'Project 985' in China) in 2024, where I conducted my research at the <a href="https://iiaulab.github.io/">IIAU-LAB</a> under the supervision of <a href="https://scholar.google.com/citations?user=XGPdQbIAAAAJ&hl=zh-CN">Prof. Lihe Zhang</a> and <a href="https://scholar.google.com/citations?hl=en&user=D3nE0agAAAAJ">Prof. Huchuan Lu (IEEE Fellow)</a>. I also obtained my B.E. degree in Electronic Information Engineering from DUT in 2019.
+        </p>
         <p>
-Beyond academic research, I am deeply passionate about AI + X entrepreneurship. I am a Founding Partner  of <a href="http://www.gy3000.company/en/about-us">X3000 INSPECTION (Startup, Series B Funding)</a>. From 2021 to 2024, I served as its Chief AI Scientist, leading the development of X3000Former, X3000NeXt and other foundational models for power battery generation and inspection, which have been deployed to serve top power battery companies.
+Beyond academic research, I am deeply passionate about AI + X entrepreneurship. I am a Founding Partner of <a href="http://www.gy3000.company/en/about-us">X3000 INSPECTION (Startup, Series B Funding)</a>. From 2021 to 2024, I served as its Chief AI Scientist, leading the development of X3000Former, X3000NeXt and other foundational models for power battery generation and inspection, which have been deployed to serve top power battery companies.
         </p>
       </div>
 
       <div class="bio-sidebar reveal">
         <div class="info-card">
           <div class="info-card-title">Current Positions</div>
-          <div class="info-item"><i class="fas fa-map-marker-alt"></i> NTU Singapore · AI4X PI / Postdoctoral  Fellow</div>
+          <div class="info-item"><i class="fas fa-map-marker-alt"></i> NTU Singapore · AI4X PI / Postdoctoral Fellow</div>
           <div class="info-item"><i class="fas fa-flask"></i> Yale University · Postdoctoral Researcher</div>
           <div class="info-item"><i class="fas fa-briefcase"></i> X3000 INSPECTION · Founding Partner</div>
         </div>
@@ -1236,192 +1244,43 @@ Beyond academic research, I am deeply passionate about AI + X entrepreneurship. 
         <h2 class="section-title">News</h2>
       </div>
       <div class="news-list reveal">
-
-  <div class="news-item">
-    <div class="news-date">02 · 2026</div>
-    <div class="news-body"><span class="news-tag tag-paper">CVPR</span>Two papers accepted at CVPR 2026. Congratulations to Yuan Zhao and Jiawei!</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">02 · 2026</div>
-    <div class="news-body"><span class="news-tag tag-award">Award</span>Awarded the <strong>Singapore NRF Postdoctoral Award (PI)</strong> — the most prestigious Singapore government fellowship, providing up to four years of intensive support toward an Assistant Professor position. 😎</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">02 · 2026</div>
-    <div class="news-body"><span class="news-tag tag-award">Fellowship</span>Awarded the <a href="https://www.ntu.edu.sg/research/research-careers/ntu-ai-for-x-postdoctoral-fellowship">NTU AI-for-X Postdoctoral Fellowship</a>.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">01 · 2026</div>
-    <div class="news-body"><span class="news-tag tag-paper">ISBI</span>One paper accepted at ISBI 2026. Congratulations to <a href="https://scholar.google.com/citations?user=53LJfHAAAAAJ&hl=zh-CN">Xiaobing</a>!</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">12 · 2025</div>
-    <div class="news-body"><span class="news-tag tag-startup">Startup</span>X3000 INSPECTION successfully closed its <strong>Series B funding round</strong>. 🎉</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">11 · 2025</div>
-    <div class="news-body"><span class="news-tag tag-paper">Milestone</span><a href="https://scholar.google.com/citations?view_op=view_citation&hl=zh-CN&user=0EKcLI4AAAAJ&citation_for_view=0EKcLI4AAAAJ:u-x6o8ySG0sC">MINet</a> surpasses <strong>1,000 citations</strong>. 🎉</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">09 · 2025</div>
-    <div class="news-body"><span class="news-tag tag-paper">NeurIPS</span>Two papers accepted at NeurIPS 2025.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">08 · 2025</div>
-    <div class="news-body"><span class="news-tag tag-award">Award</span>Nominated as a <strong>Rising Star</strong> at World Artificial Intelligence Conference (WAIC) Yunfan!</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">05 · 2025</div>
-    <div class="news-body"><span class="news-tag tag-media">Media</span>Profiled by <strong>People's Daily《人民日报》</strong> as an <a href="https://mp.weixin.qq.com/s/dBHdfQmwjeYRn-ls726Myw">Outstanding PhD Student Representative</a>.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">02 · 2025</div>
-    <div class="news-body"><span class="news-tag tag-paper">TPAMI</span>ComPtr accepted by IEEE TPAMI 2025. Congratulations to <a href="https://lartpang.github.io/">Youwei</a>!</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">02 · 2025</div>
-    <div class="news-body"><span class="news-tag tag-paper">CVPR</span>Two papers accepted at CVPR 2025. Congratulations to <a href="https://scholar.google.com/citations?user=yn5W75MAAAAJ&hl=zh-CN">Shijie</a> and <a href="https://scholar.google.com/citations?user=jLLrtFQAAAAJ&hl=zh-CN">Jia</a>!</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">02 · 2025</div>
-    <div class="news-body"><span class="news-tag tag-award">Position</span>Incoming Postdoc at <strong>Yale University</strong>.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">01 · 2025</div>
-    <div class="news-body"><span class="news-tag tag-esi">ESI</span>CAVER (IEEE TIP 2023) is an <strong>ESI Highly Cited Paper (Top 1%)</strong>.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">12 · 2024</div>
-    <div class="news-body"><span class="news-tag tag-phd">PhD</span>Successfully defended PhD dissertation. Call me <strong>Dr. Zhao</strong>! 😎</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">10 · 2024</div>
-    <div class="news-body"><span class="news-tag tag-award">Award</span>Awarded the <strong>National PhD Scholarship</strong> from the Ministry of Education of China again.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">08 · 2024</div>
-    <div class="news-body"><span class="news-tag tag-startup">Startup</span><a href="https://mp.weixin.qq.com/s/t7zYXtV-M6cgGUTyvRkpaw">X3000 INSPECTION finished Series A and A+ funding rounds</a>. 🎉 Ai4EVSafety is all you need!</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">07 · 2024</div>
-    <div class="news-body"><span class="news-tag tag-paper">ECCV</span>One paper accepted at ECCV 2024. <strong>New Task! Open-Vocabulary Camouflaged Object Segmentation.</strong></div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">06 · 2024</div>
-    <div class="news-body"><span class="news-tag tag-paper">TPAMI</span>One paper accepted at IEEE TPAMI 2024.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">05 · 2024</div>
-    <div class="news-body"><span class="news-tag tag-paper">ICML</span>One paper accepted at ICML 2024.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">02 · 2024</div>
-    <div class="news-body"><span class="news-tag tag-paper">CVPR</span>Two papers at CVPR 2024 · <strong>1 Highlight (~3% [324/11532])</strong>. Congratulations to <a href="https://scholar.google.com/citations?user=_PgjfE4AAAAJ&hl=zh-TW">Qian Yu</a>!</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">01 · 2024</div>
-    <div class="news-body"><span class="news-tag tag-paper">IJCV</span>One paper accepted at IJCV 2024.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">08 · 2023</div>
-    <div class="news-body"><span class="news-tag tag-award">Award</span><strong>3rd Place Solution</strong> for PVUW2023 VSS Track: A Large Model for Semantic Segmentation on VSPW.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">07 · 2023</div>
-    <div class="news-body"><span class="news-tag tag-paper">ICCV</span>One paper accepted at ICCV 2023. Congratulations to <a href="https://scholar.google.com/citations?user=IKZh8-kAAAAJ&hl=en">Yichen</a>!</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">02 · 2023</div>
-    <div class="news-body"><span class="news-tag tag-startup">Startup</span>X3000 INSPECTION successfully closed its <strong>Series Pre-A funding round</strong>. 🎉</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">01 · 2023</div>
-    <div class="news-body"><span class="news-tag tag-paper">TIP</span>One paper accepted at IEEE TIP 2023.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">12 · 2022</div>
-    <div class="news-body"><span class="news-tag tag-paper">TIP</span>One paper accepted at IEEE TIP 2022.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">08 · 2022</div>
-    <div class="news-body"><span class="news-tag tag-award">Award</span>Received the <strong>Huawei Camera Academic Rising Star Award</strong>. 😎</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">07 · 2022</div>
-    <div class="news-body"><span class="news-tag tag-award">Challenge</span>Led IIAU-Segmentors to top rankings in MICCAI Glaucoma OCT Challenge — <strong>Glaucoma Detection: 1/100 · OCT Layer Segmentation: 3/100 · GOALS: 2/100</strong>.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">06 · 2022</div>
-    <div class="news-body"><span class="news-tag tag-award">Service</span>Received <a href="https://cvpr2022.thecvf.com/outstanding-reviewers">CVPR 2022 Outstanding Reviewer</a> (~2% [156/6247]).</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">03 · 2022</div>
-    <div class="news-body"><span class="news-tag tag-paper">CVPR</span>Two papers accepted at CVPR 2022.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">12 · 2021</div>
-    <div class="news-body"><span class="news-tag tag-startup">Startup</span>X3000 INSPECTION successfully closed its <strong>Angel funding round</strong>. 🎉</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">11 · 2021</div>
-    <div class="news-body"><span class="news-tag tag-paper">AAAI</span>One paper accepted at AAAI 2022 (~15% [1349/9020]).</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">09 · 2021</div>
-    <div class="news-body"><span class="news-tag tag-startup">Startup</span>Co-founded <strong>X3000 Inspection</strong>, an AI-powered CT-based lithium battery quality assessment startup. Serving as Founding Partner and Chief AI Scientist. 🎉</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">07 · 2021</div>
-    <div class="news-body"><span class="news-tag tag-paper">ACM MM</span>One paper accepted at ACM MM 2021 · <strong>Oral (~9% [179/1942])</strong>.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">06 · 2021</div>
-    <div class="news-body"><span class="news-tag tag-paper">MICCAI</span>One paper accepted at MICCAI 2021.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">07 · 2020</div>
-    <div class="news-body"><span class="news-tag tag-paper">ECCV</span>Three papers accepted at ECCV 2020 · <strong>1 Oral (~2% [104/5025])</strong>.</div>
-  </div>
-
-  <div class="news-item">
-    <div class="news-date">03 · 2020</div>
-    <div class="news-body"><span class="news-tag tag-paper">CVPR</span>One paper accepted at CVPR 2020.</div>
-  </div>
-
+        <div class="news-item"><div class="news-date">02 · 2026</div><div class="news-body"><span class="news-tag tag-paper">CVPR</span>Two papers accepted at CVPR 2026. Congratulations to Yuan Zhao and Jiawei!</div></div>
+        <div class="news-item"><div class="news-date">02 · 2026</div><div class="news-body"><span class="news-tag tag-award">Award</span>Awarded the <strong>Singapore NRF Postdoctoral Award (PI)</strong> — the most prestigious Singapore government fellowship, providing up to four years of intensive support toward an Assistant Professor position. 😎</div></div>
+        <div class="news-item"><div class="news-date">02 · 2026</div><div class="news-body"><span class="news-tag tag-award">Fellowship</span>Awarded the <a href="https://www.ntu.edu.sg/research/research-careers/ntu-ai-for-x-postdoctoral-fellowship">NTU AI-for-X Postdoctoral Fellowship</a>.</div></div>
+        <div class="news-item"><div class="news-date">01 · 2026</div><div class="news-body"><span class="news-tag tag-paper">ISBI</span>One paper accepted at ISBI 2026. Congratulations to <a href="https://scholar.google.com/citations?user=53LJfHAAAAAJ&hl=zh-CN">Xiaobing</a>!</div></div>
+        <div class="news-item"><div class="news-date">12 · 2025</div><div class="news-body"><span class="news-tag tag-startup">Startup</span>X3000 INSPECTION successfully closed its <strong>Series B funding round</strong>. 🎉</div></div>
+        <div class="news-item"><div class="news-date">11 · 2025</div><div class="news-body"><span class="news-tag tag-paper">Milestone</span><a href="https://scholar.google.com/citations?view_op=view_citation&hl=zh-CN&user=0EKcLI4AAAAJ&citation_for_view=0EKcLI4AAAAJ:u-x6o8ySG0sC">MINet</a> surpasses <strong>1,000 citations</strong>. 🎉</div></div>
+        <div class="news-item"><div class="news-date">09 · 2025</div><div class="news-body"><span class="news-tag tag-paper">NeurIPS</span>Two papers accepted at NeurIPS 2025.</div></div>
+        <div class="news-item"><div class="news-date">08 · 2025</div><div class="news-body"><span class="news-tag tag-award">Award</span>Nominated as a <strong>Rising Star</strong> at World Artificial Intelligence Conference (WAIC) Yunfan!</div></div>
+        <div class="news-item"><div class="news-date">05 · 2025</div><div class="news-body"><span class="news-tag tag-paper">Media</span>Profiled by <strong>People's Daily《人民日报》</strong> as an <a href="https://mp.weixin.qq.com/s/dBHdfQmwjeYRn-ls726Myw">Outstanding PhD Student Representative</a>.</div></div>
+        <div class="news-item"><div class="news-date">02 · 2025</div><div class="news-body"><span class="news-tag tag-paper">TPAMI</span>ComPtr accepted by IEEE TPAMI 2025. Congratulations to <a href="https://lartpang.github.io/">Youwei</a>!</div></div>
+        <div class="news-item"><div class="news-date">02 · 2025</div><div class="news-body"><span class="news-tag tag-paper">CVPR</span>Two papers accepted at CVPR 2025. Congratulations to <a href="https://scholar.google.com/citations?user=yn5W75MAAAAA&hl=zh-CN">Shijie</a> and <a href="https://scholar.google.com/citations?user=jLLrtFQAAAAJ&hl=zh-CN">Jia</a>!</div></div>
+        <div class="news-item"><div class="news-date">02 · 2025</div><div class="news-body"><span class="news-tag tag-award">Position</span>Incoming Postdoc at <strong>Yale University</strong>.</div></div>
+        <div class="news-item"><div class="news-date">01 · 2025</div><div class="news-body"><span class="news-tag tag-paper">ESI</span>CAVER (IEEE TIP 2023) is an <strong>ESI Highly Cited Paper (Top 1%)</strong>.</div></div>
+        <div class="news-item"><div class="news-date">12 · 2024</div><div class="news-body"><span class="news-tag tag-paper">PhD</span>Successfully defended PhD dissertation. Call me <strong>Dr. Zhao</strong>! 😎</div></div>
+        <div class="news-item"><div class="news-date">10 · 2024</div><div class="news-body"><span class="news-tag tag-award">Award</span>Awarded the <strong>National PhD Scholarship</strong> from the Ministry of Education of China again.</div></div>
+        <div class="news-item"><div class="news-date">08 · 2024</div><div class="news-body"><span class="news-tag tag-startup">Startup</span><a href="https://mp.weixin.qq.com/s/t7zYXtV-M6cgGUTyvRkpaw">X3000 INSPECTION finished Series A and A+ funding rounds</a>. 🎉</div></div>
+        <div class="news-item"><div class="news-date">07 · 2024</div><div class="news-body"><span class="news-tag tag-paper">ECCV</span>One paper accepted at ECCV 2024. <strong>New Task! Open-Vocabulary Camouflaged Object Segmentation.</strong></div></div>
+        <div class="news-item"><div class="news-date">06 · 2024</div><div class="news-body"><span class="news-tag tag-paper">TPAMI</span>One paper accepted at IEEE TPAMI 2024.</div></div>
+        <div class="news-item"><div class="news-date">05 · 2024</div><div class="news-body"><span class="news-tag tag-paper">ICML</span>One paper accepted at ICML 2024.</div></div>
+        <div class="news-item"><div class="news-date">02 · 2024</div><div class="news-body"><span class="news-tag tag-paper">CVPR</span>Two papers at CVPR 2024 · <strong>1 Highlight (~3% [324/11532])</strong>. Congratulations to <a href="https://scholar.google.com/citations?user=_PgjfE4AAAAJ&hl=zh-TW">Qian Yu</a>!</div></div>
+        <div class="news-item"><div class="news-date">01 · 2024</div><div class="news-body"><span class="news-tag tag-paper">IJCV</span>One paper accepted at IJCV 2024.</div></div>
+        <div class="news-item"><div class="news-date">08 · 2023</div><div class="news-body"><span class="news-tag tag-award">Award</span><strong>3rd Place Solution</strong> for PVUW2023 VSS Track: A Large Model for Semantic Segmentation on VSPW.</div></div>
+        <div class="news-item"><div class="news-date">07 · 2023</div><div class="news-body"><span class="news-tag tag-paper">ICCV</span>One paper accepted at ICCV 2023. Congratulations to <a href="https://scholar.google.com/citations?user=IKZh8-kAAAAJ&hl=en">Yichen</a>!</div></div>
+        <div class="news-item"><div class="news-date">02 · 2023</div><div class="news-body"><span class="news-tag tag-startup">Startup</span>X3000 INSPECTION successfully closed its <strong>Series Pre-A funding round</strong>. 🎉</div></div>
+        <div class="news-item"><div class="news-date">01 · 2023</div><div class="news-body"><span class="news-tag tag-paper">TIP</span>One paper accepted at IEEE TIP 2023.</div></div>
+        <div class="news-item"><div class="news-date">12 · 2022</div><div class="news-body"><span class="news-tag tag-paper">TIP</span>One paper accepted at IEEE TIP 2022.</div></div>
+        <div class="news-item"><div class="news-date">08 · 2022</div><div class="news-body"><span class="news-tag tag-award">Award</span>Received the <strong>Huawei Camera Academic Rising Star Award</strong>. 😎</div></div>
+        <div class="news-item"><div class="news-date">07 · 2022</div><div class="news-body"><span class="news-tag tag-award">Challenge</span>Led IIAU-Segmentors to top rankings in MICCAI Glaucoma OCT Challenge — <strong>Glaucoma Detection: 1/100 · OCT Layer Segmentation: 3/100 · GOALS: 2/100</strong>.</div></div>
+        <div class="news-item"><div class="news-date">06 · 2022</div><div class="news-body"><span class="news-tag tag-award">Service</span>Received <a href="https://cvpr2022.thecvf.com/outstanding-reviewers">CVPR 2022 Outstanding Reviewer</a> (~2% [156/6247]).</div></div>
+        <div class="news-item"><div class="news-date">03 · 2022</div><div class="news-body"><span class="news-tag tag-paper">CVPR</span>Two papers accepted at CVPR 2022.</div></div>
+        <div class="news-item"><div class="news-date">12 · 2021</div><div class="news-body"><span class="news-tag tag-startup">Startup</span>X3000 INSPECTION successfully closed its <strong>Angel funding round</strong>. 🎉</div></div>
+        <div class="news-item"><div class="news-date">11 · 2021</div><div class="news-body"><span class="news-tag tag-paper">AAAI</span>One paper accepted at AAAI 2022 (~15% [1349/9020]).</div></div>
+        <div class="news-item"><div class="news-date">09 · 2021</div><div class="news-body"><span class="news-tag tag-startup">Startup</span>Co-founded <strong>X3000 Inspection</strong>, an AI-powered CT-based lithium battery quality assessment startup. 🎉</div></div>
+        <div class="news-item"><div class="news-date">07 · 2021</div><div class="news-body"><span class="news-tag tag-paper">ACM MM</span>One paper accepted at ACM MM 2021 · <strong>Oral (~9% [179/1942])</strong>.</div></div>
+        <div class="news-item"><div class="news-date">06 · 2021</div><div class="news-body"><span class="news-tag tag-paper">MICCAI</span>One paper accepted at MICCAI 2021.</div></div>
+        <div class="news-item"><div class="news-date">07 · 2020</div><div class="news-body"><span class="news-tag tag-paper">ECCV</span>Three papers accepted at ECCV 2020 · <strong>1 Oral (~2% [104/5025])</strong>.</div></div>
+        <div class="news-item"><div class="news-date">03 · 2020</div><div class="news-body"><span class="news-tag tag-paper">CVPR</span>One paper accepted at CVPR 2020.</div></div>
       </div>
     </div>
   </div>
@@ -1434,13 +1293,13 @@ Beyond academic research, I am deeply passionate about AI + X entrepreneurship. 
     <div class="section-label">Vision &amp; Direction</div>
     <h2 class="section-title">Research Fields</h2>
   </div>
-		<img src="./resources/paper_icon/research_field.png" 
-			alt="Research Framework Overview"
-			style="max-width:100%; height:auto; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.08);">
+  <img src="./resources/paper_icon/research_field.png"
+    alt="Research Framework Overview"
+    style="max-width:100%; height:auto; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.08); margin-bottom: 32px;">
   <div class="research-intro reveal">
     <p>
-				My long-term research vision is to build a general-purpose visual intelligence engine under the AI-for-X paradigm. This vision is structured around three interconnected layers: <strong>Pattern, Unification, AI4X Applications.</strong> At the pattern level, I investigate self-driven learning mechanisms such as self-supervised, open-vocabulary, prompt-based, and in-context learning to establish scalable and transferable learning principles that reduce supervision dependency and enhance generalization. At the unification level, I study how diverse visual tasks, concepts, and modalities can be integrated within shared architectures and representations, enabling unified multi-task modeling, context-dependent concept understanding, and image-video multi-modal perception under a coherent semantic framework. Built upon these foundations, the AI4X application layer extends the engine into real-world domains such as healthcare and industry, validating its robustness in complex, domain-specific environments while <strong>continuously expanding the scope of X</strong>. Ultimately, progressing toward visual AGI requires iterative strengthening of learning patterns, deeper unification across tasks and modalities, and sustained expansion of AI4X domains to achieve multi-source input processing, multi-task learning, multi-modal fusion, cross-domain generalization, and a balance between expert-level performance and unified modeling. Recently, I have developed a strong interest in AI4ResearchTools, exploring how general visual intelligence systems can accelerate research workflows, and I warmly welcome collaboration and mentorship.    
-       </p>
+      My long-term research vision is to build a general-purpose visual intelligence engine under the AI-for-X paradigm. This vision is structured around three interconnected layers: <strong>Pattern, Unification, AI4X Applications.</strong> At the pattern level, I investigate self-driven learning mechanisms such as self-supervised, open-vocabulary, prompt-based, and in-context learning to establish scalable and transferable learning principles that reduce supervision dependency and enhance generalization. At the unification level, I study how diverse visual tasks, concepts, and modalities can be integrated within shared architectures and representations, enabling unified multi-task modeling, context-dependent concept understanding, and image-video multi-modal perception under a coherent semantic framework. Built upon these foundations, the AI4X application layer extends the engine into real-world domains such as healthcare and industry, validating its robustness in complex, domain-specific environments while <strong>continuously expanding the scope of X</strong>. Recently, I have developed a strong interest in AI4ResearchTools, and I warmly welcome collaboration and mentorship.
+    </p>
   </div>
 
   <div class="research-pillars">
@@ -1450,7 +1309,7 @@ Beyond academic research, I am deeply passionate about AI + X entrepreneurship. 
       <div class="pillar-sub">Reducing supervision dependency while enhancing generalization across domains and modalities.</div>
       <div class="pillar-tags">
         <span class="pillar-tag">Self-supervised Learning</span>
-         <span class="pillar-tag">Unsupervised Learning</span>
+        <span class="pillar-tag">Unsupervised Learning</span>
         <span class="pillar-tag">Few-shot Learning</span>
         <span class="pillar-tag">In-context Learning</span>
         <span class="pillar-tag">Open-Vocabulary Learning</span>
@@ -1459,68 +1318,45 @@ Beyond academic research, I am deeply passionate about AI + X entrepreneurship. 
       <div class="pillar-works">
         <strong>Key Works: </strong>
         <a href="https://arxiv.org/pdf/2101.12482">SSLSOD (AAAI'22)</a> ·
-		<a href="https://arxiv.org/pdf/2405.01002">Spider (ICML'24)</a> ·
-		<a href="https://arxiv.org/abs/2509.16170">UniMRSeg (NeurIPS'25)</a> ·
-		<a href="https://arxiv.org/pdf/2311.11241">OVCoser (ECCV'24)</a> ·
-		<a href="https://arxiv.org/abs/2509.25934">UniMMAD (CVPR'26)</a> ·
-		<a href="https://arxiv.org/abs/2509.25934">DGDM (TCSVT'25)</a> ·
-		<a href="https://arxiv.org/pdf/2407.11503?">UniFSS (PR'25)</a> ·
-		<a href="https://arxiv.org/pdf/2412.01240">SAM-EVA (arXiv'25)</a> ·
-		<a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Chang_Unified_Medical_Lesion_Segmentation_via_Self-referring_Indicator_CVPR_2025_paper.pdf">SR-ICL (CVPR'25)</a> ·
-         <a href="https://arxiv.org/abs/2512.04585">SAM3-I (arXiv'26)</a> 
-
+        <a href="https://arxiv.org/pdf/2405.01002">Spider (ICML'24)</a> ·
+        <a href="https://arxiv.org/abs/2509.16170">UniMRSeg (NeurIPS'25)</a> ·
+        <a href="https://arxiv.org/pdf/2311.11241">OVCoser (ECCV'24)</a> ·
+        <a href="https://arxiv.org/abs/2509.25934">UniMMAD (CVPR'26)</a>
       </div>
     </div>
-
     <div class="pillar-card reveal">
       <div class="pillar-number">02</div>
       <div class="pillar-title">Unified Visual Perception</div>
       <div class="pillar-sub">Integrating tasks, concepts, and modalities under coherent shared architectures for multi-task modeling.</div>
       <div class="pillar-tags">
-        <span class="pillar-tag">General Concept Understanding Models</span>
-        <span class="pillar-tag">Context-Dependent Multi-Concept Understanding Models</span>
-        <span class="pillar-tag">Unified Multi-modal/Image-Video/Multi-view Models</span>
+        <span class="pillar-tag">General Concept Understanding</span>
+        <span class="pillar-tag">Context-Dependent Multi-Concept Models</span>
+        <span class="pillar-tag">Unified Multi-modal/Image-Video Models</span>
       </div>
       <div class="pillar-works">
         <strong>Key Works: </strong>
-   <a href="https://arxiv.org/pdf/2405.01002">Spider (ICML'24)</a> ·
-		<a href="https://arxiv.org/pdf/2303.10396">GateNet (IJCV'24 & ECCV'20)</a> ·   
-		<a href="https://arxiv.org/abs/2509.16170">UniMRSeg (NeurIPS'25)</a> · 
-		<a href="https://arxiv.org/abs/2509.25934">UniMMAD (CVPR'26)</a> ·
-		<a href="https://arxiv.org/pdf/2407.11503?">UniFSS (PR'25)</a> · 
-		<a href="https://arxiv.org/pdf/2412.01240">SAM-EVA (arXiv'25)</a> ·
-		<a href="https://arxiv.org/pdf/2307.12349">ComPtr (PAMI'25)</a> ·
-		<a href="https://openaccess.thecvf.com/content/CVPR2025W/DG-EBF/papers/Wei_Mixture-of-Shape-Experts_MoSE_End-to-End_Shape_Dictionary_Framework_to_Prompt_SAM_for_CVPRW_2025_paper.pdf">MoSE (CVPR'25)</a> ·
-		<a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Chang_Unified_Medical_Lesion_Segmentation_via_Self-referring_Indicator_CVPR_2025_paper.pdf">SR-ICL (CVPR'25)</a> · 
-		<a href="https://arxiv.org/pdf/2303.10383">MS-ASP (IJCV'24 & MM'21)</a> ·
-		<a href="https://arxiv.org/pdf/2310.20208">ZoomNeXt (PAMI'24)</a> ·
-		<a href="https://arxiv.org/pdf/2404.07445">MVANet (CVPR'24)</a> ·
-		<a href="https://arxiv.org/pdf/2203.04895">MMFT (TIP'23)</a> ·
-        <a href="https://arxiv.org/abs/2512.04585">SAM3-I (arXiv'26)</a> ·
-		<a href="https://arxiv.org/abs/2512.04585">TP-Seg (CVPR'26)</a>
+        <a href="https://arxiv.org/pdf/2405.01002">Spider (ICML'24)</a> ·
+        <a href="https://arxiv.org/pdf/2303.10396">GateNet (IJCV'24)</a> ·
+        <a href="https://arxiv.org/abs/2509.16170">UniMRSeg (NeurIPS'25)</a> ·
+        <a href="https://arxiv.org/abs/2509.25934">UniMMAD (CVPR'26)</a>
       </div>
     </div>
-
     <div class="pillar-card reveal">
       <div class="pillar-number">03</div>
       <div class="pillar-title">AI4Industry</div>
       <div class="pillar-sub">AI-Driven Intelligent Manufacturing, Quality Evaluation, and System Management for New Energy Power Batteries.</div>
       <div class="pillar-tags">
         <span class="pillar-tag">Battery Management System</span>
-        <span class="pillar-tag">Power Battery Detection and Generation with Ultra-dense Plates (600+)</span>
-        <span class="pillar-tag">High-speed Power Battery CT Reconstruction</span>
+        <span class="pillar-tag">Power Battery Detection (600+ Plates)</span>
+        <span class="pillar-tag">High-speed CT Reconstruction</span>
         <span class="pillar-tag">Unsupervised Anomaly Detection</span>
-        <span class="pillar-tag">Industrial Blind Image Enhancement</span>
       </div>
       <div class="pillar-works">
         <strong>Key Works: </strong>
-		<a href="https://arxiv.org/pdf/2312.02528">MDCNet (CVPR'24)</a> ·
-		<a href="https://arxiv.org/pdf/2508.07797">MDCNeXt (IJCV'26)</a> ·  
-		<a href="https://arxiv.org/abs/2509.25934">UniMMAD (CVPR'26)</a> ·
-		<a href="https://arxiv.org/abs/2509.25934">DGDM (TCSVT'25)</a>
+        <a href="https://arxiv.org/pdf/2312.02528">MDCNet (CVPR'24)</a> ·
+        <a href="https://arxiv.org/abs/2509.25934">UniMMAD (CVPR'26)</a>
       </div>
     </div>
-
     <div class="pillar-card reveal">
       <div class="pillar-number">04</div>
       <div class="pillar-title">AI4Health</div>
@@ -1532,10 +1368,8 @@ Beyond academic research, I am deeply passionate about AI + X entrepreneurship. 
       </div>
       <div class="pillar-works">
         <strong>Key Works: </strong>
-     		<a href="https://arxiv.org/abs/2509.16170">UniMRSeg (NeurIPS'25)</a> ·
-		<a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Chang_Unified_Medical_Lesion_Segmentation_via_Self-referring_Indicator_CVPR_2025_paper.pdf">SR-ICL (CVPR'25)</a> ·
-    		<a href="https://openaccess.thecvf.com/content/CVPR2025W/DG-EBF/papers/Wei_Mixture-of-Shape-Experts_MoSE_End-to-End_Shape_Dictionary_Framework_to_Prompt_SAM_for_CVPRW_2025_paper.pdf">MoSE (CVPR'25)</a> ·
-    		<a href="https://arxiv.org/abs/2512.04585">TP-Seg (CVPR'26)</a>
+        <a href="https://arxiv.org/abs/2509.16170">UniMRSeg (NeurIPS'25)</a> ·
+        <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Chang_Unified_Medical_Lesion_Segmentation_via_Self-referring_Indicator_CVPR_2025_paper.pdf">SR-ICL (CVPR'25)</a>
       </div>
     </div>
   </div>
@@ -1545,153 +1379,81 @@ Beyond academic research, I am deeply passionate about AI + X entrepreneurship. 
 <div id="team-section" class="section section-alt" style="display:none;">
   <div class="section-header reveal">
     <div class="section-label">NTU · Singapore 2026</div>
-<h2 class="section-title" style="display:flex; align-items:center; gap:0.5rem;">
-  AI4X Team
-  <img src="./resources/paper_icon/ntu_ai4x_logo_merge_1.png" style="height:1em; width:auto; vertical-align:middle; background-color: white;">
-</h2>
+    <h2 class="section-title" style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+      AI4X Team
+      <img src="./resources/paper_icon/ntu_ai4x_logo_merge_1.png" style="height:1em; width:auto; vertical-align:middle; background-color: white;">
+    </h2>
   </div>
 
-
-
-  <div class="team-box reveal">	
-      This group was established in <strong>February 2026</strong>. Building upon NTU's long-term strategic investment in AI for X (AI4X) and strong support from the Singapore government, our team is dedicated to advancing foundational AI technologies and their deep integration into high-impact real-world domains.<br><br>
+  <div class="team-box reveal">
+    This group was established in <strong>February 2026</strong>. Building upon NTU's long-term strategic investment in AI for X (AI4X) and strong support from the Singapore government, our team is dedicated to advancing foundational AI technologies and their deep integration into high-impact real-world domains.<br><br>
     Directions include: <br>
-    <strong>[General AI: Self-Supervised Foundation Model · Foundation Model Evaluation · Efficient AI (Large Model Feature Coding) · SAM Series · Autoregressive Models · Metrics Design]</strong> and <br>
-    <strong>[AI4X: Scent Signal Representation · Climate &amp; Environmental Monitoring · Tool Agent for Research · Tool Agent for Photography ·  Multi-modal Understanding of Harmful Content in Virtual Experiences · Outpainting /Reflection Removal/Variable Aperture Bokeh · Battery Management System · Power Battery Detection with Ultra-dense Plates (600+) · High-speed Power Battery CT Reconstruction · Fine-grained Battery Attribute Generation · Medical Diagnosis with Incomplete Modalities · Blood Analysis and Disease Prediction for Different Races · PET-CT-MRI Fusion · Medical Generalist · OV in Medicine …]</strong><br>
-    <div class="join-cta"><i class="fa-solid fa-user-plus"></i> We welcome outstanding Postdoc / PhD / RA / Visiting Researchers to join!</div>
-    </div>
+    <strong>[General AI: Self-Supervised Foundation Model · Foundation Model Evaluation · Efficient AI · SAM Series · Autoregressive Models · Metrics Design]</strong> and <br>
+    <strong>[AI4X: Scent Signal Representation · Climate &amp; Environmental Monitoring · Tool Agent for Research · Battery Management System · Power Battery Detection · Medical Diagnosis · PET-CT-MRI Fusion · Medical Generalist …]</strong><br>
+    <a class="join-cta"><i class="fa-solid fa-user-plus"></i> We welcome outstanding Postdoc / PhD / RA / Visiting Researchers to join!</a>
+  </div>
 
-    <div class="team-section-title reveal">NTU Members &amp; Advisors</div>
-    <div class="team-grid reveal">
-      <div class="member-card">
-        <div class="member-portrait">
-          <a href="https://personal.ntu.edu.sg/wslin/Home.html" target="_blank" style="display:block;">
-            <img src="./resources/images/lws.png" alt="Weisi Lin" onerror="this.style.display='none'">
-          </a>
-        </div>
-        <div class="member-info">
-          <div class="member-name">Weisi Lin</div>
-          <div class="member-role">NTU President's Chair Professor · IEEE Fellow</div>
-        </div>
+  <div class="team-section-title reveal">NTU Members &amp; Advisors</div>
+  <div class="team-grid reveal">
+    <div class="member-card">
+      <div class="member-portrait">
+        <a href="https://personal.ntu.edu.sg/wslin/Home.html" target="_blank">
+          <img src="./resources/images/lws.png" alt="Weisi Lin" onerror="this.style.display='none'">
+        </a>
       </div>
-      <div class="member-card">
-        <div class="member-portrait">
-          <a href="https://xiaoqi-zhao-dlut.github.io" target="_blank" style="display:block;">
-            <img src="./resources/images/zxq_4k.png" alt="Xiaoqi Zhao" onerror="this.style.display='none'">
-          </a>
-        </div>
-        <div class="member-info">
-          <div class="member-name">Xiaoqi Zhao</div>
-          <div class="member-role">NTU AI4X Principal Investigator / Postdoctoral Fellow</div>
-        </div>
-      </div>
-      <div class="member-card">
-        <div class="member-portrait">
-          <a href="https://lartpang.github.io" target="_blank" style="display:block;">
-            <img src="./resources/images/pyw_1.png" alt="Youwei Pang" onerror="this.style.display='none'">
-          </a>
-        </div>
-        <div class="member-info">
-          <div class="member-name">Youwei Pang</div>
-          <div class="member-role">NTU Research Fellow</div>
-        </div>
-      </div>
-      <div class="member-card">
-        <div class="member-portrait">
-          <a href="https://scholar.google.com/citations?user=8FG0RjsAAAAJ&hl=en" target="_blank" style="display:block;">
-            <img src="./resources/images/zkl.png" alt="Kailai Zhou" onerror="this.style.display='none'">
-          </a>
-        </div>
-        <div class="member-info">
-          <div class="member-name">Kailai Zhou</div>
-          <div class="member-role">NTU Research Fellow</div>
-        </div>
+      <div class="member-info">
+        <div class="member-name">Weisi Lin</div>
+        <div class="member-role">NTU President's Chair Professor · IEEE Fellow</div>
       </div>
     </div>
+    <div class="member-card">
+      <div class="member-portrait">
+        <a href="https://xiaoqi-zhao-dlut.github.io" target="_blank">
+          <img src="./resources/images/zxq_4k.png" alt="Xiaoqi Zhao" onerror="this.style.display='none'">
+        </a>
+      </div>
+      <div class="member-info">
+        <div class="member-name">Xiaoqi Zhao</div>
+        <div class="member-role">NTU AI4X Principal Investigator / Postdoctoral Fellow</div>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="member-portrait">
+        <a href="https://lartpang.github.io" target="_blank">
+          <img src="./resources/images/pyw_1.png" alt="Youwei Pang" onerror="this.style.display='none'">
+        </a>
+      </div>
+      <div class="member-info">
+        <div class="member-name">Youwei Pang</div>
+        <div class="member-role">NTU Research Fellow</div>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="member-portrait">
+        <a href="https://scholar.google.com/citations?user=8FG0RjsAAAAJ&hl=en" target="_blank">
+          <img src="./resources/images/zkl.png" alt="Kailai Zhou" onerror="this.style.display='none'">
+        </a>
+      </div>
+      <div class="member-info">
+        <div class="member-name">Kailai Zhou</div>
+        <div class="member-role">NTU Research Fellow</div>
+      </div>
+    </div>
+  </div>
 
-    <div class="team-section-title reveal" style="margin-top: 40px;">External Members &amp; Advisors</div>
-    <div class="team-grid reveal" style="grid-template-columns: repeat(4, 1fr);">
-      <div class="member-card">
-        <div class="member-portrait">
-          <a href="https://scholar.google.com.sg/citations?user=D3nE0agAAAAJ&hl=en" target="_blank" style="display:block; width:100%; height:100%;">
-            <img src="./resources/images/lhc.jpg" alt="" onerror="this.style.display='none'">
-          </a>
-        </div>
-        <div class="member-info"><div class="member-name">Huchuan Lu</div><div class="member-role">Professor & Director at IIAU-LAB@DUT · IEEE Fellow</div></div>
-      </div>
-      <div class="member-card">
-        <div class="member-portrait">
-          <a href="https://campuspress.yale.edu/xliu/" target="_blank" style="display:block; width:100%; height:100%;">
-            <img src="./resources/images/lxf.jpg" alt="" onerror="this.style.display='none'">
-          </a>
-        </div>
-        <div class="member-info"><div class="member-name">Xiaofeng Liu</div><div class="member-role">Assistant Professor at Yale</div></div>
-      </div>
-      <div class="member-card">
-        <div class="member-portrait">
-          <a href="https://cite.nju.edu.cn/People/Faculty/20190621/i5054.html" target="_blank" style="display:block; width:100%; height:100%;">
-            <img src="./resources/images/cx.jpg" alt="" onerror="this.style.display='none'">
-          </a>
-        </div>
-        <div class="member-info"><div class="member-name">Xun Cao</div><div class="member-role">Professor at NJU · Founder of LIGHTGENE</div></div>
-      </div>
-      <div class="member-card">
-        <div class="member-portrait">
-          <a href="http://www.3000gy.com/" target="_blank" style="display:block; width:100%; height:100%;">
-          <img src="./resources/images/zjm_2.jpg" alt="" onerror="this.style.display='none'">
-          </a>
-        </div>
-        <div class="member-info"><div class="member-name">Jiaming Zuo</div><div class="member-role">Founder &amp; Chairman of X3000 Inspection</div></div>
-      </div>
-      <div class="member-card">
-        <div class="member-portrait">
-          <a href="https://akaxlh.github.io/" target="_blank" style="display:block; width:100%; height:100%;">
-            <img src="./resources/images/xlh.jpg" alt="" onerror="this.style.display='none'">
-          </a>
-        </div>
-        <div class="member-info"><div class="member-name">Lianghao Xia</div><div class="member-role">Professor at HIT (Shenzhen)</div></div>
-      </div>
-      <div class="member-card">
-        <div class="member-portrait">
-          <a href="https://teacher.nwpu.edu.cn/fanbin.html" target="_blank" style="display:block; width:100%; height:100%;">
-          <img src="./resources/images/fanbin.png" alt="" onerror="this.style.display='none'">
-          </a>
-        </div>
-        <div class="member-info"><div class="member-name">Bin Fan</div><div class="member-role">Professor at NWPU</div></div>
-      </div>
-      <div class="member-card">
-        <div class="member-portrait">
-          <a href="https://iai.xmu.edu.cn/info/2981/5895.htm" target="_blank" style="display:block; width:100%; height:100%;">
-          <img src="./resources/images/hj.jpg" alt="" onerror="this.style.display='none'">
-          </a>
-        </div>
-        <div class="member-info"><div class="member-name">Jie Hu</div><div class="member-role">Associate Professor at MAC@XMU · Research Fellow at NUS</div></div>
-      </div>
-      <div class="member-card">
-        <div class="member-portrait">
-          <a href="https://scholar.google.com/citations?user=G4uCKHcAAAAJ&hl=en" target="_blank" style="display:block; width:100%; height:100%;">
-            <img src="./resources/images/jw.jpg" alt="" onerror="this.style.display='none'">
-          </a>
-        </div>
-        <div class="member-info"><div class="member-name">Wei Ji</div><div class="member-role">Research Fellow at Yale</div></div>
-      </div>
-      <div class="member-card">
-        <div class="member-portrait">
-          <a href="https://masterbin-iiau.github.io/" target="_blank" style="display:block; width:100%; height:100%;">
-            <img src="./resources/images/yb.jpg" alt="" onerror="this.style.display='none'">
-          </a>
-        </div>
-        <div class="member-info"><div class="member-name">Bin Yan</div><div class="member-role">Research Scientist at ByteDance (Bay Area of California)</div></div>
-      </div>
-      <div class="member-card">
-        <div class="member-portrait">
-          <a href="https://pengtaojiang.github.io/" target="_blank" style="display:block; width:100%; height:100%;">
-            <img src="./resources/images/jpt.jpg" alt="" onerror="this.style.display='none'">
-          </a>
-        </div>
-        <div class="member-info"><div class="member-name">Peng-Tao Jiang</div><div class="member-role">Lead Researcher at vivo</div></div>
-      </div>
-    </div>
+  <div class="team-section-title reveal" style="margin-top: 40px;">External Members &amp; Advisors</div>
+  <div class="team-grid reveal" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="member-card"><div class="member-portrait"><a href="https://scholar.google.com.sg/citations?user=D3nE0agAAAAJ&hl=en" target="_blank"><img src="./resources/images/lhc.jpg" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Huchuan Lu</div><div class="member-role">Professor & Director at IIAU-LAB@DUT · IEEE Fellow</div></div></div>
+    <div class="member-card"><div class="member-portrait"><a href="https://campuspress.yale.edu/xliu/" target="_blank"><img src="./resources/images/lxf.jpg" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Xiaofeng Liu</div><div class="member-role">Assistant Professor at Yale</div></div></div>
+    <div class="member-card"><div class="member-portrait"><a href="https://cite.nju.edu.cn/People/Faculty/20190621/i5054.html" target="_blank"><img src="./resources/images/cx.jpg" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Xun Cao</div><div class="member-role">Professor at NJU · Founder of LIGHTGENE</div></div></div>
+    <div class="member-card"><div class="member-portrait"><a href="http://www.3000gy.com/" target="_blank"><img src="./resources/images/zjm_2.jpg" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Jiaming Zuo</div><div class="member-role">Founder &amp; Chairman of X3000 Inspection</div></div></div>
+    <div class="member-card"><div class="member-portrait"><a href="https://akaxlh.github.io/" target="_blank"><img src="./resources/images/xlh.jpg" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Lianghao Xia</div><div class="member-role">Professor at HIT (Shenzhen)</div></div></div>
+    <div class="member-card"><div class="member-portrait"><a href="https://teacher.nwpu.edu.cn/fanbin.html" target="_blank"><img src="./resources/images/fanbin.png" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Bin Fan</div><div class="member-role">Professor at NWPU</div></div></div>
+    <div class="member-card"><div class="member-portrait"><a href="https://iai.xmu.edu.cn/info/2981/5895.htm" target="_blank"><img src="./resources/images/hj.jpg" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Jie Hu</div><div class="member-role">Associate Professor at MAC@XMU · Research Fellow at NUS</div></div></div>
+    <div class="member-card"><div class="member-portrait"><a href="https://scholar.google.com/citations?user=G4uCKHcAAAAJ&hl=en" target="_blank"><img src="./resources/images/jw.jpg" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Wei Ji</div><div class="member-role">Research Fellow at Yale</div></div></div>
+    <div class="member-card"><div class="member-portrait"><a href="https://masterbin-iiau.github.io/" target="_blank"><img src="./resources/images/yb.jpg" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Bin Yan</div><div class="member-role">Research Scientist at ByteDance</div></div></div>
+    <div class="member-card"><div class="member-portrait"><a href="https://pengtaojiang.github.io/" target="_blank"><img src="./resources/images/jpt.jpg" alt="" onerror="this.style.display='none'"></a></div><div class="member-info"><div class="member-name">Peng-Tao Jiang</div><div class="member-role">Lead Researcher at vivo</div></div></div>
+  </div>
 </div>
 
 <!-- PUBLICATIONS -->
@@ -1719,634 +1481,318 @@ Beyond academic research, I am deeply passionate about AI + X entrepreneurship. 
     <button class="pub-filter-btn" onclick="filterPubs('2026', this)">2026</button>
     <button class="pub-filter-btn" onclick="filterPubs('2025', this)">2025</button>
     <button class="pub-filter-btn" onclick="filterPubs('2024', this)">2024</button>
-    <button class="pub-filter-btn" onclick="filterPubs('older', this)">2020-2023</button>
-    <!-- <button class="pub-filter-btn" onclick="filterPubs('older', this)">2020–2022</button> -->
+    <button class="pub-filter-btn" onclick="filterPubs('older', this)">2020–2023</button>
   </div>
 
   <div class="pub-list reveal" id="pub-list">
 
-    <!-- 2026 -->
     <div class="pub-entry" data-year="2026">
-      <div class="pub-image" style="min-height:180px;">
-        <img src="./resources/paper_icon/UniMMAD.png" alt="" onerror="this.style.display='none'"
-           style="width:100%; height:180px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">CVPR 2026</div>
-      </div>
+      <div class="pub-image" style="min-height:180px;"><img src="./resources/paper_icon/UniMMAD.png" alt="" onerror="this.style.display='none'" style="width:100%;height:180px;object-fit:contain;"><div class="pub-venue-badge badge-top">CVPR 2026</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/abs/2509.25934" target="_blank">UniMMAD: Unified Multi-Modal and Multi-Class Anomaly Detection via MoE-Driven Feature Decompression</a></div>
         <div class="pub-authors">Yuan Zhao, Youwei Pang, Lihe Zhang, Hanqi Liu, Jiaming Zuo, Huchuan Lu, <strong>Xiaoqi Zhao<sup>#</sup></strong></div>
         <div class="pub-venue">CVPR 2026</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/abs/2509.25934" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/yuanzhao-CVLAB/UniMMAD" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/yuanzhao-CVLAB/UniMMAD" 
-            style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/abs/2509.25934" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/yuanzhao-CVLAB/UniMMAD" target="_blank" class="pub-btn">Code <img src="https://img.shields.io/github/stars/yuanzhao-CVLAB/UniMMAD" style="height:14px;vertical-align:middle;margin-left:4px;"></a></div>
       </div>
     </div>
 
     <div class="pub-entry" data-year="2026">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/TP-Seg.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">CVPR Findings 2026</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/TP-Seg.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">CVPR Findings 2026</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="" target="_blank">TP-Seg: Task-Prototype Framework for Unified Medical Lesion Segmentation</a></div>
         <div class="pub-authors">Jiawei Xu, Qiangqiang Zhou, Dandan Zhu, Yong Chen, Yugen Yi, <strong>Xiaoqi Zhao<sup>#</sup></strong></div>
         <div class="pub-venue">CVPR 2026</div>
-        <div class="pub-actions">
-          <a href="" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/jiaweiXu1029/TP-Seg" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/jiaweiXu1029/TP-Seg" 
-            style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-actions"><a href="" class="pub-btn">arXiv</a><a href="https://github.com/jiaweiXu1029/TP-Seg" target="_blank" class="pub-btn">Code <img src="https://img.shields.io/github/stars/jiaweiXu1029/TP-Seg" style="height:14px;vertical-align:middle;margin-left:4px;"></a></div>
       </div>
     </div>
 
-    
     <div class="pub-entry" data-year="2026">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/U-Harmony.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">ISBI 2026 <strong style="color:red;">Oral</strong></div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/U-Harmony.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">ISBI 2026 <strong style="color:red;">Oral</strong></div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="" target="_blank">U-Harmony: Enhancing Joint Training for Segmentation Models with Universal Harmonization</a></div>
-        <div class="pub-authors">Weiwei Ma, Xiaobing Yu, Peijie Qiu, Jin Yang, Pan Xiao, <strong>Xiaoqi Zhao</strong>, Xiaofeng Liu, Tomo Miyazaki, Shinichiro Omachi, Yongsong Huang</div>
+        <div class="pub-authors">Weiwei Ma, Xiaobing Yu, Peijie Qiu, Jin Yang, Pan Xiao, <strong>Xiaoqi Zhao</strong>, Xiaofeng Liu, et al.</div>
         <div class="pub-venue">ISBI 2026 · <strong style="color:red;">Oral</strong></div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2601.14605" target="_blank" class="pub-btn">arXiv</a>
-          <a href="" target="_blank" class="pub-btn">Code</a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2601.14605" target="_blank" class="pub-btn">arXiv</a><a href="" class="pub-btn">Code</a></div>
       </div>
     </div>
 
     <div class="pub-entry" data-year="2026">
-      <div class="pub-image" style="min-height:180px;">
-        <img src="./resources/paper_icon/SAM3-I2025.png" alt="" 
-             onerror="this.style.display='none'"
-             style="width:100%; height:180px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">arXiv 2026</div>
-      </div>
+      <div class="pub-image" style="min-height:180px;"><img src="./resources/paper_icon/SAM3-I2025.png" alt="" onerror="this.style.display='none'" style="width:100%;height:180px;object-fit:contain;"><div class="pub-venue-badge badge-top">arXiv 2026</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2512.04585" target="_blank">SAM3-I: Segment Anything with Instructions</a></div>
-        <div class="pub-authors">Jingjing Li, Yue Feng, Yuchen Guo, Jincai Huang, Yongri Piao, Qi Bi, Miao Zhang, <strong>Xiaoqi Zhao</strong>, Qiang Chen, Shihao Zou, Wei Ji, Huchuan Lu, Li Cheng</div>
-        <div class="pub-venue">arXiv, 2026</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2512.04585" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/debby-0527/SAM3-I" target="_blank" class="pub-btn">
-            Code
-            <img src="https://img.shields.io/github/stars/debby-0527/SAM3-I" 
-                 style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-authors">Jingjing Li, Yue Feng, Yuchen Guo, Jincai Huang, Yongri Piao, Qi Bi, Miao Zhang, <strong>Xiaoqi Zhao</strong>, et al.</div>
+        <div class="pub-venue">arXiv 2026</div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2512.04585" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/debby-0527/SAM3-I" target="_blank" class="pub-btn">Code <img src="https://img.shields.io/github/stars/debby-0527/SAM3-I" style="height:14px;vertical-align:middle;margin-left:4px;"></a></div>
       </div>
     </div>
 
     <div class="pub-entry" data-year="2026">
-      <div class="pub-image" style="min-height:200px;">
-        <img src="./resources/paper_icon/SAM-EVA2025.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:180px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">arXiv 2026</div>
-      </div>
+      <div class="pub-image" style="min-height:180px;"><img src="./resources/paper_icon/SAM-EVA2025.png" alt="" onerror="this.style.display='none'" style="width:100%;height:180px;object-fit:contain;"><div class="pub-venue-badge badge-top">arXiv 2026</div></div>
       <div class="pub-content">
-        <div class="pub-title"><a href="https://arxiv.org/pdf/2412.01240" target="_blank">Inspiring the Next Generation of Segment Anything Models: Comprehensively Evaluate SAM and SAM 2 with Diverse Prompts Towards Context-Dependent Concepts under Different Scenes</a></div>
-        <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Youwei Pang, Shijie Chang, Yuan Zhao, Lihe Zhang, Chenyang Yu, Hanqi Liu, Jiaming Zuo, Jinsong Ouyang, Weisi Lin, Georges El Fakhri, Huchuan Lu, Xiaofeng Liu</div>
+        <div class="pub-title"><a href="https://arxiv.org/pdf/2412.01240" target="_blank">Inspiring the Next Generation of Segment Anything Models: Comprehensively Evaluate SAM and SAM 2</a></div>
+        <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Youwei Pang, Shijie Chang, Yuan Zhao, Lihe Zhang, et al.</div>
         <div class="pub-venue">arXiv 2026</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2412.01240" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/lartpang/SAMs-CDConcepts-Eval" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/lartpang/SAMs-CDConcepts-Eval" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-          <a href="https://mp.weixin.qq.com/s/wljctDrwkhDTCdEdx5HhxQ" target="_blank" class="pub-btn">52CV (2,000+ views)</a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2412.01240" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/lartpang/SAMs-CDConcepts-Eval" target="_blank" class="pub-btn">Code</a><a href="https://mp.weixin.qq.com/s/wljctDrwkhDTCdEdx5HhxQ" target="_blank" class="pub-btn">52CV</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="2026">
-      <div class="pub-image" style="min-height:200px;">
-        <img src="./resources/paper_icon/PBD_arXiv25.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:180px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">arXiv 2026</div>
-      </div>
+      <div class="pub-image" style="min-height:180px;"><img src="./resources/paper_icon/PBD_arXiv25.png" alt="" onerror="this.style.display='none'" style="width:100%;height:180px;object-fit:contain;"><div class="pub-venue-badge badge-top">arXiv 2026</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2508.07797" target="_blank">Power Battery Detection</a></div>
-        <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Peiqian Cao, Chenyang Yu, Zonglei Feng, Lihe Zhang, Hanqi Liu, Jiaming Zuo, Youwei Pang, Jinsong Ouyang, Weisi Lin, Georges El Fakhri, Huchuan Lu, Xiaofeng Liu</div>
+        <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Peiqian Cao, Chenyang Yu, Zonglei Feng, Lihe Zhang, et al.</div>
         <div class="pub-venue">arXiv 2026</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2508.07797" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/Xiaoqi-Zhao-DLUT/X-ray-PBD" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/X-ray-PBD" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-          <a href="https://mp.weixin.qq.com/s/7QL2joyC8CN8A7IG6TKbjA" target="_blank" class="pub-btn">52CV (1,000+ views)</a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2508.07797" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/Xiaoqi-Zhao-DLUT/X-ray-PBD" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
 
-    <!-- 2025 -->
     <div class="pub-entry" data-year="2025">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/UniMRSeg.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">NeurIPS 2025</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/UniMRSeg.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">NeurIPS 2025</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/abs/2509.16170" target="_blank">UniMRSeg: Unified Modality-Relax Segmentation via Hierarchical Self-Supervised Compensation</a></div>
         <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Youwei Pang, Chenyang Yu, Lihe Zhang, Huchuan Lu, Shijian Lu, Georges El Fakhri, Xiaofeng Liu</div>
         <div class="pub-venue">NeurIPS 2025</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/abs/2509.16170" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/Xiaoqi-Zhao-DLUT/UniMRSeg" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/UniMRSeg" 
-            style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/abs/2509.16170" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/Xiaoqi-Zhao-DLUT/UniMRSeg" target="_blank" class="pub-btn">Code <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/UniMRSeg" style="height:14px;vertical-align:middle;margin-left:4px;"></a></div>
       </div>
     </div>
 
     <div class="pub-entry" data-year="2025">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/IRSTD.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">NeurIPS 2025</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/IRSTD.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">NeurIPS 2025</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://openreview.net/pdf?id=MS1gqufmVu" target="_blank">Rethinking Evaluation of Infrared Small Target Detection</a></div>
         <div class="pub-authors">Youwei Pang, <strong>Xiaoqi Zhao<sup>#</sup></strong>, Lihe Zhang, Huchuan Lu, Georges El Fakhri, Xiaofeng Liu, Shijian Lu</div>
         <div class="pub-venue">NeurIPS 2025</div>
-        <div class="pub-actions">
-          <a href="https://openreview.net/pdf?id=MS1gqufmVu" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/lartpang/PyIRSTDMetrics" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/lartpang/PyIRSTDMetrics" 
-            style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-actions"><a href="https://openreview.net/pdf?id=MS1gqufmVu" target="_blank" class="pub-btn">Paper</a><a href="https://github.com/lartpang/PyIRSTDMetrics" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
 
     <div class="pub-entry" data-year="2025">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/PAMI_Comptr.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">TPAMI 2025</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/PAMI_Comptr.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">TPAMI 2025</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2307.12349" target="_blank">ComPtr: Toward Diverse Bi-Source Dense Prediction Tasks via a Simple Yet General Complementary Transformer</a></div>
         <div class="pub-authors">Youwei Pang, <strong>Xiaoqi Zhao</strong>, Lihe Zhang, Huchuan Lu</div>
         <div class="pub-venue">IEEE TPAMI 2025</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2307.12349" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/lartpang/ComPtr" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/lartpang/ComPtr" 
-            style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2307.12349" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/lartpang/ComPtr" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
 
     <div class="pub-entry" data-year="2025">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/SR-ICL.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:180px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">CVPR 2025</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/SR-ICL.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">CVPR 2025</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Chang_Unified_Medical_Lesion_Segmentation_via_Self-referring_Indicator_CVPR_2025_paper.pdf" target="_blank">Unified Medical Lesion Segmentation via Self-referring Indicator</a></div>
         <div class="pub-authors">Shijie Chang, <strong>Xiaoqi Zhao</strong>, Lihe Zhang, Tiancheng Wang</div>
         <div class="pub-venue">CVPR 2025</div>
-        <div class="pub-actions">
-          <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Chang_Unified_Medical_Lesion_Segmentation_via_Self-referring_Indicator_CVPR_2025_paper.pdf" target="_blank" class="pub-btn">Paper</a>
-          <a href="https://github.com/DUT-CSJ/SR-ICL" target="_blank" class="pub-btn">Code</a>
-        </div>
+        <div class="pub-actions"><a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Chang_Unified_Medical_Lesion_Segmentation_via_Self-referring_Indicator_CVPR_2025_paper.pdf" target="_blank" class="pub-btn">Paper</a><a href="https://github.com/DUT-CSJ/SR-ICL" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
 
-
     <div class="pub-entry" data-year="2025">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/MoSE.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">CVPR 2025</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/MoSE.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">CVPR 2025</div></div>
       <div class="pub-content">
-        <div class="pub-title"><a href="https://openaccess.thecvf.com/content/CVPR2025W/DG-EBF/papers/Wei_Mixture-of-Shape-Experts_MoSE_End-to-End_Shape_Dictionary_Framework_to_Prompt_SAM_for_CVPRW_2025_paper.pdf" target="_blank">Mixture-of-Shape-Experts (MoSE): End-to-End Shape Dictionary Framework to Prompt SAM for Generalizable Medical Segmentation</a></div>
+        <div class="pub-title"><a href="https://openaccess.thecvf.com/content/CVPR2025W/DG-EBF/papers/Wei_Mixture-of-Shape-Experts_MoSE_End-to-End_Shape_Dictionary_Framework_to_Prompt_SAM_for_CVPRW_2025_paper.pdf" target="_blank">Mixture-of-Shape-Experts (MoSE): End-to-End Shape Dictionary Framework to Prompt SAM</a></div>
         <div class="pub-authors">Jia Wei, <strong>Xiaoqi Zhao</strong>, Jonghye Woo, Jinsong Ouyang, Georges El Fakhri, Qingyu Chen, Xiaofeng Liu</div>
         <div class="pub-venue">CVPR 2025</div>
-        <div class="pub-actions">
-          <a href="https://openaccess.thecvf.com/content/CVPR2025W/DG-EBF/papers/Wei_Mixture-of-Shape-Experts_MoSE_End-to-End_Shape_Dictionary_Framework_to_Prompt_SAM_for_CVPRW_2025_paper.pdf" target="_blank" class="pub-btn">Paper</a>
-          <a href="" target="_blank" class="pub-btn">Code</a>
-        </div>
+        <div class="pub-actions"><a href="https://openaccess.thecvf.com/content/CVPR2025W/DG-EBF/papers/Wei_Mixture-of-Shape-Experts_MoSE_End-to-End_Shape_Dictionary_Framework_to_Prompt_SAM_for_CVPRW_2025_paper.pdf" target="_blank" class="pub-btn">Paper</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="2025">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/UniFSS.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">PR 2025</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/UniFSS.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">PR 2025</div></div>
       <div class="pub-content">
-        <div class="pub-title"><a href="https://arxiv.org/pdf/2407.11503?" target="_blank">Beyond Mask: Rethinking Guidance Types in Few-shot Segmentation</a></div>
+        <div class="pub-title"><a href="https://arxiv.org/pdf/2407.11503" target="_blank">Beyond Mask: Rethinking Guidance Types in Few-shot Segmentation</a></div>
         <div class="pub-authors">Shijie Chang, Youwei Pang, <strong>Xiaoqi Zhao</strong>, Huchuan Lu, Lihe Zhang</div>
         <div class="pub-venue">PR 2025</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2407.11503?" target="_blank" class="pub-btn">Paper</a>
-          <a href="https://github.com/DUT-CSJ/PR-UniFSS" target="_blank" class="pub-btn">Code</a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2407.11503" target="_blank" class="pub-btn">Paper</a><a href="https://github.com/DUT-CSJ/PR-UniFSS" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
 
-
-    <!-- 2024 -->
     <div class="pub-entry" data-year="2024">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/Spider-ICML2024.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">ICML 2024</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/Spider-ICML2024.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">ICML 2024</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2405.01002" target="_blank">Spider: A Unified Framework for Context-dependent Concept Segmentation</a></div>
-        <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Youweii Pang, Wei Ji, Baicheng Sheng, Jiaming Zuo, Lihe Zhang, Huchuan Lu</div>
+        <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Youwei Pang, Wei Ji, Baicheng Sheng, Jiaming Zuo, Lihe Zhang, Huchuan Lu</div>
         <div class="pub-venue">ICML 2024</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2405.01002" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/Xiaoqi-Zhao-DLUT/Spider-UniCDSeg" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Spider-UniCDSeg" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-          <a href="https://mp.weixin.qq.com/s/_qaKf6ctRm0A0VYWL63umQ" target="_blank" class="pub-btn">CVHub (8,000+ views)</a>
-          <a href="https://mp.weixin.qq.com/s/wljctDrwkhDTCdEdx5HhxQ" target="_blank" class="pub-btn">52CV (2,000+ views)</a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2405.01002" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/Xiaoqi-Zhao-DLUT/Spider-UniCDSeg" target="_blank" class="pub-btn">Code</a><a href="https://mp.weixin.qq.com/s/_qaKf6ctRm0A0VYWL63umQ" target="_blank" class="pub-btn">CVHub</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="2024">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/CVPR24-PBD-1.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:180px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">CVPR 2024</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/CVPR24-PBD-1.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">CVPR 2024</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2312.02528" target="_blank">Towards Automatic Power Battery Detection: New Challenge, Benchmark Dataset and Baseline</a></div>
         <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Youwei Pang, Zhenyu Chen, Qian Yu, Lihe Zhang, Hanqi Liu, Jiaming Zuo, Huchuan Lu</div>
         <div class="pub-venue">CVPR 2024</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2312.02528" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/Xiaoqi-Zhao-DLUT/X-ray-PBD" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/X-ray-PBD" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-          <a href="https://mp.weixin.qq.com/s/ZGI3aGQqOFCzCVWETKe4VA" target="_blank" class="pub-btn">极市平台</a>
-          <a href="https://mp.weixin.qq.com/s/7YIxzGnwimo7UOb-Nw62mw" target="_blank" class="pub-btn">X3000 INSPECTION</a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2312.02528" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/Xiaoqi-Zhao-DLUT/X-ray-PBD" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="2024">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/CVPR24-MVNet.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">CVPR 2024 <strong style="color:red;">Highlight</strong></div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/CVPR24-MVNet.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">CVPR 2024 <strong style="color:red;">Highlight</strong></div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2404.07445" target="_blank">Multi-view Aggregation Network for Dichotomous Image Segmentation</a></div>
         <div class="pub-authors">Qian Yu, <strong>Xiaoqi Zhao</strong>, Youwei Pang, Lihe Zhang, Huchuan Lu</div>
         <div class="pub-venue">CVPR 2024 <strong style="color:red;">Highlight</strong></div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2404.07445" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/qianyu-dlut/MVANet" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/qianyu-dlut/MVANet" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2404.07445" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/qianyu-dlut/MVANet" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="2024">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/ECCV2024-OVCOS.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">ECCV 2024</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/ECCV2024-OVCOS.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">ECCV 2024</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2311.11241" target="_blank">Open-Vocabulary Camouflaged Object Segmentation</a></div>
         <div class="pub-authors">Youwei Pang, <strong>Xiaoqi Zhao</strong>, Jiaming Zuo, Lihe Zhang, Huchuan Lu</div>
         <div class="pub-venue">ECCV 2024</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2311.11241" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/lartpang/OVCamo" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/lartpang/OVCamo" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-          <a href="https://mp.weixin.qq.com/s/JdhHr5-X1578STcTaDcg3Q" target="_blank" class="pub-btn">CVHub (7,000+ views)</a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2311.11241" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/lartpang/OVCamo" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="2024">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/IJCV-23-DBS.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:180px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">IJCV 2024</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/IJCV-23-DBS.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">IJCV 2024</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2303.10396" target="_blank">Towards Diverse Binary Segmentation via A Simple yet General Gated Network</a></div>
         <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Youwei Pang, Lihe Zhang, Huchuan Lu, Lei Zhang</div>
         <div class="pub-venue">IJCV 2024</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2303.10396" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2303.10396" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="2024">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/IJCV-23-AMP.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:180px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">IJCV 2024</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/IJCV-23-AMP.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">IJCV 2024</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2303.10383" target="_blank">Adaptive Multi-source Predictor for Zero-shot Video Object Segmentation</a></div>
         <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Shijie Chang, Youwei Pang, Jiaxing Yang, Lihe Zhang, Huchuan Lu</div>
         <div class="pub-venue">IJCV 2024</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2303.10383" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2303.10383" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="2024">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/TPAMI24-ZoomNeXt.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">TPAMI 2024</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/TPAMI24-ZoomNeXt.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">TPAMI 2024</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2310.20208" target="_blank">ZoomNeXt: A Unified Collaborative Pyramid Network for Camouflaged Object Detection</a></div>
         <div class="pub-authors">Youwei Pang, <strong>Xiaoqi Zhao</strong>, Tian-Zhu Xiang, Lihe Zhang, Huchuan Lu</div>
         <div class="pub-venue">TPAMI 2024</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2310.20208" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/lartpang/ZoomNeXt" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/lartpang/ZoomNeXt" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2310.20208" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/lartpang/ZoomNeXt" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
-    
 
-    <!-- Older (2020-2023) -->
     <div class="pub-entry" data-year="older">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/TMI-23-M2SNet.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">MICCAI Challenge</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/TMI-23-M2SNet.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">MICCAI Challenge</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2303.10894" target="_blank">M2SNet: Multi-scale in Multi-scale Subtraction Network for Medical Image Segmentation</a></div>
         <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Hongpeng Jia, Youwei Pang, Long Lv, Feng Tian, Lihe Zhang, Weibing Sun, Huchuan Lu</div>
         <div class="pub-venue">🏆 2nd Place (2/100), MICCAI 2022 Challenge GOALS</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2303.10894" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/Xiaoqi-Zhao-DLUT/MSNet" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/MSNet" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-          <a href="https://mp.weixin.qq.com/s/qwfsNXEqNj9StsB1eYaOZA" target="_blank" class="pub-btn">极市平台 (6,000+ views)</a>
-          <a href="https://mp.weixin.qq.com/s/Hh7ZimtcvpOiMYU3FxBA3A" target="_blank" class="pub-btn">CVHub (4,000+ views)</a>
-        </div>
-      </div>
-    </div>
-    
-    <div class="pub-entry" data-year="older">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/PVUW2023.jpg" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">CVPR Challenge</div>
-      </div>
-      <div class="pub-content">
-        <div class="pub-title"><a href="https://arxiv.org/abs/2306.02291" target="_blank">3rd Place Solution for PVUW2023 VSS Track: A Large Model for Semantic Segmentation on VSPW</a></div>
-        <div class="pub-authors">Shijie Chang, Zeqi Hao, Ben Kang, <strong>Xiaoqi Zhao</strong>, Jiawen Zhu, Zhenyu Chen, Lihe Zhang, Lu Zhang, Huchuan Lu</div>
-        <div class="pub-venue">🏆 3rd Place, CVPR 2023 PVUW Challenge VSS Track</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/abs/2306.02291" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/DUT-CSJ/PVUW2023-VSS-3rd" target="_blank" class="pub-btn">Code</a>
-        </div>
-      </div>
-    </div>
-    
-    <div class="pub-entry" data-year="older">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/TIP23-CAVER.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">TIP 2023</div>
-      </div>
-      <div class="pub-content">
-        <div class="pub-title"><a href="https://arxiv.org/pdf/2112.02363" target="_blank">CAVER: Cross-Modal View-Mixed Transformer for Bi-Modal Salient Object Detection</a></div>
-        <div class="pub-authors">Youwei Pang, <strong>Xiaoqi Zhao</strong>, Lihe Zhang, Huchuan Lu</div>
-        <div class="pub-venue">TIP 2023 · <span style="color:red;">ESI Highly Cited Paper (1%)</span></div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2112.02363" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/lartpang/CAVER" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/lartpang/CAVER" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
-      </div>
-    </div>
-    
-    <div class="pub-entry" data-year="older">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/ICCV23-Isomer.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">ICCV 2023</div>
-      </div>
-      <div class="pub-content">
-        <div class="pub-title"><a href="https://arxiv.org/pdf/2308.06693" target="_blank">Isomer: Isomerous Transformer for Zero-shot Video Object Segmentation</a></div>
-        <div class="pub-authors">Yichen Yuan, Yifan Wang, Lijun Wang, <strong>Xiaoqi Zhao</strong>, Huchuan Lu, Yu Wang, Weibo Su, Lei Zhang</div>
-        <div class="pub-venue">ICCV 2023</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2308.06693" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/DLUT-yyc/Isomer" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/DLUT-yyc/Isomer" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2303.10894" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/Xiaoqi-Zhao-DLUT/MSNet" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
 
     <div class="pub-entry" data-year="older">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/TIP2022-MMFT.jpg" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:180px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">TIP 2022</div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/TIP23-CAVER.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">TIP 2023</div></div>
+      <div class="pub-content">
+        <div class="pub-title"><a href="https://arxiv.org/pdf/2112.02363" target="_blank">CAVER: Cross-Modal View-Mixed Transformer for Bi-Modal Salient Object Detection</a></div>
+        <div class="pub-authors">Youwei Pang, <strong>Xiaoqi Zhao</strong>, Lihe Zhang, Huchuan Lu</div>
+        <div class="pub-venue">TIP 2023 · <span style="color:red;">ESI Highly Cited Paper (1%)</span></div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2112.02363" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/lartpang/CAVER" target="_blank" class="pub-btn">Code</a></div>
       </div>
+    </div>
+
+    <div class="pub-entry" data-year="older">
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/ICCV23-Isomer.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">ICCV 2023</div></div>
+      <div class="pub-content">
+        <div class="pub-title"><a href="https://arxiv.org/pdf/2308.06693" target="_blank">Isomer: Isomerous Transformer for Zero-shot Video Object Segmentation</a></div>
+        <div class="pub-authors">Yichen Yuan, Yifan Wang, Lijun Wang, <strong>Xiaoqi Zhao</strong>, Huchuan Lu, Yu Wang, Weibo Su, Lei Zhang</div>
+        <div class="pub-venue">ICCV 2023</div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2308.06693" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/DLUT-yyc/Isomer" target="_blank" class="pub-btn">Code</a></div>
+      </div>
+    </div>
+
+    <div class="pub-entry" data-year="older">
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/TIP2022-MMFT.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">TIP 2022</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2203.04895" target="_blank">Joint Learning of Salient Object Detection, Depth Estimation and Contour Extraction</a></div>
         <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Youwei Pang, Lihe Zhang, Huchuan Lu</div>
         <div class="pub-venue">TIP 2022</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2203.04895" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/Xiaoqi-Zhao-DLUT/MMFT" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/MMFT" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2203.04895" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/Xiaoqi-Zhao-DLUT/MMFT" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="older">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/2021-SSL.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">AAAI 2022</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/2021-SSL.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">AAAI 2022</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2101.12482" target="_blank">Self-Supervised Pretraining for RGB-D Salient Object Detection</a></div>
         <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Youwei Pang, Lihe Zhang, Huchuan Lu, Xiang Ruan</div>
         <div class="pub-venue">AAAI 2022</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2101.12482" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/Xiaoqi-Zhao-DLUT/SSLSOD" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/SSLSOD" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-          <a href="https://mp.weixin.qq.com/s/cvCkM6noKFAf8D9sFmtONA" target="_blank" class="pub-btn">极市平台 (3,000+ views)</a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2101.12482" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/Xiaoqi-Zhao-DLUT/SSLSOD" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="older">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/CVPR2022-ZoomNet.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">CVPR 2022</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/CVPR2022-ZoomNet.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">CVPR 2022</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2203.02688" target="_blank">Zoom In and Out: A Mixed-scale Triplet Network for Camouflaged Object Detection</a></div>
         <div class="pub-authors">Youwei Pang, <strong>Xiaoqi Zhao</strong>, Tian-zhu Xiang, Lihe Zhang, Huchuan Lu</div>
         <div class="pub-venue">CVPR 2022</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2203.02688" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/lartpang/ZoomNet" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/lartpang/ZoomNet" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2203.02688" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/lartpang/ZoomNet" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="older">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/ACMMM2021-Multisource.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">MM 2021 <strong style="color:red;">Oral</strong></div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/ACMMM2021-Multisource.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">MM 2021 <strong style="color:red;">Oral</strong></div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2108.05076" target="_blank">Multi-Source Fusion and Automatic Predictor Selection for Zero-Shot Video Object Segmentation</a></div>
         <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Youwei Pang, Jiaxing Yang, Lihe Zhang, Huchuan Lu</div>
         <div class="pub-venue">ACM MM 2021 · <strong style="color:red;">Oral</strong></div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2108.05076" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-          <a href="https://mp.weixin.qq.com/s/lV1KktoF5ggoz58L_sguaA" target="_blank" class="pub-btn">极市平台 (2,000+ views)</a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2108.05076" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/Xiaoqi-Zhao-DLUT/Multi-Source-APS-ZVOS" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="older">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/MICCAI2021-MSNet.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">MICCAI 2021</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/MICCAI2021-MSNet.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">MICCAI 2021</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2108.05082" target="_blank">Automatic Polyp Segmentation via Multi-scale Subtraction Network</a></div>
         <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Lihe Zhang, Huchuan Lu</div>
-        <div class="pub-venue">MICCAI 2021 · <span style="color:red;">🔥Top 1% Most Cited MICCAI 2021 Papers · 🏆Ranking Top 1 in Colonoscopy Diagnosis <a href="https://scholar.google.com/citations?hl=en&view_op=list_hcore&venue=QLpioUFGyGMJ.2024&vq=med_radiologymedicalimaging&cstart=20" target="_blank" style="color:red;">[Link]</a></span></div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2108.05082" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/Xiaoqi-Zhao-DLUT/MSNet" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/MSNet" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-venue">MICCAI 2021 · <span style="color:red;">🔥Top 1% Most Cited · 🏆Ranking Top 1 in Colonoscopy Diagnosis</span></div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2108.05082" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/Xiaoqi-Zhao-DLUT/MSNet" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="older">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/ECCV2020-GateNet.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">ECCV 2020 <strong style="color:red;">Oral</strong></div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/ECCV2020-GateNet.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">ECCV 2020 <strong style="color:red;">Oral</strong></div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2007.08074" target="_blank">Suppress and Balance: A Simple Gated Network for Salient Object Detection</a></div>
         <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Youwei Pang, Lihe Zhang, Huchuan Lu, Lei Zhang</div>
-        <div class="pub-venue">ECCV 2020 · <strong style="color:red;">Oral</strong> · <span style="color:red;">🔥Top 3% Most Cited ECCV 2020 Papers · 🏆Ranking Top 1 in Visual Saliency  <a href="https://scholar.google.com/citations?hl=en&view_op=list_hcore&venue=cwIh2C-xo8kJ.2024&vq=eng_computervisionpatternrecognition&cstart=40" target="_blank" style="color:red;">[Link]</a></span></div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2007.08074" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-venue">ECCV 2020 · <strong style="color:red;">Oral</strong> · 🔥Top 3% Most Cited · 🏆Ranking Top 1 in Visual Saliency</div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2007.08074" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/Xiaoqi-Zhao-DLUT/GateNet-RGB-Saliency" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="older">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/ECCV2020-DANet.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:180px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">ECCV 2020</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/ECCV2020-DANet.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">ECCV 2020</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2007.06811" target="_blank">A Single Stream Network for Robust and Real-time RGB-D Salient Object Detection</a></div>
         <div class="pub-authors"><strong>Xiaoqi Zhao</strong>, Youwei Pang, Lihe Zhang, Huchuan Lu, Lei Zhang</div>
         <div class="pub-venue">ECCV 2020</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2007.06811" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/Xiaoqi-Zhao-DLUT/DANet-RGBD-Saliency" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/DANet-RGBD-Saliency" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2007.06811" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/Xiaoqi-Zhao-DLUT/DANet-RGBD-Saliency" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="older">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/ECCV2020-HDFNet.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">ECCV 2020</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/ECCV2020-HDFNet.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">ECCV 2020</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2007.06227" target="_blank">Hierarchical Dynamic Filtering Network for RGB-D Salient Object Detection</a></div>
         <div class="pub-authors">Youwei Pang, Lihe Zhang, <strong>Xiaoqi Zhao</strong>, Huchuan Lu</div>
         <div class="pub-venue">ECCV 2020</div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2007.06227" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/lartpang/HDFNet" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/lartpang/HDFNet" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2007.06227" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/lartpang/HDFNet" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
-    
+
     <div class="pub-entry" data-year="older">
-      <div class="pub-image" style="min-height:130px;">
-        <img src="./resources/paper_icon/CVPR2021-MINet.png" alt="" onerror="this.style.display='none'"
-        style="width:100%; height:130px; object-fit:contain; object-position:center;">
-        <div class="pub-venue-badge badge-top">CVPR 2020</div>
-      </div>
+      <div class="pub-image" style="min-height:130px;"><img src="./resources/paper_icon/CVPR2021-MINet.png" alt="" onerror="this.style.display='none'" style="width:100%;height:130px;object-fit:contain;"><div class="pub-venue-badge badge-top">CVPR 2020</div></div>
       <div class="pub-content">
         <div class="pub-title"><a href="https://arxiv.org/pdf/2007.09062" target="_blank">Multi-scale Interactive Network for Salient Object Detection</a></div>
         <div class="pub-authors">Youwei Pang, <strong>Xiaoqi Zhao</strong>, Lihe Zhang, Huchuan Lu</div>
-        <div class="pub-venue">CVPR 2020 · <span style="color:red;">🔥Top 4% Most Cited CVPR 2020 Papers · 🏆Ranking Top 1 in Visual Saliency <a href="https://scholar.google.com/citations?hl=en&view_op=list_hcore&venue=FXe-a9w0eycJ.2025&vq=en&cstart=140" target="_blank" style="color:red;">[Link]</a></span></div>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/pdf/2007.09062" target="_blank" class="pub-btn">arXiv</a>
-          <a href="https://github.com/lartpang/MINet" target="_blank" class="pub-btn">Code
-            <img src="https://img.shields.io/github/stars/lartpang/MINet" style="height:14px; vertical-align:middle; margin-left:4px;">
-          </a>
-        </div>
+        <div class="pub-venue">CVPR 2020 · 🔥Top 4% Most Cited · 🏆Ranking Top 1 in Visual Saliency</div>
+        <div class="pub-actions"><a href="https://arxiv.org/pdf/2007.09062" target="_blank" class="pub-btn">arXiv</a><a href="https://github.com/lartpang/MINet" target="_blank" class="pub-btn">Code</a></div>
       </div>
     </div>
 
@@ -2361,61 +1807,21 @@ Beyond academic research, I am deeply passionate about AI + X entrepreneurship. 
   </div>
 
   <div class="honors-list reveal">
-    <div class="honor-item">
-      <div class="honor-year">2026</div>
-      <div class="honor-text"><strong>NRF Postdoctoral Award (PI)</strong> — Top-tier Singapore Government Fellowship; SGD $250,000</div>
-    </div>
-    <div class="honor-item">
-      <div class="honor-year">2026</div>
-      <div class="honor-text"><a href="https://www.ntu.edu.sg/research/research-careers/ntu-ai-for-x-postdoctoral-fellowship"><strong>NTU AI-for-X Postdoctoral Fellowship</strong></a></div>
-    </div>
-    <div class="honor-item">
-      <div class="honor-year">2025</div>
-      <div class="honor-text"><a href="https://www.thegaiaa.org/en/awards_mrzx"><strong>World Artificial Intelligence Conference (WAIC) Yunfan Award, Rising Star Nomination</strong></a> (10 winners worldwide)</div>
-    </div>
-    <div class="honor-item">
-      <div class="honor-year">2025</div>
-      <div class="honor-text">Profiled by <strong>People's Daily 《人民日报》</strong> as an <a href="https://mp.weixin.qq.com/s/dBHdfQmwjeYRn-ls726Myw">Outstanding PhD Student Representative</a> (100 nationwide; 1 from DUT)</div>
-    </div>
-    <div class="honor-item">
-      <div class="honor-year">2020–24</div>
-      <div class="honor-text"><a href="https://www.aminer.org/ai2000/search_rank?id=5614ca9445ce1e59634f5e37&searchValue=%E8%B5%B5%E9%AA%81%E9%AA%90&yearLeft=2020&yearRight=2024"><strong>AI 2000 Most Influential Scholars</strong></a> by AMiner in Computer Vision</div>
-    </div>
-    <div class="honor-item">
-      <div class="honor-year">2022 · 24</div>
-      <div class="honor-text"><strong>National PhD Scholarship (2×)</strong>, Ministry of Education, China</div>
-    </div>
-    <div class="honor-item">
-      <div class="honor-year">2023</div>
-      <div class="honor-text"><strong>3rd Place</strong> · <a href="https://www.vspwdataset.com/Workshop%202023.html">Video Semantic Segmentation Track, CVPR PVUW Challenge</a></div>
-    </div>
-    <div class="honor-item">
-      <div class="honor-year">2023</div>
-      <div class="honor-text"><strong>Gold Award</strong> · <a href="https://cy.ncss.cn/information/2c93f4c682872dbb01849802948e17dd">8th China International College Students' 'Internet+' Innovation &amp; Entrepreneurship</a> (~0.05‰ · 161 / 3,400,000+)</div>
-    </div>
-    <div class="honor-item">
-      <div class="honor-year">2022</div>
-      <div class="honor-text"><a href="https://cvpr2022.thecvf.com/outstanding-reviewers"><strong>CVPR 2022 Outstanding Reviewer</strong></a> (~2% · 156/6,247)</div>
-    </div>
-    <div class="honor-item">
-      <div class="honor-year">2022</div>
-      <div class="honor-text"><strong>Huawei Camera Academic Rising Star Award</strong> (8 winners worldwide; 170,000+ viewers; ¥30,000 bonus)</div>
-    </div>
-    <div class="honor-item">
-      <div class="honor-year">2022</div>
-      <div class="honor-text"><strong>MICCAI Challenge GOALS</strong> · Glaucoma Detection: <strong>1st/100</strong>, OCT Segmentation: 3rd/100, Overall: 2nd/100 ($1,300 bonus)</div>
-    </div>
-    <div class="honor-item">
-      <div class="honor-year">2019–24</div>
-      <div class="honor-text"><strong>Outstanding Graduate Student</strong>, Dalian University of Technology</div>
-    </div>
-    <div class="honor-item">
-      <div class="honor-year">2018</div>
-      <div class="honor-text"><strong>3rd Place · OPPO Top AI Competition</strong> (Portrait Segmentation) (3/456; ¥50,000 bonus)</div>
-    </div>
+    <div class="honor-item"><div class="honor-year">2026</div><div class="honor-text"><strong>NRF Postdoctoral Award (PI)</strong> — Top-tier Singapore Government Fellowship; SGD $250,000</div></div>
+    <div class="honor-item"><div class="honor-year">2026</div><div class="honor-text"><a href="https://www.ntu.edu.sg/research/research-careers/ntu-ai-for-x-postdoctoral-fellowship"><strong>NTU AI-for-X Postdoctoral Fellowship</strong></a></div></div>
+    <div class="honor-item"><div class="honor-year">2025</div><div class="honor-text"><a href="https://www.thegaiaa.org/en/awards_mrzx"><strong>World Artificial Intelligence Conference (WAIC) Yunfan Award, Rising Star Nomination</strong></a> (10 winners worldwide)</div></div>
+    <div class="honor-item"><div class="honor-year">2025</div><div class="honor-text">Profiled by <strong>People's Daily 《人民日报》</strong> as an <a href="https://mp.weixin.qq.com/s/dBHdfQmwjeYRn-ls726Myw">Outstanding PhD Student Representative</a> (100 nationwide; 1 from DUT)</div></div>
+    <div class="honor-item"><div class="honor-year">2020–24</div><div class="honor-text"><a href="https://www.aminer.org/ai2000/search_rank?id=5614ca9445ce1e59634f5e37&searchValue=%E8%B5%B5%E9%AA%81%E9%AA%90&yearLeft=2020&yearRight=2024"><strong>AI 2000 Most Influential Scholars</strong></a> by AMiner in Computer Vision</div></div>
+    <div class="honor-item"><div class="honor-year">2022 · 24</div><div class="honor-text"><strong>National PhD Scholarship (2×)</strong>, Ministry of Education, China</div></div>
+    <div class="honor-item"><div class="honor-year">2023</div><div class="honor-text"><strong>3rd Place</strong> · <a href="https://www.vspwdataset.com/Workshop%202023.html">Video Semantic Segmentation Track, CVPR PVUW Challenge</a></div></div>
+    <div class="honor-item"><div class="honor-year">2023</div><div class="honor-text"><strong>Gold Award</strong> · <a href="https://cy.ncss.cn/information/2c93f4c682872dbb01849802948e17dd">8th China International College Students' 'Internet+' Innovation &amp; Entrepreneurship</a> (~0.05‰ · 161 / 3,400,000+)</div></div>
+    <div class="honor-item"><div class="honor-year">2022</div><div class="honor-text"><a href="https://cvpr2022.thecvf.com/outstanding-reviewers"><strong>CVPR 2022 Outstanding Reviewer</strong></a> (~2% · 156/6,247)</div></div>
+    <div class="honor-item"><div class="honor-year">2022</div><div class="honor-text"><strong>Huawei Camera Academic Rising Star Award</strong> (8 winners worldwide; ¥30,000 bonus)</div></div>
+    <div class="honor-item"><div class="honor-year">2022</div><div class="honor-text"><strong>MICCAI Challenge GOALS</strong> · Glaucoma Detection: <strong>1st/100</strong>, OCT Segmentation: 3rd/100, Overall: 2nd/100</div></div>
+    <div class="honor-item"><div class="honor-year">2019–24</div><div class="honor-text"><strong>Outstanding Graduate Student</strong>, Dalian University of Technology</div></div>
+    <div class="honor-item"><div class="honor-year">2018</div><div class="honor-text"><strong>3rd Place · OPPO Top AI Competition</strong> (Portrait Segmentation) (3/456; ¥50,000 bonus)</div></div>
   </div>
 
-  <!-- Academic Service -->
   <div style="margin-top: 64px;">
     <div class="section-header reveal">
       <div class="section-label">Community</div>
@@ -2453,57 +1859,36 @@ Beyond academic research, I am deeply passionate about AI + X entrepreneurship. 
   </div>
 
   <div class="projects-grid reveal">
-
     <div class="project-card">
       <div class="project-icon"><i class="fas fa-star"></i></div>
       <div class="project-name"><a href="https://github.com/Xiaoqi-Zhao-DLUT/Awesome-AI4X-NSCLR-Papers" target="_blank">Awesome-AI4X-NSCLR-Papers</a></div>
       <div class="project-desc">A curated collection of AI+X papers published in Nature / Science / Cell / Lancet / Radiology and their flagship sub-journals.</div>
-      <div class="project-footer">
-        <div class="project-lang">Python</div>
-        <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Awesome-AI4X-NSCLR-Papers" style="height:18px;" alt="">
-      </div>
+      <div class="project-footer"><div class="project-lang">Python</div><img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Awesome-AI4X-NSCLR-Papers" style="height:18px;" alt=""></div>
     </div>
-
     <div class="project-card">
       <div class="project-icon"><i class="fas fa-eye"></i></div>
       <div class="project-name"><a href="https://github.com/Xiaoqi-Zhao-DLUT/Awesome-Open-Vision-Problem-Modeling" target="_blank">Awesome-Open-Vision-Problem-Modeling</a></div>
       <div class="project-desc">Awesome list for diverse open vision problems and modeling solutions.</div>
-      <div class="project-footer">
-        <div class="project-lang">Python</div>
-        <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Awesome-Open-Vision-Problem-Modeling" style="height:18px;" alt="">
-      </div>
+      <div class="project-footer"><div class="project-lang">Python</div><img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Awesome-Open-Vision-Problem-Modeling" style="height:18px;" alt=""></div>
     </div>
-
     <div class="project-card">
       <div class="project-icon"><i class="fas fa-layer-group"></i></div>
       <div class="project-name"><a href="https://github.com/Xiaoqi-Zhao-DLUT/Awesome-Unified-Context-dependent-Concept-Segmentation" target="_blank">Awesome-Unified-Context-dependent-Concept-Segmentation</a></div>
       <div class="project-desc">Awesome list for unified context-dependent concept segmentation covering the latest research and benchmarks.</div>
-      <div class="project-footer">
-        <div class="project-lang">Python</div>
-        <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Awesome-Unified-Context-dependent-Concept-Segmentation" style="height:18px;" alt="">
-      </div>
+      <div class="project-footer"><div class="project-lang">Python</div><img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/Awesome-Unified-Context-dependent-Concept-Segmentation" style="height:18px;" alt=""></div>
     </div>
-
     <div class="project-card">
       <div class="project-icon"><i class="fas fa-search"></i></div>
       <div class="project-name"><a href="https://github.com/lartpang/SAMs-CDConcepts-Eval" target="_blank">SAMs-CDConcepts-Eval</a></div>
       <div class="project-desc">Comprehensively evaluate SAM and SAM 2 with diverse prompts towards context-dependent concepts under different scenes.</div>
-      <div class="project-footer">
-        <div class="project-lang">Python</div>
-        <img src="https://img.shields.io/github/stars/lartpang/SAMs-CDConcepts-Eval" style="height:18px;" alt="">
-      </div>
+      <div class="project-footer"><div class="project-lang">Python</div><img src="https://img.shields.io/github/stars/lartpang/SAMs-CDConcepts-Eval" style="height:18px;" alt=""></div>
     </div>
-
     <div class="project-card">
       <div class="project-icon"><i class="fas fa-chart-bar"></i></div>
       <div class="project-name"><a href="https://github.com/Xiaoqi-Zhao-DLUT/PySegMetric_EvalToolkit" target="_blank">PySegMetrics</a></div>
       <div class="project-desc">A Python-based simple yet efficient evaluation toolbox for segmentation-like tasks.</div>
-      <div class="project-footer">
-        <div class="project-lang">Python</div>
-        <img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/PySegMetric_EvalToolkit" style="height:18px;" alt="">
-      </div>
+      <div class="project-footer"><div class="project-lang">Python</div><img src="https://img.shields.io/github/stars/Xiaoqi-Zhao-DLUT/PySegMetric_EvalToolkit" style="height:18px;" alt=""></div>
     </div>
-
   </div>
 </div>
 
@@ -2514,25 +1899,72 @@ Beyond academic research, I am deeply passionate about AI + X entrepreneurship. 
 </footer>
 
 <script>
-// Section navigation
-function showSection(id) {
+// ── Bio wrapper padding responsive
+function adjustBioPadding() {
+  const bw = document.getElementById('bio-wrapper');
+  if (!bw) return;
+  if (window.innerWidth <= 600) {
+    bw.style.padding = '48px 16px';
+  } else if (window.innerWidth <= 900) {
+    bw.style.padding = '60px 32px';
+  } else {
+    bw.style.padding = '80px 120px';
+  }
+}
+
+// ── Mobile drawer
+function toggleDrawer() {
+  const drawer = document.getElementById('nav-drawer');
+  const btn = document.getElementById('hamburger');
+  drawer.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+
+function closeDrawer() {
+  const drawer = document.getElementById('nav-drawer');
+  const btn = document.getElementById('hamburger');
+  drawer.classList.remove('open');
+  btn.classList.remove('open');
+}
+
+// ── Section navigation
+function showSection(id, e) {
+  if (e) e.preventDefault();
+
+  // Hide all
   document.querySelectorAll('.section').forEach(s => {
     s.style.display = 'none';
     s.classList.remove('active');
   });
+
   const el = document.getElementById(id + '-section');
   if (el) {
-    el.style.display = (id === 'about') ? 'flex' : 'block';
-    el.style.flexDirection = (id === 'about') ? 'column' : '';
+    if (id === 'about') {
+      el.style.display = 'flex';
+      el.style.flexDirection = 'column';
+    } else {
+      el.style.display = 'block';
+      el.style.flexDirection = '';
+    }
     el.classList.add('active');
   }
+
+  // Update desktop nav active state
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-  event.target.classList.add('active');
+  // Update drawer active state
+  document.querySelectorAll('.nav-drawer a').forEach(a => a.classList.remove('active'));
+  const drawerLink = document.getElementById('drawer-' + id);
+  if (drawerLink) drawerLink.classList.add('active');
+
+  // Mark clicked desktop link active if event exists
+  if (e && e.target) e.target.classList.add('active');
+
   window.scrollTo(0, 0);
+  adjustBioPadding();
   setTimeout(triggerReveal, 100);
 }
 
-// Publication filter
+// ── Publication filter
 function filterPubs(year, btn) {
   document.querySelectorAll('.pub-filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -2547,9 +1979,9 @@ function filterPubs(year, btn) {
   });
 }
 
-// Scroll reveal
+// ── Scroll reveal
 function triggerReveal() {
-  const items = document.querySelectorAll('.reveal');
+  const items = document.querySelectorAll('.reveal:not(.visible)');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
@@ -2557,18 +1989,33 @@ function triggerReveal() {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.05 });
   items.forEach(el => observer.observe(el));
 }
 
-// Init
+// ── Close drawer on outside tap
+document.addEventListener('click', (e) => {
+  const drawer = document.getElementById('nav-drawer');
+  const btn = document.getElementById('hamburger');
+  if (drawer.classList.contains('open') &&
+      !drawer.contains(e.target) && !btn.contains(e.target)) {
+    closeDrawer();
+  }
+});
+
+// ── Init
 window.addEventListener('load', () => {
+  adjustBioPadding();
   triggerReveal();
-  // Show about section properly
   const about = document.getElementById('about-section');
   about.style.display = 'flex';
   about.style.flexDirection = 'column';
+  // Mark about as active in desktop nav
+  const firstNavLink = document.querySelector('.nav-links a');
+  if (firstNavLink) firstNavLink.classList.add('active');
 });
+
+window.addEventListener('resize', adjustBioPadding);
 </script>
 
 </body>
