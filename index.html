@@ -1926,124 +1926,153 @@ Beyond academic research, I am deeply passionate about AI + X entrepreneurship. 
 </footer>
 
 <script>
-// ── Bio wrapper padding responsive
-function adjustBioPadding() {
-  const bw = document.getElementById('bio-wrapper');
-  if (!bw) return;
-  if (window.innerWidth <= 600) {
-    bw.style.padding = '48px 16px';
-  } else if (window.innerWidth <= 900) {
-    bw.style.padding = '60px 32px';
-  } else {
-    bw.style.padding = '80px 120px';
-  }
-}
-
-// ── Mobile drawer
-function toggleDrawer() {
-  const drawer = document.getElementById('nav-drawer');
-  const btn = document.getElementById('hamburger');
-  drawer.classList.toggle('open');
-  btn.classList.toggle('open');
-}
-
-function closeDrawer() {
-  const drawer = document.getElementById('nav-drawer');
-  const btn = document.getElementById('hamburger');
-  drawer.classList.remove('open');
-  btn.classList.remove('open');
-}
-
-// ── Section navigation
-function showSection(id, e) {
-  if (e) e.preventDefault();
-
-  // Hide all
-  document.querySelectorAll('.section').forEach(s => {
-    s.style.display = 'none';
-    s.classList.remove('active');
-  });
-
-  const el = document.getElementById(id + '-section');
-  if (el) {
-    if (id === 'about') {
-      el.style.display = 'flex';
-      el.style.flexDirection = 'column';
+  // ── 路由配置
+  const SECTIONS = ['about', 'research', 'team', 'publications', 'honors', 'projects'];
+  const BASE = '/';
+  
+  // ── Bio wrapper padding responsive
+  function adjustBioPadding() {
+    const bw = document.getElementById('bio-wrapper');
+    if (!bw) return;
+    if (window.innerWidth <= 600) {
+      bw.style.padding = '48px 16px';
+    } else if (window.innerWidth <= 900) {
+      bw.style.padding = '60px 32px';
     } else {
-      el.style.display = 'block';
-      el.style.flexDirection = '';
+      bw.style.padding = '80px 120px';
     }
-    el.classList.add('active');
   }
-
-  // Update desktop nav active state
-  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-  // Update drawer active state
-  document.querySelectorAll('.nav-drawer a').forEach(a => a.classList.remove('active'));
-  const drawerLink = document.getElementById('drawer-' + id);
-  if (drawerLink) drawerLink.classList.add('active');
-
-  // Mark clicked desktop link active if event exists
-  if (e && e.target) e.target.classList.add('active');
-
-  window.scrollTo(0, 0);
-  adjustBioPadding();
-  setTimeout(triggerReveal, 100);
-}
-
-// ── Publication filter
-function filterPubs(year, btn) {
-  document.querySelectorAll('.pub-filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.pub-entry').forEach(entry => {
-    if (year === 'all' || entry.dataset.year === year) {
-      entry.removeAttribute('data-hidden');
-      entry.style.display = 'grid';
-    } else {
-      entry.setAttribute('data-hidden', 'true');
-      entry.style.display = 'none';
+  
+  // ── Mobile drawer
+  function toggleDrawer() {
+    const drawer = document.getElementById('nav-drawer');
+    const btn = document.getElementById('hamburger');
+    drawer.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+  
+  function closeDrawer() {
+    const drawer = document.getElementById('nav-drawer');
+    const btn = document.getElementById('hamburger');
+    drawer.classList.remove('open');
+    btn.classList.remove('open');
+  }
+  
+  // ── 从 URL 解析当前 section
+  function getSectionFromPath() {
+    // 检查 404.html 重定向传来的参数
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('redirect')) {
+      const seg = params.get('redirect');
+      const target = SECTIONS.includes(seg) ? seg : 'about';
+      const cleanPath = target === 'about' ? '/' : '/' + target;
+      history.replaceState({ section: target }, '', cleanPath);
+      return target;
     }
+    const path = window.location.pathname.replace(/\/$/, '');
+    const seg = path.split('/').pop();
+    return SECTIONS.includes(seg) ? seg : 'about';
+  }
+  
+  // ── 渲染指定 section（不修改 URL）
+  function renderSection(id) {
+    document.querySelectorAll('.section').forEach(s => {
+      s.style.display = 'none';
+      s.classList.remove('active');
+    });
+  
+    const el = document.getElementById(id + '-section');
+    if (el) {
+      if (id === 'about') {
+        el.style.display = 'flex';
+        el.style.flexDirection = 'column';
+      } else {
+        el.style.display = 'block';
+        el.style.flexDirection = '';
+      }
+      el.classList.add('active');
+    }
+  
+    // 更新桌面导航高亮
+    document.querySelectorAll('#desktop-nav a').forEach(a => {
+      const onclick = a.getAttribute('onclick') || '';
+      a.classList.toggle('active', onclick.includes("'" + id + "'"));
+    });
+  
+    // 更新抽屉导航高亮
+    document.querySelectorAll('.nav-drawer a').forEach(a => a.classList.remove('active'));
+    const drawerLink = document.getElementById('drawer-' + id);
+    if (drawerLink) drawerLink.classList.add('active');
+  
+    window.scrollTo(0, 0);
+    adjustBioPadding();
+    setTimeout(triggerReveal, 100);
+  }
+  
+  // ── 导航跳转（更新 URL + 渲染）
+  function showSection(id, e) {
+    if (e) e.preventDefault();
+    const newPath = id === 'about' ? '/' : '/' + id;
+    history.pushState({ section: id }, '', newPath);
+    renderSection(id);
+  }
+  
+  // ── 浏览器前进/后退
+  window.addEventListener('popstate', (e) => {
+    const id = (e.state && e.state.section) ? e.state.section : getSectionFromPath();
+    renderSection(id);
   });
-}
-
-// ── Scroll reveal
-function triggerReveal() {
-  const items = document.querySelectorAll('.reveal:not(.visible)');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
+  
+  // ── Publication filter
+  function filterPubs(year, btn) {
+    document.querySelectorAll('.pub-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.pub-entry').forEach(entry => {
+      if (year === 'all' || entry.dataset.year === year) {
+        entry.removeAttribute('data-hidden');
+        entry.style.display = 'grid';
+      } else {
+        entry.setAttribute('data-hidden', 'true');
+        entry.style.display = 'none';
       }
     });
-  }, { threshold: 0.05 });
-  items.forEach(el => observer.observe(el));
-}
-
-// ── Close drawer on outside tap
-document.addEventListener('click', (e) => {
-  const drawer = document.getElementById('nav-drawer');
-  const btn = document.getElementById('hamburger');
-  if (drawer.classList.contains('open') &&
-      !drawer.contains(e.target) && !btn.contains(e.target)) {
-    closeDrawer();
   }
-});
-
-// ── Init
-window.addEventListener('load', () => {
-  adjustBioPadding();
-  triggerReveal();
-  const about = document.getElementById('about-section');
-  about.style.display = 'flex';
-  about.style.flexDirection = 'column';
-  // Mark about as active in desktop nav
-  const firstNavLink = document.querySelector('.nav-links a');
-  if (firstNavLink) firstNavLink.classList.add('active');
-});
-
-window.addEventListener('resize', adjustBioPadding);
-</script>
+  
+  // ── Scroll reveal
+  function triggerReveal() {
+    const items = document.querySelectorAll('.reveal:not(.visible)');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    items.forEach(el => observer.observe(el));
+  }
+  
+  // ── 关闭抽屉（点击外部）
+  document.addEventListener('click', (e) => {
+    const drawer = document.getElementById('nav-drawer');
+    const btn = document.getElementById('hamburger');
+    if (drawer.classList.contains('open') &&
+        !drawer.contains(e.target) && !btn.contains(e.target)) {
+      closeDrawer();
+    }
+  });
+  
+  // ── 初始化
+  window.addEventListener('load', () => {
+    adjustBioPadding();
+    const initSection = getSectionFromPath();
+    history.replaceState({ section: initSection }, '', window.location.pathname + window.location.search);
+    renderSection(initSection);
+    triggerReveal();
+  });
+  
+  window.addEventListener('resize', adjustBioPadding);
+  </script>
 
 </body>
 </html>

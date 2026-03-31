@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script>
+    // 捕获 GitHub Pages 的 404，提取路径段后重定向回首页
+    const seg = window.location.pathname.replace(/\/$/, '').split('/').pop();
+    const valid = ['about', 'research', 'team', 'publications', 'honors', 'projects'];
+    const target = valid.includes(seg) ? seg : 'about';
+    window.location.replace('/?redirect=' + target);
+  </script>
+</head>
+<body></body>
+</html>
