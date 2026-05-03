@@ -887,7 +887,12 @@ nav {
 .honor-text a { color: var(--gold-light); text-decoration: none; }
 .honor-text strong { color: var(--text-primary); }
 
-.service-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 32px; }
+.service-cols {
+  display: grid;
+  grid-template-columns: 1fr;   /* 改成单列 */
+  gap: 32px;
+  margin-top: 32px;
+}
 
 .service-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 28px; }
 .service-card-title { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
@@ -2284,7 +2289,7 @@ Multi-Class Anomaly Detection</a></div>
       <h2 class="section-title">Academic Service</h2>
     </div>
     <div class="service-cols reveal">
-        <div class="service-card">
+     <div class="service-card">
         <div class="service-card-title">Area Chair</div>
         <div class="service-entry"><i class="fas fa-circle"></i>NeurIPS</div>
       </div>
