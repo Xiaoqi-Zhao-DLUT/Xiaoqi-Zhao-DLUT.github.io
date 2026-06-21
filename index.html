@@ -4,6 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Xiaoqi Zhao · AI Researcher</title>
+<script>
+  // 在首屏渲染前应用主题，避免闪烁
+  (function () {
+    try {
+      var saved = localStorage.getItem('site-theme');
+      if (!saved) {
+        saved = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+      }
+      document.documentElement.setAttribute('data-theme', saved);
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -26,7 +40,43 @@
   --accent-blue: #4a90d9;
   --accent-teal: #2dd4bf;
   --border: rgba(255,255,255,0.06);
+  --border-strong: rgba(255,255,255,0.15);
+  --hairline: rgba(255,255,255,0.025);
+  --cta-bg: rgba(255,255,255,0.1);
+  --cta-border: rgba(255,255,255,0.2);
+  --cta-text: #fff;
+  --noise-opacity: 0.4;
+  --img-shadow: rgba(0,0,0,0.08);
+  --nav-bg: rgba(8,11,18,0.92);
+  --drawer-bg: rgba(8,11,18,0.97);
   --nav-h: 60px;
+}
+
+html[data-theme="light"] {
+  --obsidian: #f7f4ee;
+  --deep-navy: #efe9df;
+  --midnight: #ffffff;
+  --surface: #ffffff;
+  --surface2: #f0ebe2;
+  --gold: #a6792a;
+  --gold-light: #8a5f1d;
+  --gold-dim: rgba(166,121,42,0.10);
+  --gold-line: rgba(166,121,42,0.35);
+  --text-primary: #241f17;
+  --text-secondary: #5c5448;
+  --text-dim: #6b6354;
+  --accent-blue: #2b6cb5;
+  --accent-teal: #0d9488;
+  --border: rgba(20,15,5,0.08);
+  --border-strong: rgba(20,15,5,0.18);
+  --hairline: rgba(20,15,5,0.04);
+  --cta-bg: rgba(20,15,5,0.05);
+  --cta-border: rgba(20,15,5,0.15);
+  --cta-text: #241f17;
+  --noise-opacity: 0.15;
+  --img-shadow: rgba(20,15,5,0.12);
+  --nav-bg: rgba(247,244,238,0.92);
+  --drawer-bg: rgba(247,244,238,0.97);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,6 +89,7 @@ body {
   font-weight: 300;
   line-height: 1.7;
   overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 body::before {
@@ -48,7 +99,8 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.4;
+  opacity: var(--noise-opacity);
+  transition: opacity 0.4s ease;
 }
 
 /* ── NAV ── */
@@ -61,10 +113,11 @@ nav {
   align-items: center;
   justify-content: space-between;
   height: var(--nav-h);
-  background: rgba(8,11,18,0.92);
+  background: var(--nav-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 .nav-logo {
@@ -121,13 +174,66 @@ nav {
 .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+/* Theme toggle */
+.theme-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--gold-light);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-left: 28px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: border-color 0.3s, background-color 0.3s, color 0.3s, transform 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.theme-toggle:hover {
+  border-color: var(--gold-line);
+  background: var(--gold-dim);
+}
+.theme-toggle:active { transform: scale(0.95); }
+.theme-toggle i { font-size: 0.85rem; }
+.theme-toggle .fa-moon { display: none; }
+.theme-toggle .theme-toggle-label::before { content: 'Dark'; }
+html[data-theme="light"] .theme-toggle .fa-sun { display: none; }
+html[data-theme="light"] .theme-toggle .fa-moon { display: inline; }
+html[data-theme="light"] .theme-toggle .theme-toggle-label::before { content: 'Light'; }
+
+.theme-toggle-drawer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.theme-toggle-drawer i { color: var(--gold-light); font-size: 0.85rem; }
+.theme-toggle-drawer .fa-moon { display: none; }
+html[data-theme="light"] .theme-toggle-drawer .fa-sun { display: none; }
+html[data-theme="light"] .theme-toggle-drawer .fa-moon { display: inline; }
+
 /* Mobile drawer */
 .nav-drawer {
   display: none;
   position: fixed;
   top: var(--nav-h);
   left: 0; right: 0;
-  background: rgba(8,11,18,0.97);
+  background: var(--drawer-bg);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-bottom: 1px solid var(--border);
@@ -135,7 +241,7 @@ nav {
   padding: 0;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.3s;
+  transition: max-height 0.4s ease, padding 0.3s, background-color 0.4s ease;
 }
 .nav-drawer.open {
   max-height: 400px;
@@ -186,8 +292,8 @@ nav {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    linear-gradient(var(--hairline) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
   background-size: 80px 80px;
   mask-image: radial-gradient(ellipse 80% 80% at 70% 50%, black 30%, transparent 80%);
 }
@@ -319,7 +425,7 @@ nav {
   border-color: var(--border);
   background: transparent;
 }
-.hero-link-btn.secondary:hover { color: var(--text-primary); border-color: rgba(255,255,255,0.15); }
+.hero-link-btn.secondary:hover { color: var(--text-primary); border-color: var(--border-strong); }
 
 /* Mobile portrait — shown only on small screens inside hero-left */
 .hero-portrait-mobile {
@@ -702,7 +808,7 @@ nav {
   min-height: 40px;
   touch-action: manipulation;
 }
-.pub-filter-btn:hover { color: var(--text-secondary); border-color: rgba(255,255,255,0.12); }
+.pub-filter-btn:hover { color: var(--text-secondary); border-color: var(--border-strong); }
 .pub-filter-btn.active { background: var(--gold-dim); border-color: var(--gold-line); color: var(--gold); }
 
 .pub-list { display: flex; flex-direction: column; gap: 2px; }
@@ -803,7 +909,7 @@ nav {
   margin-bottom: 60px;
 }
 
-.join-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; padding: 10px 18px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: #fff; font-size: 13px; font-weight: 600; text-decoration: none; }
+.join-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; padding: 10px 18px; background: var(--cta-bg); border: 1px solid var(--cta-border); border-radius: 6px; color: var(--cta-text); font-size: 13px; font-weight: 600; text-decoration: none; transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease; }
 
 .member-card {
   background: var(--surface);
@@ -1013,6 +1119,7 @@ footer {
 
   nav { padding: 0 20px; }
   .nav-links { display: none; }
+  .theme-toggle.desktop-only { display: none; }
   .nav-hamburger { display: flex; }
   .nav-drawer { display: block; }
 
@@ -1159,6 +1266,9 @@ footer {
     <li><a onclick="showSection('honors', event)">Honors &amp; Services</a></li>
     <li><a onclick="showSection('projects', event)">Projects</a></li>
   </ul>
+  <button class="theme-toggle desktop-only" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark theme">
+    <i class="fas fa-sun"></i><i class="fas fa-moon"></i><span class="theme-toggle-label"></span>
+  </button>
   <button class="nav-hamburger" id="hamburger" onclick="toggleDrawer()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -1173,6 +1283,12 @@ footer {
     <li><a onclick="showSection('publications', event); closeDrawer();" id="drawer-publications">Publications</a></li>
     <li><a onclick="showSection('honors', event); closeDrawer();" id="drawer-honors">Honors &amp; Services</a></li>
     <li><a onclick="showSection('projects', event); closeDrawer();" id="drawer-projects">Projects</a></li>
+    <li>
+      <div class="theme-toggle-drawer" onclick="toggleTheme()">
+        <span><i class="fas fa-sun"></i><i class="fas fa-moon"></i> Theme</span>
+        <span id="drawer-theme-label">Dark</span>
+      </div>
+    </li>
   </ul>
 </div>
 
@@ -1248,10 +1364,10 @@ footer {
           I am fortunate to receive close mentorship and collaborate with both <a href="https://personal.ntu.edu.sg/wslin/Home.html">Prof. Weisi Lin (IEEE Fellow)</a> and <a href="https://scholar.google.com/citations?user=RwlJNLcAAAAJ&hl=en">Prof. Dacheng Tao (IEEE Fellow)</a> at NTU.
         </p>
         <p>
-I was a Postdoctoral Researcher at Yale University working with <a href="https://campuspress.yale.edu/xliu/people/">Prof. Xiaofeng Liu</a> and <a href="https://medicine.yale.edu/profile/georges-elfakhri/">Prof. Georges El Fakhri (AIMBE and IEEE Fellow)</a>. Previously, I received my Ph.D. degree in Signal and Information Processing from the Dalian University of Technology (DUT, 'Project 985' in China) in 2024, where I conducted my research at the <a href="https://iiaulab.github.io/">IIAU-LAB</a> under the supervision of <a href="https://scholar.google.com/citations?user=XGPdQbIAAAAJ&hl=zh-CN">Prof. Lihe Zhang</a> and <a href="https://scholar.google.com/citations?hl=en&user=D3nE0agAAAAJ">Prof. Huchuan Lu (IEEE Fellow)</a>. I also obtained my B.E. degree in Electronic Information Engineering from DUT in 2019.
+I was a <strong>Postdoctoral Researcher at Yale</strong> University working with <a href="https://campuspress.yale.edu/xliu/people/">Prof. Xiaofeng Liu</a> and <a href="https://medicine.yale.edu/profile/georges-elfakhri/">Prof. Georges El Fakhri (AIMBE and IEEE Fellow)</a>. Previously, I received my Ph.D. degree in Signal and Information Processing from the Dalian University of Technology (DUT, 'Project 985' in China) in 2024, where I conducted my research at the <a href="https://iiaulab.github.io/">IIAU-LAB</a> under the supervision of <a href="https://scholar.google.com/citations?user=XGPdQbIAAAAJ&hl=zh-CN">Prof. Lihe Zhang</a> and <a href="https://scholar.google.com/citations?hl=en&user=D3nE0agAAAAJ">Prof. Huchuan Lu (IEEE Fellow)</a>. I also obtained my B.E. degree in Electronic Information Engineering from DUT in 2019.
         </p>
         <p>
-Beyond academic research, I am deeply passionate about AI + X entrepreneurship. I am a Founding Member of <a href="http://www.gy3000.company/en/about-us">X3000 INSPECTION (Startup, Series B Funding)</a>. From 2021 to 2024, I served as its Chief AI Scientist, leading the development of X3000Former, X3000NeXt and other foundational models for power battery generation and inspection, which have been deployed to serve top power battery companies.
+Beyond academic research, I am deeply passionate about AI + X entrepreneurship. I am a <strong>Founding Partner</strong> of <a href="http://www.gy3000.company/en/about-us">X3000 INSPECTION (Startup, Series B Funding)</a>. From 2021 to 2024, I served as its <strong>Chief  Scientist</strong>, leading the development of X3000Former, X3000NeXt and other foundational models for power battery generation and inspection, which have been deployed to serve top power battery companies.
         </p>
 
 <div class="join-cta"><i class="fa-solid fa-user-plus"></i> We warmly welcome outstanding students to join NTU as my short-term or long-term RAs. Competitive and highly attractive compensation is offered.</div>
@@ -1263,7 +1379,7 @@ Beyond academic research, I am deeply passionate about AI + X entrepreneurship. 
           <div class="info-card-title">Current Positions</div>
           <div class="info-item"><i class="fas fa-map-marker-alt"></i> NTU Singapore · AI4X PI / Postdoctoral Fellow</div>
           <div class="info-item"><i class="fas fa-flask"></i> Yale University · Postdoctoral Researcher</div>
-          <div class="info-item"><i class="fas fa-briefcase"></i> X3000 INSPECTION · Founding Member</div>
+          <div class="info-item"><i class="fas fa-briefcase"></i> X3000 INSPECTION · Founding Partner</div>
         </div>
         <div class="info-card">
           <div class="info-card-title">Education</div>
@@ -2488,6 +2604,28 @@ Multi-Class Anomaly Detection</a></div>
   // ── 路由配置
   const SECTIONS = ['about', 'research', 'team', 'publications', 'honors', 'projects'];
   const BASE = '/';
+
+  // ── 主题切换（白天 / 夜间）
+  const THEME_KEY = 'site-theme';
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    const label = document.getElementById('drawer-theme-label');
+    if (label) label.textContent = theme === 'light' ? 'Light' : 'Dark';
+  }
+
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    const next = current === 'light' ? 'dark' : 'light';
+    try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+    applyTheme(next);
+  }
+
+  function syncThemeLabel() {
+    const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    applyTheme(current);
+  }
+  syncThemeLabel();
   
   // ── Bio wrapper padding responsive
   function adjustBioPadding() {
