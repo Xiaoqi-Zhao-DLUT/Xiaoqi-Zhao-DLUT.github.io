@@ -3095,14 +3095,35 @@ function filterPubs(filter, btn) {
     }
   });
   
-  // ── 初始化
-  window.addEventListener('load', () => {
-    adjustBioPadding();
-    const initSection = getSectionFromPath();
-    history.replaceState({ section: initSection }, '', window.location.pathname + window.location.search);
-    renderSection(initSection);
-    triggerReveal();
-  });
+
+// — 初始化
+window.addEventListener('load', () => {
+  adjustBioPadding();
+
+  const initSection = getSectionFromPath();
+
+  history.replaceState(
+    { section: initSection },
+    '',
+    window.location.pathname + window.location.search
+  );
+
+  renderSection(initSection);
+
+  // Publications 默认进入 ALL，
+  // 并隐藏 Representative Works
+  if (initSection === 'publications') {
+    const allBtn = document.querySelector(
+      '.pub-filter-btn[onclick*="filterPubs(\'all\'"]'
+    );
+
+    if (allBtn) {
+      filterPubs('all', allBtn);
+    }
+  }
+
+  triggerReveal();
+});
   
   window.addEventListener('resize', adjustBioPadding);
   </script>
