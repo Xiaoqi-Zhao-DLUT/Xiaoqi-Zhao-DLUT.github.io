@@ -1715,7 +1715,12 @@ Beyond academic research, I am deeply passionate about AI + X entrepreneurship. 
   </div>
 
   <div class="pub-filters reveal">
-    <button class="pub-filter-btn active" onclick="filterPubs('all', this)">All</button>
+  <button
+  id="pub-filter-all"
+  class="pub-filter-btn active"
+  onclick="filterPubs('all', this)">
+  All
+</button>
     <button
     class="pub-filter-btn"
     onclick="filterPubs('representative', this)">
@@ -3000,13 +3005,27 @@ Multi-Class Anomaly Detection</a></div>
     setTimeout(triggerReveal, 100);
   }
   
-  // ── 导航跳转（更新 URL + 渲染）
-  function showSection(id, e) {
-    if (e) e.preventDefault();
-    const newPath = id === 'about' ? '/' : '/' + id;
-    history.pushState({ section: id }, '', newPath);
-    renderSection(id);
+// ── 导航跳转（更新 URL + 渲染）
+function showSection(id, e) {
+  if (e) e.preventDefault();
+
+  const newPath = id === 'about' ? '/' : '/' + id;
+
+  history.pushState({ section: id }, '', newPath);
+
+  renderSection(id);
+
+  // 每次通过顶部导航进入 Publications，都自动恢复到 ALL
+  if (id === 'publications') {
+    const allBtn = document.querySelector(
+      '.pub-filter-btn[onclick*="filterPubs(\'all\'"]'
+    );
+
+    if (allBtn) {
+      filterPubs('all', allBtn);
+    }
   }
+}
   
   // ── 浏览器前进/后退
   window.addEventListener('popstate', (e) => {
