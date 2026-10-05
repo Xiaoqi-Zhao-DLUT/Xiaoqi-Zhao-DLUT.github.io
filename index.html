@@ -3016,16 +3016,14 @@ Multi-Class Anomaly Detection</a></div>
   
   // ── Publication filter
 
-  function filterPubs(filter, btn) {
+function filterPubs(filter, btn) {
 
-  // Update active button
   document.querySelectorAll('.pub-filter-btn').forEach(b => {
     b.classList.remove('active');
   });
 
   btn.classList.add('active');
 
-  // Filter publications
   document.querySelectorAll('.pub-entry').forEach(entry => {
 
     const type = entry.dataset.type;
@@ -3033,20 +3031,19 @@ Multi-Class Anomaly Detection</a></div>
 
     let show = false;
 
-    // Representative works are completely independent
+    // 代表作：只显示 representative
     if (filter === 'representative') {
       show = type === 'representative';
     }
 
-    // "All" means all regular publications,
-    // excluding representative works
+    // ALL：只显示普通论文，不显示代表作
     else if (filter === 'all') {
-      show = type === 'regular';
+      show = type !== 'representative';
     }
 
-    // Year filters only apply to regular publications
+    // 年份筛选：同样排除代表作
     else {
-      show = type === 'regular' && year === filter;
+      show = type !== 'representative' && year === filter;
     }
 
     if (show) {
