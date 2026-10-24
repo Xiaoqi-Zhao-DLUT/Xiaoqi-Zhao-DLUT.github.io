@@ -3522,7 +3522,7 @@ function filterPubs(filter, btn) {
 
     // ALL：只显示普通论文，不显示代表作
     else if (filter === 'all') {
-      show = type !== 'representative';
+        show = type !== 'representative' && year !== 'PAMI/IJCV';
     }
 
     // 年份筛选：同样排除代表作
