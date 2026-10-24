@@ -845,6 +845,11 @@ html[data-theme="light"] .theme-toggle-drawer .fa-moon { display: inline; }
 .pub-entry:hover { border-color: var(--gold-line); }
 .pub-entry[data-hidden="true"] { display: none; }
 
+/* 默认 ALL 视图：首次渲染时即隐藏独立的代表作和 PAMI/IJCV 分组。
+   切换标签时，filterPubs() 设置的内联 display 会覆盖这里的规则。 */
+.pub-entry[data-type="representative"],
+.pub-entry[data-year="PAMI/IJCV"] { display: none; }
+
 .pub-image {
   background: var(--surface2);
   display: flex;
@@ -2172,9 +2177,8 @@ Deployed by multiple global Top 10 lithium-ion battery manufacturers.
 </div>
 
 
-        <!-- PAMI/IJCV -->
-    <div class="pub-entry"
-     data-type="PAMI/IJCV">
+        <!-- 2026 -->
+          <div class="pub-entry" data-type="regular" data-year="PAMI/IJCV">
       <div class="pub-image" style="min-height:200px;">
         <img src="./resources/paper_icon/PBD_arXiv25.png" alt="" onerror="this.style.display='none'"
         style="width:100%; height:180px; object-fit:contain; object-position:center;">
@@ -2194,8 +2198,7 @@ Deployed by multiple global Top 10 lithium-ion battery manufacturers.
       </div>
     </div>
     
-    <div class="pub-entry"
-     data-type="PAMI/IJCV">
+ <div class="pub-entry" data-type="regular" data-year="PAMI/IJCV">
       <div class="pub-image" style="min-height:130px;">
         <img src="./resources/paper_icon/PAMI_Comptr.png" alt="" onerror="this.style.display='none'"
         style="width:100%; height:130px; object-fit:contain; object-position:center;">
@@ -2215,8 +2218,7 @@ Deployed by multiple global Top 10 lithium-ion battery manufacturers.
       </div>
     </div>
     
-    <div class="pub-entry"
-     data-type="PAMI/IJCV">
+    <div class="pub-entry" data-type="regular" data-year="PAMI/IJCV">
       <div class="pub-image" style="min-height:130px;">
         <img src="./resources/paper_icon/TPAMI24-ZoomNeXt.png" alt="" onerror="this.style.display='none'"
         style="width:100%; height:130px; object-fit:contain; object-position:center;">
@@ -2239,8 +2241,7 @@ Deployed by multiple global Top 10 lithium-ion battery manufacturers.
 
 
 
-    <div class="pub-entry"
-     data-type="PAMI/IJCV">
+        <div class="pub-entry" data-type="regular" data-year="PAMI/IJCV">
       <div class="pub-image" style="min-height:130px;">
         <img src="./resources/paper_icon/IJCV-23-DBS.png" alt="" onerror="this.style.display='none'"
         style="width:100%; height:180px; object-fit:contain; object-position:center;">
@@ -2259,8 +2260,7 @@ Deployed by multiple global Top 10 lithium-ion battery manufacturers.
       </div>
     </div>
     
-    <div class="pub-entry"
-     data-type="PAMI/IJCV">
+    <div class="pub-entry" data-type="regular" data-year="PAMI/IJCV">
       <div class="pub-image" style="min-height:130px;">
         <img src="./resources/paper_icon/IJCV-23-AMP.png" alt="" onerror="this.style.display='none'"
         style="width:100%; height:180px; object-fit:contain; object-position:center;">
@@ -3487,9 +3487,7 @@ function showSection(id, e) {
 
   // 每次通过顶部导航进入 Publications，都自动恢复到 ALL
   if (id === 'publications') {
-    const allBtn = document.querySelector(
-      '.pub-filter-btn[onclick*="filterPubs(\'all\'"]'
-    );
+    const allBtn = document.getElementById('pub-filter-all');
 
     if (allBtn) {
       filterPubs('all', allBtn);
@@ -3501,6 +3499,10 @@ function showSection(id, e) {
   window.addEventListener('popstate', (e) => {
     const id = (e.state && e.state.section) ? e.state.section : getSectionFromPath();
     renderSection(id);
+    if (id === 'publications') {
+      const allBtn = document.getElementById('pub-filter-all');
+      if (allBtn) filterPubs('all', allBtn);
+    }
   });
   
   // ── Publication filter
@@ -3585,8 +3587,12 @@ function filterPubs(filter, btn) {
   });
   
 
-// — 初始化
-window.addEventListener('load', () => {
+// — 初始化：DOM 构建完成立刻初始化，不等待全部远程图片、字体加载
+// 此时页面的初始选中状态是 ALL，因此先应用正确的筛选。
+document.addEventListener('DOMContentLoaded', () => {
+  const allBtn = document.getElementById('pub-filter-all');
+  if (allBtn) filterPubs('all', allBtn);
+
   adjustBioPadding();
 
   const initSection = getSectionFromPath();
@@ -3598,18 +3604,6 @@ window.addEventListener('load', () => {
   );
 
   renderSection(initSection);
-
-  // Publications 默认进入 ALL，
-  // 并隐藏 Representative Works
-  if (initSection === 'publications') {
-    const allBtn = document.querySelector(
-      '.pub-filter-btn[onclick*="filterPubs(\'all\'"]'
-    );
-
-    if (allBtn) {
-      filterPubs('all', allBtn);
-    }
-  }
 
   triggerReveal();
 });
